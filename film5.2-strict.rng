@@ -1,0 +1,3161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grammar datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes" ns="http://apple.com/itunes/importer" xmlns="http://relaxng.org/ns/structure/1.0" xmlns:ixa="http://apple.com/itunes/importer/alterations">
+    <!--
+      This is the main schema file from which ALL other itmsp schema files are derived.
+    -->
+    <start>
+        <element name="package">
+            <ref name="PackageType"/>
+        </element>
+    </start>
+    <define name="PackageType">
+        <attribute name="version">
+            <ref name="PackageVersion"/>
+        </attribute>
+        <optional>
+            <attribute name="generator">
+                <ref name="String255"/>
+            </attribute>
+        </optional>
+        <optional>
+            <attribute name="generator_version">
+                <ref name="String255"/>
+            </attribute>
+        </optional>
+        <interleave>
+            <optional>
+                <element name="metadata_token">
+                    <data type="string"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="comments">
+                    <data type="string"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="language">
+                    <ref name="LanguageType"/>
+                </element>
+            </optional>
+            <element name="provider">
+                <ref name="ProviderType"/>
+            </element>
+            <choice>
+                <element name="album">
+                    <ref name="Album"/>
+                </element>
+                <element name="tracks">
+                    <ref name="TrackList"/>
+                </element>
+                <element name="assets">
+                    <ref name="AssetList"/>
+                </element>
+                <element name="video">
+                    <ref name="Video"/>
+                </element>
+                <element name="artist">
+                    <ref name="ArtistType"/>
+                </element>
+                <element name="itunes_extra">
+                    <ref name="ItunesExtra"/>
+                </element>
+                <element name="clone_assets">
+                    <ref name="CloneAssetList"/>
+                </element>
+            </choice>
+        </interleave>
+    </define>
+    <define name="PackageVersion">
+        <data type="token">
+            <param name="pattern">film\d+(\.\d+)*</param>
+        </data>
+    </define>
+    <define name="AssetList">
+        <optional>
+            <!-- container_id is required for tv. -->
+            <attribute name="container_id">
+                <ref name="VendorIdType"/>
+            </attribute>
+        </optional>
+        <optional>
+            <attribute name="media_type">
+                <choice>
+                    <value>video</value>
+                    <!-- playlist is for film or tv only. -->
+                    <value>playlist</value>
+                    <!-- for media archive files -->
+                    <value>extra_video_item</value>
+                    <!-- for extras2.0 -->
+                    <value>gallery_item_video</value>
+                    <value>gallery_item_image</value>
+                    <value>gallery_item_audio</value>
+                </choice>
+            </attribute>
+        </optional>
+        <optional>
+            <!-- vendor_id is required for film but not for tv. -->
+            <attribute name="vendor_id">
+                <ref name="VendorIdType"/>
+            </attribute>
+        </optional>
+        <interleave>
+            <oneOrMore>
+                <element name="asset">
+                    <ref name="AssetItem"/>
+                </element>
+            </oneOrMore>
+            <optional>
+                <element name="accessibility_info">
+                    <ref name="AccessibilityInfo"/>
+                </element>
+            </optional>
+        </interleave>
+    </define>
+    <define name="CloneAssetList">
+        <optional>
+            <!-- container_id is required for tv. -->
+            <attribute name="container_id">
+                <ref name="VendorIdType"/>
+            </attribute>
+        </optional>
+        <optional>
+            <attribute name="media_type">
+                <choice>
+                    <value>video</value>
+                </choice>
+            </attribute>
+        </optional>
+        <attribute name="origin_provider">
+            <ref name="ProviderType"/>
+        </attribute>
+        <attribute name="origin_vendor_id">
+            <ref name="VendorIdType"/>
+        </attribute>
+        <interleave>
+            <optional>
+                <attribute name="target_vendor_id">
+                    <ref name="VendorIdType"/>
+                </attribute>
+            </optional>
+            <zeroOrMore>
+                <element name="clone_asset">
+                    <ref name="CloneAssetItem"/>
+                </element>
+            </zeroOrMore>
+            <optional>
+                <element name="clone_chapters">
+                    <ref name="FormattedBoolean"/>
+                </element>
+            </optional>
+        </interleave>
+    </define>
+    <define name="Video">
+        <interleave>
+            <optional>
+                <element name="read_only_info">
+                    <ref name="ReadOnlyInfo"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="original_spoken_locale">
+                    <ref name="LanguageType"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="phonetic_title">
+                    <ref name="NonEmptyTokenString"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="vendor_offer_code">
+                    <ref name="VendorOfferCode"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="publishers">
+                    <ref name="PublisherList"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="volume_number">
+                    <ref name="FormattedPositiveInteger"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="artists">
+                    <ref name="ArtistList"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="artwork_files">
+                    <ref name="ArtworkFilesList"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="copyright_cline">
+                    <ref name="Copyright"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="copyright_pline">
+                    <ref name="Copyright"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="explicit_content">
+                    <ref name="ParentalAdvisoryType"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="grid">
+                    <ref name="Grid"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="isrc">
+                    <ref name="Isrc"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="eidr">
+                    <ref name="Eidr"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="preorder_type">
+                    <ref name="PreOrder"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="preview">
+                    <ref name="VideoPreviewType"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="release_date">
+                    <ref name="FormattedDate"/>
+                </element>
+            </optional>
+            <!-- nuglov : LocalizableText continues to exist only to support 4.x metadata lookup beans. It is completely altered out for input. -->
+            <zeroOrMore>
+                <element name="title">
+                    <text/>
+                </element>
+            </zeroOrMore>
+            <!-- nuglov : LocalizableText continues to exist only to support 4.x metadata lookup beans. It is completely altered out for input. -->
+            <zeroOrMore>
+                <element name="title_version">
+                    <text/>
+                </element>
+            </zeroOrMore>
+            <optional>
+                <element name="track_number">
+                    <ref name="FormattedPositiveInteger"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="upc">
+                    <ref name="Upc"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="vendor_id">
+                    <ref name="VendorIdType"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="xid">
+                    <ref name="Xid"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="assets">
+                    <ref name="AssetList"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="clone_assets">
+                    <ref name="CloneAssetList"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="share_assets">
+                    <ref name="ShareAssets"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="genres">
+                    <ref name="GenreList"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="label_name">
+                    <ref name="LabelNameType"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="products">
+                    <ref name="ProductList"/>
+                </element>
+            </optional>
+            <!-- Begin film and tv elements -->
+            <optional>
+                <element name="subtype">
+                    <choice>
+                        <!-- film subtypes -->
+                        <value>concert</value>
+                        <value>short</value>
+                        <value>feature</value>
+                        <value>speciality</value>
+                        <!-- tv subtypes -->
+                        <value>episode</value>
+                        <value>episodebonus</value>
+                        <value>seasonbonus</value>
+                    </choice>
+                </element>
+            </optional>
+            <optional>
+                <element name="ratings">
+                    <oneOrMore>
+                        <choice>
+                            <element name="rating">
+                                <ref name="FilmRating"/>
+                            </element>
+                            <element name="advisory">
+                                <ref name="VideoAdvisory"/>
+                            </element>
+                        </choice>
+                    </oneOrMore>
+                </element>
+            </optional>
+            <optional>
+                <element name="type">
+                    <data type="string">
+                        <param name="pattern">([Ff][Ii][Ll][Mm])|([Tt][Vv])</param>
+                    </data>
+                </element>
+            </optional>
+            <optional>
+                <element name="cue_sheet">
+                    <ref name="CueSheet"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="locales">
+                    <oneOrMore>
+                        <element name="locale">
+                            <ref name="VideoLocale"/>
+                        </element>
+                    </oneOrMore>
+                </element>
+            </optional>
+            <optional>
+                <element name="regions">
+                    <oneOrMore>
+                        <element name="region">
+                            <ref name="VideoRegion"/>
+                        </element>
+                    </oneOrMore>
+                </element>
+            </optional>
+            <optional>
+                <element name="chapters">
+                    <ref name="ChapterList"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="accessibility_info">
+                    <ref name="AccessibilityInfo"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="studio_release_title">
+                    <ref name="StudioReleaseTitle"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="previews">
+                    <ref name="PreviewDefinitionList"/>
+                </element>
+            </optional>
+            <!-- End film and tv elements -->
+            <!-- Begin rentals properties -->
+            <optional>
+                <element name="theatrical_release_date">
+                    <ref name="FormattedDate"/>
+                </element>
+            </optional>
+            <!-- End rentals properties -->
+            <optional>
+                <choice>
+                    <!-- "description" replaces long_description in the 3.3.2 TV spec -->
+                    <element name="long_description">
+                        <ref name="String4000"/>
+                    </element>
+                    <element name="synopsis">
+                        <ref name="String4000"/>
+                    </element>
+                </choice>
+            </optional>
+            <!-- End tv-specific properties -->
+            <!-- Begin film-specific properties -->
+            <optional>
+                <element name="production_company">
+                    <ref name="String255"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="isan">
+                    <ref name="String50"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="country">
+                    <ref name="Territory"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="cast">
+                    <oneOrMore>
+                        <choice>
+                            <element name="actor">
+                                <ref name="MovieParticipant"/>
+                            </element>
+                            <element name="cast_member">
+                                <ref name="LocalizableMovieParticipant"/>
+                            </element>
+                        </choice>
+                    </oneOrMore>
+                </element>
+            </optional>
+            <optional>
+                <element name="crew">
+                    <oneOrMore>
+                        <choice>
+                            <element name="member">
+                                <ref name="MovieParticipant"/>
+                            </element>
+                            <element name="crew_member">
+                                <ref name="LocalizableMovieParticipant"/>
+                            </element>
+                        </choice>
+                    </oneOrMore>
+                </element>
+            </optional>
+            <optional>
+                <element name="bonus_materials">
+                    <ref name="BonusMaterialList"/>
+                </element>
+            </optional>
+            <!-- End film-specific properties -->
+            <optional>
+                <element name="extra">
+                    <ref name="Extra"/>
+                </element>
+            </optional>
+        </interleave>
+    </define>
+    <define name="AccessibilityInfo">
+        <interleave>
+            <optional>
+                <element name="read_only_info">
+                    <ref name="ReadOnlyInfo"/>
+                </element>
+            </optional>
+            <zeroOrMore>
+                <element name="accessibility">
+                    <ref name="AccessibilityDetail"/>
+                </element>
+            </zeroOrMore>
+        </interleave>
+    </define>
+    <define name="AccessibilityDetail">
+        <attribute name="role">
+            <ref name="AccessibilityRole"/>
+        </attribute>
+        <attribute name="available">
+            <data type="boolean"/>
+        </attribute>
+        <optional>
+            <attribute name="locale">
+                <ref name="Locale"/>
+            </attribute>
+        </optional>
+        <optional>
+            <attribute name="reason_code">
+                <ref name="AccessibilityReasonCode"/>
+            </attribute>
+        </optional>
+    </define>
+    <define name="AccessibilityRole">
+        <choice>
+            <value>captions</value>
+        </choice>
+    </define>
+    <define name="AccessibilityReasonCode">
+        <data type="string"/>
+    </define>
+    <!-- Begin film and tv-specific definitions -->
+    <define name="ShareAssets">
+        <interleave>
+            <optional>
+                <!-- provider short name is optional and implicitly the current -->
+                <attribute name="provider">
+                    <ref name="ProviderType"/>
+                </attribute>
+            </optional>
+            <optional>
+                <attribute name="vendor_id">
+                    <ref name="VendorIdType"/>
+                </attribute>
+            </optional>
+            <optional>
+                <attribute name="apple_id">
+                    <ref name="FormattedPositiveInteger"/>
+                </attribute>
+            </optional>
+        </interleave>
+    </define>
+    <define name="VideoLocale">
+        <attribute name="name">
+            <ref name="LanguageType"/>
+        </attribute>
+        <interleave>
+            <optional>
+                <element name="designated_fallback">
+                    <ref name="FormattedBoolean"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="title">
+                    <text/>
+                </element>
+            </optional>
+            <optional>
+                <element name="title_version">
+                    <text/>
+                </element>
+            </optional>
+            <optional>
+                <element name="short_description">
+                    <ref name="String255"/>
+                </element>
+            </optional>
+            <optional>
+                <choice>
+                    <element name="long_description">
+                        <text/>
+                    </element>
+                    <element name="synopsis">
+                        <ref name="String4000"/>
+                    </element>
+                </choice>
+            </optional>
+            <optional>
+                <element name="phonetic_title">
+                    <text/>
+                </element>
+            </optional>
+        </interleave>
+    </define>
+    <define name="VideoRegion">
+        <interleave>
+            <element name="territory">
+                <ref name="Territory"/>
+            </element>
+            <optional>
+                <element name="theatrical_release_date">
+                    <ref name="FormattedDate"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="release_date">
+                    <ref name="FormattedDate"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="copyright_pline">
+                    <ref name="Copyright"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="copyright_cline">
+                    <ref name="Copyright"/>
+                </element>
+            </optional>
+        </interleave>
+    </define>
+    <define name="CueSheet">
+        <zeroOrMore>
+            <element name="cue">
+                <ref name="Cue"/>
+            </element>
+        </zeroOrMore>
+    </define>
+    <define name="Cue">
+        <interleave>
+            <element name="sequence_number">
+                <ref name="FormattedPositiveInteger"/>
+            </element>
+            <element name="time">
+                <ref name="CueTime"/>
+            </element>
+            <element name="title">
+                <text/>
+            </element>
+            <element name="artists">
+                <ref name="ArtistList"/>
+            </element>
+            <optional>
+                <element name="isrc">
+                    <ref name="Isrc"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="iswc">
+                    <text/>
+                </element>
+            </optional>
+            <optional>
+                <element name="copyright_cline">
+                    <ref name="Copyright"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="copyright_pline">
+                    <ref name="Copyright"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="usage">
+                    <ref name="CueUsage"/>
+                </element>
+            </optional>
+        </interleave>
+    </define>
+    <define name="CueUsage">
+        <data type="token">
+            <param name="pattern">([Bb][Aa][Cc][Kk][Gg][Rr][Oo][Uu][Nn][Dd])|([Ff][Ee][Aa][Tt][Uu][Rr][Ee][Dd])|([Ss][Ii][Gg][Nn][Aa][Tt][Uu][Rr][Ee])</param>
+        </data>
+    </define>
+    <define name="CueTime">
+        <interleave>
+            <optional>
+                <element name="start_timecode">
+                    <ref name="FormattedTime"/>
+                </element>
+            </optional>
+            <element name="duration">
+                <ref name="FormattedTime"/>
+            </element>
+        </interleave>
+    </define>
+    <!-- VideoAdvisory is only supported by TV -->
+    <define name="VideoAdvisory">
+        <attribute name="system">
+            <choice>
+                <value>us-cable</value>
+                <value>us-tv</value>
+                <value>au-tv</value>
+            </choice>
+        </attribute>
+        <!-- code-enforced: code is being rolled out and preferred over name, but we're not ready to require it yet -->
+        <optional>
+            <attribute name="code">
+                <ref name="NonEmptyTokenString"/>
+            </attribute>
+        </optional>
+        <choice>
+            <value>A</value>
+            <value>AC</value>
+            <value>AL</value>
+            <value>B</value>
+            <value>BN</value>
+            <value>D</value>
+            <value>FV</value>
+            <value>GL</value>
+            <value>GV</value>
+            <value>H</value>
+            <value>L</value>
+            <value>M</value>
+            <value>MV</value>
+            <value>N</value>
+            <value>RP</value>
+            <value>S</value>
+            <value>SN</value>
+            <value>SC</value>
+            <value>V</value>
+            <value>W</value>
+            <value/>
+            <!-- code-enforced: code is being rolled out and preferred over name -->
+        </choice>
+    </define>
+    <!-- FilmRating is supported by Film and TV -->
+    <define name="FilmRating">
+        <attribute name="system">
+            <ref name="NonEmptyTokenString"/>
+        </attribute>
+        <!-- code-enforced: code is being rolled out and preferred over name, but we're not ready to require it yet -->
+        <optional>
+            <attribute name="code">
+                <ref name="NonEmptyTokenString"/>
+            </attribute>
+        </optional>
+        <!-- code-enforced: reason is required for Film but not TV -->
+        <optional>
+            <attribute name="reason">
+                <data type="token"/>
+            </attribute>
+        </optional>
+        <data type="token"/>
+        <!-- code-enforced: code is being rolled out and preferred over name -->
+    </define>
+    <define name="MovieParticipant">
+        <attribute name="name">
+            <ref name="String250"/>
+        </attribute>
+        <attribute name="display">
+            <ref name="String250"/>
+        </attribute>
+        <optional>
+            <attribute name="billing">
+                <!-- Case-insensitive enumeration of: ordered, top -->
+                <data type="token">
+                    <param name="pattern">([Oo][Rr][Dd][Ee][Rr][Ee][Dd])|([Tt][Oo][Pp])</param>
+                </data>
+            </attribute>
+        </optional>
+        <ref name="NonEmptyTokenString"/>
+    </define>
+    <define name="LocalizableMovieParticipant">
+        <optional>
+            <attribute name="billing">
+                <!-- Case-insensitive enumeration of: ordered, top -->
+                <data type="token">
+                    <param name="pattern">([Oo][Rr][Dd][Ee][Rr][Ee][Dd])|([Tt][Oo][Pp])</param>
+                </data>
+            </attribute>
+        </optional>
+        <!-- New style cast & crew translations -->
+        <interleave>
+            <optional>
+                <element name="apple_id">
+                    <ref name="FormattedPositiveInteger"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="read_only_info">
+                    <ref name="ReadOnlyInfo"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="display_name">
+                    <ref name="String250"/>
+                </element>
+            </optional>
+            <optional>
+                <choice>
+                    <!-- Character_name deprecated in 5.2, replaced with characters block-->
+                    <element name="character_name">
+                        <ref name="String250"/>
+                    </element>
+                    <element name="characters">
+                        <ref name="Characters"/>
+                    </element>
+                </choice>
+            </optional>
+            <optional>
+                <element name="phonetic_name">
+                    <ref name="String250"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="sort_name">
+                    <ref name="String250"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="locales">
+                    <oneOrMore>
+                        <element name="locale">
+                            <ref name="MovieParticipantLocale"/>
+                        </element>
+                    </oneOrMore>
+                </element>
+            </optional>
+            <optional>
+                <element name="roles">
+                    <oneOrMore>
+                        <element name="role">
+                            <ref name="MovieRole"/>
+                        </element>
+                    </oneOrMore>
+                </element>
+            </optional>
+            <optional>
+                <element name="description">
+                    <ref name="Description"/>
+                </element>
+            </optional>
+        </interleave>
+    </define>
+    <define name="MovieParticipantLocale">
+        <attribute name="name">
+            <ref name="Locale"/>
+        </attribute>
+        <interleave>
+            <optional>
+                <element name="designated_fallback">
+                    <ref name="FormattedBoolean"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="display_name">
+                    <ref name="String250"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="character_name">
+                    <ref name="String250"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="phonetic_name">
+                    <ref name="String250"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="description">
+                    <ref name="Description"/>
+                </element>
+            </optional>
+        </interleave>
+    </define>
+    <!-- End film and tv-specific definitions -->
+    <define name="AssetItem">
+        <optional>
+            <attribute name="type">
+                <choice>
+                    <value>full</value>
+                    <value>preview</value>
+                    <value>artwork</value>
+                    <!-- head and tail are only allowed for tv. -->
+                    <value>head</value>
+                    <value>tail</value>
+                    <!-- timeline is for extras2.0 -->
+                    <value>timeline</value>
+                </choice>
+            </attribute>
+        </optional>
+        <!-- enabled is only for tv. -->
+        <!--
+        <optional>
+            <attribute name="enabled">
+                <ref name="FormattedBoolean"/>
+            </attribute>
+        </optional>
+        -->
+        <!-- display_target is only for extras2.0 -->
+        <optional>
+            <attribute name="display_target">
+                <ref name="ItunesExtraDisplayTargetEnum"/>
+            </attribute>
+        </optional>
+        <interleave>
+            <optional>
+                <element name="read_only_info">
+                    <ref name="ReadOnlyInfo"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="territories">
+                    <zeroOrMore>
+                        <element name="territory">
+                            <ref name="Territory"/>
+                        </element>
+                    </zeroOrMore>
+                </element>
+            </optional>
+            <!-- only one data_file element is allowed at this level for tv. -->
+            <oneOrMore>
+                <element name="data_file">
+                    <ref name="AssetFile"/>
+                </element>
+            </oneOrMore>
+            <!-- chapters can be sent under the full asset in an asset-only update -->
+            <optional>
+                <element name="chapters">
+                    <ref name="ChapterList"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="preview_image_time">
+                    <ref name="PreviewImageTime"/>
+                </element>
+            </optional>
+        </interleave>
+    </define>
+    <define name="PreviewImageTime">
+        <optional>
+            <attribute name="format">
+                <ref name="TimecodeFormat"/>
+            </attribute>
+        </optional>
+        <ref name="FormattedTime"/>
+    </define>
+    <define name="CloneAssetItem">
+        <optional>
+            <attribute name="type">
+                <choice>
+                    <value>full</value>
+                    <value>preview</value>
+                    <value>artwork</value>
+                </choice>
+            </attribute>
+        </optional>
+        <interleave>
+            <optional>
+                <element name="read_only_info">
+                    <ref name="ReadOnlyInfo"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="territories">
+                    <zeroOrMore>
+                        <element name="territory">
+                            <ref name="Territory"/>
+                        </element>
+                    </zeroOrMore>
+                </element>
+            </optional>
+            <zeroOrMore>
+                <element name="clone_data_file">
+                    <ref name="CloneAssetFile"/>
+                </element>
+            </zeroOrMore>
+        </interleave>
+    </define>
+    <define name="Album">
+        <interleave>
+            <optional>
+                <element name="read_only_info">
+                    <ref name="ReadOnlyInfo"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="galleries">
+                    <ref name="GalleryList"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="locales">
+                    <ref name="LocalizationList"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="album_type">
+                    <ref name="AlbumType"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="vendor_id">
+                    <ref name="VendorIdType"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="grid">
+                    <ref name="Grid"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="preorder_grid">
+                    <ref name="Grid"/>
+                </element>
+            </optional>
+            <!-- nuglov : LocalizableText continues to exist only to support 4.x metadata lookup beans. It is completely altered out for input. -->
+            <zeroOrMore>
+                <element name="title">
+                    <ref name="LocalizableText"/>
+                </element>
+            </zeroOrMore>
+            <!-- nuglov : LocalizableText continues to exist only to support 4.x metadata lookup beans. It is completely altered out for input. -->
+            <zeroOrMore>
+                <element name="title_version">
+                    <ref name="LocalizableText"/>
+                </element>
+            </zeroOrMore>
+            <optional>
+                <element name="phonetic_title">
+                    <text/>
+                </element>
+            </optional>
+            <optional>
+                <element name="copyright_pline">
+                    <ref name="Copyright"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="copyright_cline">
+                    <ref name="Copyright"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="artwork_files">
+                    <zeroOrMore>
+                        <element name="file">
+                            <ref name="File"/>
+                        </element>
+                    </zeroOrMore>
+                </element>
+            </optional>
+            <optional>
+                <element name="description">
+                    <ref name="String4000"/>
+                </element>
+            </optional>
+            <optional>
+                <!-- nuglov : restoring volume_count because iTP is coded to always send it in -->
+                <!-- nuglov : we ignore it, but need accept to allow for schema validation -->
+                <element name="volume_count">
+                    <ref name="FormattedPositiveInteger"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="track_count">
+                    <ref name="FormattedPositiveInteger"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="products">
+                    <ref name="ProductList"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="preorder_previews">
+                    <ref name="FormattedBoolean"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="upc">
+                    <ref name="Upc"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="preorder_upc">
+                    <ref name="Upc"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="release_date">
+                    <ref name="FormattedDate"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="label_name">
+                    <ref name="NonEmptyTokenString"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="genres">
+                    <ref name="GenreList"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="artists">
+                    <ref name="ArtistList"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="tracks">
+                    <ref name="TrackList"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="vendor_offer_code">
+                    <ref name="VendorOfferCode"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="index_alias_terms">
+                    <text/>
+                </element>
+            </optional>
+            <optional>
+                <element name="hero_image">
+                    <ref name="HeroImage"/>
+                </element>
+            </optional>
+        </interleave>
+    </define>
+    <define name="AlbumType">
+        <choice>
+            <value>album</value>
+            <value>audiobook</value>
+            <value>ringtone</value>
+            <value>iosaudiotone</value>
+            <value>Album</value>
+            <value>Audiobook</value>
+            <value>AudioBook</value>
+            <value>Ringtone</value>
+            <value>iOSAudioTone</value>
+            <value>MovieBundle</value>
+        </choice>
+    </define>
+    <define name="TrackList">
+        <interleave>
+            <oneOrMore>
+                <choice>
+                    <element name="video">
+                        <ref name="Video"/>
+                    </element>
+                </choice>
+            </oneOrMore>
+        </interleave>
+    </define>
+    <define name="BonusMaterialList">
+        <zeroOrMore>
+            <element name="bonus_material">
+                <ref name="BonusMaterialItem"/>
+            </element>
+        </zeroOrMore>
+    </define>
+    <define name="BonusMaterialItem">
+        <interleave>
+            <optional>
+                <element name="vendor_identifier">
+                    <ref name="VendorIdType"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="file">
+                    <ref name="File"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="track">
+                    <ref name="FormattedPositiveInteger"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="preorder_type">
+                    <ref name="PreOrder"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="volume">
+                    <ref name="FormattedPositiveInteger"/>
+                </element>
+            </optional>
+            <element name="bonus_material_name">
+                <ref name="NonEmptyTokenString"/>
+            </element>
+            <element name="copyright">
+                <ref name="Copyright"/>
+            </element>
+        </interleave>
+    </define>
+    <define name="ArtworkFilesList">
+        <oneOrMore>
+            <element name="file">
+                <ref name="File"/>
+            </element>
+        </oneOrMore>
+    </define>
+    <define name="PreviewDefinitionList">
+        <zeroOrMore>
+            <element name="preview">
+                <ref name="VideoPreviewType"/>
+            </element>
+        </zeroOrMore>
+    </define>
+    <define name="VideoPreviewType">
+        <optional>
+            <attribute name="starttime">
+                <data type="string">
+                    <param name="pattern">([0-9]+)|([0-9]{2}:[0-9]{2}:[0-9]{2})</param>
+                </data>
+            </attribute>
+        </optional>
+        <text/>
+        <!-- New format-->
+        <optional>
+            <attribute name="territory">
+                <ref name="Territory"/>
+            </attribute>
+        </optional>
+        <optional>
+            <attribute name="timecode_format">
+                <ref name="TimecodeFormat"/>
+            </attribute>
+        </optional>
+        <optional>
+            <attribute name="start_time">
+                <ref name="FormattedTime"/>
+            </attribute>
+        </optional>
+        <optional>
+            <attribute name="end_time">
+                <ref name="FormattedTime"/>
+            </attribute>
+        </optional>
+        <optional>
+            <attribute name="image_time">
+                <ref name="FormattedTime"/>
+            </attribute>
+        </optional>
+        <optional>
+            <attribute name="replace_custom">
+                <ref name="FormattedBoolean"/>
+            </attribute>
+        </optional>
+        <optional>
+            <attribute name="remove">
+                <ref name="FormattedBoolean"/>
+            </attribute>
+        </optional>
+    </define>
+    <define name="LabelNameType">
+        <data type="string">
+            <param name="minLength">1</param>
+        </data>
+    </define>
+    <define name="ParentalAdvisoryType">
+        <choice>
+            <empty/>
+            <value>clean</value>
+            <value>explicit</value>
+            <value>none</value>
+            <value>normal</value>
+        </choice>
+    </define>
+    <define name="ProductList">
+        <zeroOrMore>
+            <element name="product">
+                <ref name="ProductItem"/>
+            </element>
+        </zeroOrMore>
+    </define>
+    <define name="ExtraLocale">
+        <attribute name="name">
+            <ref name="Locale"/>
+        </attribute>
+        <optional>
+            <attribute name="default">
+                <ref name="FormattedBoolean"/>
+            </attribute>
+        </optional>
+        <optional>
+            <element name="designated_fallback">
+                <ref name="FormattedBoolean"/>
+            </element>
+        </optional>
+        <optional>
+            <attribute name="remove">
+                <ref name="FormattedBoolean"/>
+            </attribute>
+        </optional>
+        <interleave>
+            <optional>
+                <element name="title">
+                    <text/>
+                </element>
+            </optional>
+            <optional>
+                <element name="phonetic_title">
+                    <text/>
+                </element>
+            </optional>
+            <element name="description">
+                <text/>
+            </element>
+        </interleave>
+    </define>
+    <define name="ScreenshotList">
+        <zeroOrMore>
+            <element name="screenshot">
+                <ref name="File"/>
+            </element>
+        </zeroOrMore>
+    </define>
+    <define name="ItunesExtraScreenshotList">
+        <zeroOrMore>
+            <element name="screenshot">
+                <ref name="ExtraScreenshot"/>
+            </element>
+        </zeroOrMore>
+    </define>
+    <define name="ProductItem">
+        <interleave>
+            <element name="territory">
+                <ref name="Territory"/>
+            </element>
+            <optional>
+                <element name="cleared_for_sale">
+                    <ref name="FormattedBoolean"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="cleared_for_ticketmaster">
+                    <ref name="FormattedBoolean"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="sales_start_date">
+                    <ref name="FormattedDate"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="sell_plus_quality">
+                    <ref name="FormattedBoolean"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="intervals">
+                    <ref name="IntervalList"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="wholesale_price_tier">
+                    <ref name="WholesalePriceTierType"/>
+                </element>
+            </optional>
+            <!-- Film-specific elements -->
+            <optional>
+                <element name="hd_wholesale_price_tier">
+                    <ref name="WholesalePriceTierType"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="available_for_vod_date">
+                    <ref name="FormattedDate"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="unavailable_for_vod_date">
+                    <ref name="FormattedDate"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="physical_release_date">
+                    <ref name="FormattedDate"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="hd_physical_release_date">
+                    <ref name="FormattedDate"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="vod_type">
+                    <ref name="VodType"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="cleared_for_vod">
+                    <ref name="FormattedBoolean"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="cleared_for_hd_vod">
+                    <ref name="FormattedBoolean"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="cleared_for_hd_sale">
+                    <ref name="FormattedBoolean"/>
+                </element>
+            </optional>
+            <!-- Playlist-specific elements -->
+            <optional>
+                <element name="preorder_sales_start_date">
+                    <ref name="FormattedDate"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="preorder_wholesale_price_tier">
+                    <ref name="WholesalePriceTierType"/>
+                </element>
+            </optional>
+            <!-- Track-specific elements -->
+            <optional>
+                <element name="sales_end_date">
+                    <ref name="FormattedDate"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="read_only_info">
+                    <ref name="ReadOnlyInfo"/>
+                </element>
+            </optional>
+        </interleave>
+    </define>
+    <!-- Begin: Film-only definitions -->
+    <define name="VodType">
+        <choice>
+            <value>Library</value>
+            <value>New Release</value>
+            <value>Direct-to-Video</value>
+        </choice>
+    </define>
+    <!-- End: Film-only definitions -->
+    <define name="GenreList">
+        <oneOrMore>
+            <element name="genre">
+                <ref name="Genre"/>
+            </element>
+        </oneOrMore>
+    </define>
+    <define name="Genre">
+        <optional>
+            <!-- code-enforced: code is being rolled out and preferred over name -->
+            <attribute name="code">
+                <ref name="NonEmptyTokenString"/>
+            </attribute>
+        </optional>
+        <data type="token"/>
+        <!-- code-enforced: code is being rolled out and preferred over name -->
+    </define>
+    <define name="PublisherList">
+        <oneOrMore>
+            <element name="publisher">
+                <text/>
+            </element>
+        </oneOrMore>
+    </define>
+    <define name="ArtistList">
+        <oneOrMore>
+            <element name="artist">
+                <ref name="ArtistType"/>
+            </element>
+        </oneOrMore>
+    </define>
+    <define name="ArtistType">
+        <interleave>
+            <optional>
+                <element name="apple_id">
+                    <ref name="AppleIdType"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="read_only_info">
+                    <ref name="ReadOnlyInfo"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="primary">
+                    <ref name="FormattedBoolean"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="language">
+                    <ref name="LanguageType"/>
+                </element>
+            </optional>
+            <!-- nuglov : LocalizableText continues to exist only to support 4.x metadata lookup beans. It is completely altered out for input. -->
+            <zeroOrMore>
+                <choice>
+                    <element name="name">
+                        <text/>
+                    </element>
+                    <element name="artist_name">
+                        <text/>
+                    </element>
+                </choice>
+            </zeroOrMore>
+            <optional>
+                <element name="phonetic_name">
+                    <text/>
+                </element>
+            </optional>
+            <optional>
+                <element name="locales">
+                    <oneOrMore>
+                        <element name="locale">
+                            <ref name="ArtistLocalizationItem"/>
+                        </element>
+                    </oneOrMore>
+                </element>
+            </optional>
+            <!-- code-enforced: roles is required for music albums, but not for audio books -->
+            <optional>
+                <element name="roles">
+                    <oneOrMore>
+                        <element name="role">
+                            <ref name="Role"/>
+                        </element>
+                    </oneOrMore>
+                </element>
+            </optional>
+            <optional>
+                <element name="hero_image">
+                    <ref name="HeroImage"/>
+                </element>
+            </optional>
+        </interleave>
+    </define>
+    <define name="IntervalList">
+        <zeroOrMore>
+            <element name="interval">
+                <ref name="Interval"/>
+            </element>
+        </zeroOrMore>
+    </define>
+    <define name="Interval">
+        <!-- Shared between schemas -->
+        <interleave>
+            <optional>
+                <element name="start_date">
+                    <ref name="FormattedDate"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="end_date">
+                    <ref name="FormattedDate"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="wholesale_price_tier">
+                    <ref name="WholesalePriceTierType"/>
+                </element>
+            </optional>
+            <!-- 
+				The hd_wholesale_price_tier is NOT needed for Publication, 
+				but we must repeat it because the Interval element is shared between schemas 
+			-->
+            <optional>
+                <element name="hd_wholesale_price_tier">
+                    <ref name="WholesalePriceTierType"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="price_tier">
+                    <ref name="WholesalePriceTierType"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="release_type">
+                    <ref name="ReleaseType"/>
+                </element>
+            </optional>
+        </interleave>
+    </define>
+    <define name="Price">
+        <optional>
+            <attribute name="currency">
+                <text/>
+            </attribute>
+        </optional>
+        <data type="string">
+            <param name="pattern">([0-9]+[.][0-9]+){0,1}</param>
+        </data>
+    </define>
+    <define name="AssetFile">
+        <optional>
+            <attribute name="role">
+                <ref name="DataFileRole"/>
+            </attribute>
+        </optional>
+        <optional>
+            <attribute name="remove">
+                <ref name="FormattedBoolean"/>
+            </attribute>
+        </optional>
+        <interleave>
+            <element name="size">
+                <ref name="FormattedPositiveInteger"/>
+            </element>
+            <element name="file_name">
+                <ref name="FileName"/>
+            </element>
+            <element name="checksum">
+                <ref name="Checksum"/>
+            </element>
+            <!-- Begin film and tv-specific properties -->
+            <optional>
+                <element name="locale">
+                    <ref name="VideoLocale"/>
+                </element>
+            </optional>
+            <!-- locales is applicable only for Film package. Also only in artwork data role.
+	            Validation to restrict it to artwork role is done in Java code. -->
+            <optional>
+                <element name="locales">
+                    <zeroOrMore>
+                        <element name="locale">
+                            <ref name="VideoLocale"/>
+                        </element>
+                    </zeroOrMore>
+                </element>
+            </optional>
+            <optional>
+                <element name="territory_exclusions">
+                    <ref name="TerritoryExclusions"/>
+                </element>
+            </optional>
+            <zeroOrMore>
+                <element name="attribute">
+                    <!-- TODO: Make sure Schema beans supports attribute + data -->
+                    <attribute name="name">
+                        <choice>
+                            <value>crop.left</value>
+                            <value>crop.top</value>
+                            <value>crop.right</value>
+                            <value>crop.bottom</value>
+                            <value>image.burned_subtitles.locale</value>
+                            <value>image.burned_forced_narrative.locale</value>
+                            <value>image.textless_master</value>
+                            <value>program.start.timecode</value>
+                            <value>component_group</value>
+                            <value>audio.surround.force_5_1_downmix</value>
+                            <value>audio.voice_over</value>
+                            <value>image.textless_master.reason_code</value>
+                        </choice>
+                    </attribute>
+                    <text/>
+                </element>
+            </zeroOrMore>
+            <!-- End film and tv-specific properties -->
+        </interleave>
+    </define>
+    <define name="DataFileRole">
+        <choice>
+            <value>source</value>
+            <value>source.hdr</value>
+            <value>mapping.hdr</value>
+            <value>captions</value>
+            <value>chapters</value>
+            <value>audio</value>
+            <value>audio.7_1</value>
+            <value>notes</value>
+            <value>subtitles</value>
+            <value>forced_subtitles</value>
+            <value>video.end.dub_credits</value>
+            <value>subtitles.hearing_impaired</value>
+            <value>audio.visually_impaired</value>
+            <value>audio.commentary</value>
+            <value>subtitles.commentary</value>
+            <value>forced_subtitles.commentary</value>
+            <value>subtitles.hearing_impaired.commentary</value>
+        </choice>
+    </define>
+    <define name="CloneAssetFile">
+        <optional>
+            <attribute name="role">
+                <ref name="DataFileRole"/>
+            </attribute>
+        </optional>
+        <optional>
+            <attribute name="component_group">
+                <text/>
+            </attribute>
+        </optional>
+        <interleave>
+            <!-- Begin film and tv-specific properties -->
+            <optional>
+                <element name="locale">
+                    <ref name="VideoLocale"/>
+                </element>
+            </optional>
+            <!-- End film and tv-specific properties -->
+        </interleave>
+    </define>
+    <define name="Checksum">
+        <optional>
+            <attribute name="type">
+                <ref name="ChecksumStrategy"/>
+            </attribute>
+        </optional>
+        <text/>
+    </define>
+    <define name="ChecksumStrategy">
+        <data type="token">
+            <param name="pattern">[Mm][Dd][5]</param>
+        </data>
+    </define>
+    <define name="Booklet">
+        <interleave>
+            <optional>
+                <element name="vendor_id">
+                    <ref name="VendorIdType"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="xid">
+                    <ref name="Xid"/>
+                </element>
+            </optional>
+            <element name="title">
+                <ref name="NonEmptyTokenString"/>
+            </element>
+            <!-- title_version is deprecated -->
+            <optional>
+                <element name="title_version">
+                    <ref name="NonEmptyTokenString"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="phonetic_title">
+                    <text/>
+                </element>
+            </optional>
+            <optional>
+                <element name="locales">
+                    <ref name="LocalizationList"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="copyright">
+                    <ref name="Copyright"/>
+                </element>
+            </optional>
+            <optional>
+                <choice>
+                    <element name="volume">
+                        <ref name="FormattedPositiveInteger"/>
+                    </element>
+                    <element name="volume_number">
+                        <ref name="FormattedPositiveInteger"/>
+                    </element>
+                </choice>
+            </optional>
+            <optional>
+                <element name="vendor_offer_code">
+                    <ref name="VendorOfferCode"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="track_number">
+                    <ref name="FormattedPositiveInteger"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="preorder_type">
+                    <ref name="PreOrder"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="explicit_content">
+                    <ref name="ParentalAdvisoryType"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="products">
+                    <ref name="ProductList"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="artists">
+                    <ref name="ArtistList"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="file">
+                    <ref name="File"/>
+                </element>
+            </optional>
+        </interleave>
+    </define>
+    <define name="ChapterList">
+        <interleave>
+            <optional>
+                <element name="timecode_format">
+                    <ref name="TimecodeFormat"/>
+                </element>
+            </optional>
+            <zeroOrMore>
+                <element name="chapter">
+                    <ref name="ChapterItem"/>
+                </element>
+            </zeroOrMore>
+        </interleave>
+    </define>
+    <define name="ChapterItem">
+        <optional>
+            <attribute name="starttime">
+                <ref name="FormattedTime"/>
+            </attribute>
+        </optional>
+        <interleave>
+            <optional>
+                <choice>
+                    <element name="start_time">
+                        <ref name="FormattedTime"/>
+                    </element>
+                    <element name="chapter_start_time">
+                        <ref name="FormattedTime"/>
+                    </element>
+                </choice>
+            </optional>
+            <choice>
+                <element name="title">
+                    <ref name="NonEmptyLocalizableTextElement"/>
+                </element>
+                <element name="titles">
+                    <oneOrMore>
+                        <element name="title">
+                            <ref name="NonEmptyLocalizableTextElement"/>
+                        </element>
+                    </oneOrMore>
+                </element>
+            </choice>
+            <optional>
+                <element name="artwork_file">
+                    <ref name="File"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="artwork_time">
+                    <ref name="FormattedTime"/>
+                </element>
+            </optional>
+        </interleave>
+    </define>
+    <define name="Extra">
+        <interleave>
+            <optional>
+                <element name="title">
+                    <text/>
+                </element>
+            </optional>
+            <optional>
+                <element name="phonetic_title">
+                    <text/>
+                </element>
+            </optional>
+            <element name="vendor_id">
+                <ref name="VendorIdType"/>
+            </element>
+            <optional>
+                <element name="vendor_offer_code">
+                    <ref name="VendorOfferCode"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="explicit_content">
+                    <ref name="ParentalAdvisoryType"/>
+                </element>
+            </optional>
+            <optional>
+                <!-- The volume_number element is only applicable in the context of an album -->
+                <element name="volume_number">
+                    <ref name="FormattedPositiveInteger"/>
+                </element>
+            </optional>
+            <optional>
+                <!-- The track_number element is only applicable in the context of an album -->
+                <element name="track_number">
+                    <ref name="FormattedPositiveInteger"/>
+                </element>
+            </optional>
+            <optional>
+                <!-- The preorder_type element is only applicable in the context of an album -->
+                <element name="preorder_type">
+                    <ref name="PreOrder"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="archive_file">
+                    <ref name="File"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="video_items">
+                    <ref name="ExtraVideoItemList"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="products">
+                    <ref name="ProductList"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="locales">
+                    <oneOrMore>
+                        <element name="locale">
+                            <ref name="ExtraLocale"/>
+                        </element>
+                    </oneOrMore>
+                </element>
+            </optional>
+            <optional>
+                <element name="screenshots">
+                    <ref name="ScreenshotList"/>
+                </element>
+            </optional>
+        </interleave>
+    </define>
+    <define name="ExtraVideoItemList">
+        <oneOrMore>
+            <element name="video_item">
+                <ref name="ExtraVideoItem"/>
+            </element>
+        </oneOrMore>
+    </define>
+    <define name="ExtraVideoItem">
+        <optional>
+            <attribute name="remove">
+                <ref name="FormattedBoolean"/>
+            </attribute>
+        </optional>
+        <interleave>
+            <element name="target_path">
+                <text/>
+            </element>
+            <element name="vendor_id">
+                <ref name="VendorIdType"/>
+            </element>
+            <element name="assets">
+                <ref name="AssetList"/>
+            </element>
+        </interleave>
+    </define>
+    <define name="TimecodeFormat">
+        <text/>
+    </define>
+    <define name="LocalizableTextElement">
+        <optional>
+            <attribute name="locale">
+                <ref name="Locale"/>
+            </attribute>
+        </optional>
+        <text/>
+    </define>
+    <define name="NonEmptyLocalizableTextElement">
+        <optional>
+            <attribute name="locale">
+                <ref name="Locale"/>
+            </attribute>
+        </optional>
+        <ref name="NonEmptyString255"/>
+    </define>
+    <define name="Locale">
+        <data type="string">
+            <!-- regex does not cover the full RFC5646 spec.  only covers what import supports -->
+            <param name="pattern">[a-zA-Z]{2,3}(-[a-zA-Z]{4})?(-([0-9]{3}|[a-zA-Z]{2}))?</param>
+        </data>
+    </define>
+    <define name="Copyright">
+        <data type="token">
+            <param name="maxLength">1000</param>
+            <param name="pattern">(\d{4}\s+.+)|(Statutory declaration under section 52A of the Copyright Act, 1957 \(as amended\): We, (.+), located at (.+) hereby declare that we are the owners of the copyright for distributing this cinematography film, having secured necessary consent and license from the producer of the film.)</param>
+        </data>
+    </define>
+    <define name="File">
+        <interleave>
+            <element name="size">
+                <ref name="FormattedPositiveInteger"/>
+            </element>
+            <element name="file_name">
+                <ref name="FileName"/>
+            </element>
+            <element name="checksum">
+                <ref name="Checksum"/>
+            </element>
+            <optional>
+                <element name="read_only_info">
+                    <ref name="ReadOnlyInfo"/>
+                </element>
+            </optional>
+        </interleave>
+    </define>
+    <define name="FileName">
+        <data type="token">
+            <param name="pattern">[^/: ]+</param>
+        </data>
+    </define>
+    <define name="FormattedBoolean">
+        <data type="string">
+            <param name="pattern">\s*([Tt][Rr][Uu][Ee])|([Ff][Aa][Ll][Ss][Ee]){0,1}\s*</param>
+        </data>
+    </define>
+    <define name="FormattedDate">
+        <optional>
+            <data type="date">
+                <param name="pattern">\s*\d{4}-((0[1-9])|(1[0-2]))-(0[1-9]|[12][0-9]|3[01]){0,1}\s*</param>
+            </data>
+        </optional>
+    </define>
+    <define name="FormattedPositiveInteger">
+        <data type="string">
+            <param name="pattern">[0-9]*</param>
+        </data>
+    </define>
+    <define name="FormattedTime">
+        <data type="token">
+            <param name="pattern">\s*\d{1,2}:\d{2}:\d{2}((.\d{3})|([:;]\d{2}))?\s*</param>
+        </data>
+    </define>
+    <define name="FormattedYear">
+        <data type="string">
+            <param name="pattern">([0-9]{4}){0,1}</param>
+        </data>
+    </define>
+    <define name="Grid">
+        <text/>
+    </define>
+    <define name="Isrc">
+        <data type="string">
+            <param name="pattern">[a-zA-Z0-9]{5}[0-9]{7}</param>
+        </data>
+    </define>
+    <define name="Eidr">
+        <ref name="NonEmptyTokenString"/>
+    </define>
+    <define name="Iswc">
+        <data type="string">
+            <param name="pattern">T[0-9]{10}</param>
+        </data>
+    </define>
+    <define name="LanguageType">
+        <data type="token">
+            <param name="minLength">1</param>
+            <!-- regex does not cover the full RFC5646 spec.  only covers what import supports -->
+            <param name="pattern">[a-zA-Z]{2,3}(-[a-zA-Z]{4})?(-([0-9]{3}|[a-zA-Z]{2}))?</param>
+        </data>
+    </define>
+    <!-- nuglov : LocalizableText continues to exist only to support 4.x metadata lookup beans -->
+    <define name="LocalizableText">
+        <optional>
+            <attribute name="translation">
+                <choice>
+                    <value>native</value>
+                    <value>phonetic</value>
+                    <value>english</value>
+                    <value>japanese</value>
+                </choice>
+            </attribute>
+        </optional>
+        <text/>
+    </define>
+    <define name="NonEmptyTokenString">
+        <data type="token">
+            <param name="minLength">1</param>
+        </data>
+    </define>
+    <define name="PreOrder">
+        <data type="token">
+            <param name="pattern">([Ss][Tt][Aa][Nn][Dd][Aa][Rr][Dd])|([Pp][Rr][Ee][Oo][Rr][Dd][Ee][Rr](\s+|-)[Oo][Nn][Ll][Yy])|([Ii][Nn][Ss][Tt][Aa][Nn][Tt](\s+|-)[Gg][Rr][Aa][Tt][Ii][Ff][Ii][Cc][Aa][Tt][Ii][Oo][Nn])</param>
+        </data>
+    </define>
+    <define name="ProviderType">
+        <data type="string">
+            <param name="minLength">1</param>
+        </data>
+    </define>
+    <define name="Role">
+        <data type="token">
+            <param name="minLength">1</param>
+        </data>
+    </define>
+    <define name="MovieRole">
+        <data type="token">
+            <param name="minLength">1</param>
+        </data>
+        <optional>
+            <attribute name="locale">
+                <ref name="Locale"/>
+            </attribute>
+        </optional>
+        <optional>
+            <attribute name="character_reference">
+                <ref name="String100"/>
+            </attribute>
+        </optional>
+    </define>
+    <define name="String1000">
+        <data type="string">
+            <param name="minLength">1</param>
+            <param name="maxLength">1000</param>
+        </data>
+    </define>
+    <define name="String100">
+        <data type="string">
+            <param name="minLength">1</param>
+            <param name="maxLength">100</param>
+        </data>
+    </define>
+    <define name="String250">
+        <data type="string">
+            <param name="minLength">1</param>
+            <param name="maxLength">250</param>
+        </data>
+    </define>
+    <define name="String255">
+        <data type="string">
+            <param name="minLength">1</param>
+            <param name="maxLength">255</param>
+        </data>
+    </define>
+    <define name="NonEmptyString255">
+        <data type="string">
+            <param name="minLength">1</param>
+            <param name="maxLength">255</param>
+            <param name="pattern">.*\S.*</param>
+        </data>
+    </define>
+    <define name="String39">
+        <data type="string">
+            <param name="minLength">1</param>
+            <param name="maxLength">39</param>
+        </data>
+    </define>
+    <define name="String4000">
+        <data type="string">
+            <param name="minLength">1</param>
+            <param name="maxLength">4000</param>
+        </data>
+    </define>
+    <define name="String50">
+        <data type="string">
+            <param name="minLength">1</param>
+            <param name="maxLength">50</param>
+        </data>
+    </define>
+    <define name="Territory">
+        <data type="token">
+            <param name="pattern">([A-Z]{2})|([Ww][Oo][Rr][Ll][Dd])</param>
+        </data>
+    </define>
+    <define name="TerritoryExclusion">
+        <optional>
+            <attribute name="end_date">
+                <ref name="FormattedDate"/>
+            </attribute>
+        </optional>
+        <data type="token">
+            <param name="pattern">([A-Z]{2})|([Ww][Oo][Rr][Ll][Dd])</param>
+        </data>
+    </define>
+    <define name="StudioReleaseTitle">
+        <text/>
+    </define>
+    <define name="Upc">
+        <data type="string">
+            <param name="pattern">\d{8,14}</param>
+        </data>
+    </define>
+    <define name="VendorIdType">
+        <data type="token"/>
+    </define>
+    <define name="Xid">
+        <optional>
+            <attribute name="scheme">
+                <choice>
+                    <value>upc</value>
+                    <value>isrc</value>
+                    <value>isan</value>
+                    <value>grid</value>
+                    <value>uuid</value>
+                    <value>vendor_id</value>
+                </choice>
+            </attribute>
+        </optional>
+        <data type="string">
+            <param name="pattern">()|([^:]+:[^:]+:.+)</param>
+        </data>
+    </define>
+    <define name="WholesalePriceTierType">
+        <data type="token">
+            <param name="pattern">[a-zA-Z\d]+</param>
+        </data>
+    </define>
+    <define name="VendorOfferCode">
+        <text/>
+    </define>
+    <define name="ReleaseType">
+        <choice>
+            <value>new-release</value>
+            <value>digital-only</value>
+            <value>other</value>
+        </choice>
+    </define>
+    <define name="LocalizationList">
+        <zeroOrMore>
+            <element name="locale">
+                <ref name="LocalizationItem"/>
+            </element>
+        </zeroOrMore>
+    </define>
+    <define name="LocalizationItem">
+        <attribute name="name">
+            <ref name="Locale"/>
+        </attribute>
+        <interleave>
+            <optional>
+                <element name="designated_fallback">
+                    <ref name="FormattedBoolean"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="title">
+                    <text/>
+                </element>
+            </optional>
+            <optional>
+                <element name="title_version">
+                    <text/>
+                </element>
+            </optional>
+            <optional>
+                <element name="phonetic_title">
+                    <text/>
+                </element>
+            </optional>
+        </interleave>
+    </define>
+    <define name="ArtistLocalizationItem">
+        <attribute name="name">
+            <ref name="Locale"/>
+        </attribute>
+        <interleave>
+            <optional>
+                <element name="designated_fallback">
+                    <ref name="FormattedBoolean"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="artist_name">
+                    <text/>
+                </element>
+            </optional>
+            <optional>
+                <element name="phonetic_name">
+                    <text/>
+                </element>
+            </optional>
+        </interleave>
+    </define>
+    <define name="GalleryList">
+        <optional>
+            <attribute name="force_sequence">
+                <ref name="FormattedBoolean"/>
+            </attribute>
+        </optional>
+        <oneOrMore>
+            <element name="gallery">
+                <ref name="Gallery"/>
+            </element>
+        </oneOrMore>
+    </define>
+    <define name="Gallery">
+        <optional>
+            <attribute name="remove">
+                <ref name="FormattedBoolean"/>
+            </attribute>
+        </optional>
+        <interleave>
+            <element name="vendor_id">
+                <ref name="VendorIdType"/>
+            </element>
+            <optional>
+                <element name="gallery_type">
+                    <choice>
+                        <value>generic</value>
+                        <value>hero</value>
+                        <!-- for extras2.0: -->
+                        <value>menubg</value>
+                        <value>selection</value>
+                        <value>video</value>
+                    </choice>
+                </element>
+            </optional>
+            <optional>
+                <element name="display_name">
+                    <text/>
+                </element>
+            </optional>
+            <optional>
+                <element name="item_display_duration_seconds">
+                    <text/>
+                </element>
+            </optional>
+            <optional>
+                <element name="gallery_repeat_limit">
+                    <ref name="FormattedPositiveInteger"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="locales">
+                    <oneOrMore>
+                        <element name="locale">
+                            <ref name="GalleryLocale"/>
+                        </element>
+                    </oneOrMore>
+                </element>
+            </optional>
+            <optional>
+                <element name="gallery_items">
+                    <oneOrMore>
+                        <element name="gallery_item">
+                            <ref name="GalleryItem"/>
+                        </element>
+                    </oneOrMore>
+                </element>
+            </optional>
+        </interleave>
+    </define>
+    <define name="GalleryLocale">
+        <attribute name="name">
+            <ref name="LanguageType"/>
+        </attribute>
+        <interleave>
+            <optional>
+                <element name="designated_fallback">
+                    <ref name="FormattedBoolean"/>
+                </element>
+            </optional>
+            <element name="display_name">
+                <text/>
+            </element>
+        </interleave>
+    </define>
+    <define name="GalleryItem">
+        <attribute name="type">
+            <choice>
+                <value>image</value>
+                <!-- for extras 2.0: -->
+                <value>audio</value>
+                <value>video</value>
+            </choice>
+        </attribute>
+        <interleave>
+            <optional>
+                <element name="assets">
+                    <ref name="AssetList"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="event_date">
+                    <ref name="FormattedDate"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="caption">
+                    <text/>
+                </element>
+            </optional>
+            <optional>
+                <element name="location">
+                    <text/>
+                </element>
+            </optional>
+            <optional>
+                <element name="attribution">
+                    <text/>
+                </element>
+            </optional>
+            <optional>
+                <element name="locales">
+                    <zeroOrMore>
+                        <element name="locale">
+                            <ref name="GalleryItemLocale"/>
+                        </element>
+                    </zeroOrMore>
+                </element>
+            </optional>
+            <optional>
+                <element name="vendor_id">
+                    <ref name="VendorIdType"/>
+                </element>
+            </optional>
+            <!-- for extras2.0: -->
+            <optional>
+                <element name="display_name">
+                    <text/>
+                </element>
+            </optional>
+            <optional>
+                <element name="gallery_item_tags">
+                    <ref name="GalleryItemTagList"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="legacy_video">
+                    <ref name="LegacyVideo"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="alt_description">
+                    <text/>
+                </element>
+            </optional>
+        </interleave>
+    </define>
+    <define name="LegacyVideo">
+        <attribute name="vendor_id">
+            <ref name="VendorIdType"/>
+        </attribute>
+    </define>
+    <define name="GalleryItemLocale">
+        <attribute name="name">
+            <ref name="LanguageType"/>
+        </attribute>
+        <interleave>
+            <optional>
+                <element name="designated_fallback">
+                    <ref name="FormattedBoolean"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="caption">
+                    <text/>
+                </element>
+            </optional>
+            <optional>
+                <element name="location">
+                    <text/>
+                </element>
+            </optional>
+            <optional>
+                <element name="attribution">
+                    <text/>
+                </element>
+            </optional>
+            <!-- extras 2.0: -->
+            <optional>
+                <element name="display_name">
+                    <text/>
+                </element>
+            </optional>
+            <optional>
+                <element name="alt_description">
+                    <text/>
+                </element>
+            </optional>
+        </interleave>
+    </define>
+    <define name="HeroImage">
+        <interleave>
+            <element name="vendor_id">
+                <ref name="VendorIdType"/>
+            </element>
+            <element name="hero_image_file">
+                <ref name="AssetFile"/>
+            </element>
+        </interleave>
+    </define>
+    <!-- extras 2.0 -->
+    <define name="GalleryItemTagList">
+        <oneOrMore>
+            <element name="gallery_item_tag">
+                <attribute name="name">
+                    <text/>
+                </attribute>
+                <zeroOrMore>
+                    <element name="value">
+                        <text/>
+                    </element>
+                </zeroOrMore>
+            </element>
+        </oneOrMore>
+    </define>
+    <define name="AppleIdType">
+        <optional>
+            <attribute name="generate">
+                <ref name="FormattedBoolean"/>
+            </attribute>
+        </optional>
+        <optional>
+            <attribute name="allow_duplicate_name">
+                <ref name="FormattedBoolean"/>
+            </attribute>
+        </optional>
+        <ref name="FormattedPositiveInteger"/>
+    </define>
+    <define name="ReadOnlyInfo">
+        <oneOrMore>
+            <element name="read_only_value">
+                <ref name="ReadOnlyValue"/>
+            </element>
+        </oneOrMore>
+    </define>
+    <define name="ReadOnlyValue">
+        <attribute name="key">
+            <data type="string"/>
+        </attribute>
+        <text/>
+    </define>
+    <define name="TerritoryExclusions">
+        <optional>
+            <attribute name="role">
+                <choice>
+                    <value>audio</value>
+                </choice>
+            </attribute>
+        </optional>
+        <zeroOrMore>
+            <choice>
+                <element name="territory">
+                    <ref name="Territory"/>
+                </element>
+                <element name="territory_exclusion">
+                    <ref name="TerritoryExclusion"/>
+                </element>
+            </choice>
+        </zeroOrMore>
+    </define>
+    <define name="ItunesExtra">
+        <interleave>
+            <optional>
+                <element name="read_only_info">
+                    <ref name="ReadOnlyInfo"/>
+                </element>
+            </optional>
+            <element name="vendor_id">
+                <ref name="VendorIdType"/>
+            </element>
+            <element name="title">
+                <text/>
+            </element>
+            <element name="content_item">
+                <attribute name="content_type">
+                    <choice>
+                        <value>video</value>
+                    </choice>
+                </attribute>
+                <element name="vendor_id">
+                    <ref name="VendorIdType"/>
+                </element>
+            </element>
+            <optional>
+                <element name="description">
+                    <text/>
+                </element>
+            </optional>
+            <optional>
+                <element name="release_date">
+                    <ref name="FormattedDate"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="cleared_for_preorder">
+                    <ref name="FormattedBoolean"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="rootnodes">
+                    <ref name="RootnodeList"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="scene_groups">
+                    <ref name="SceneGroupCollection"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="scenes">
+                    <ref name="SceneCollection"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="galleries">
+                    <ref name="GalleryList"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="assets">
+                    <ref name="AssetList"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="locales">
+                    <zeroOrMore>
+                        <element name="locale">
+                            <ref name="ItunesExtraLocale"/>
+                        </element>
+                    </zeroOrMore>
+                </element>
+            </optional>
+            <optional>
+                <element name="disable_audio_in_store">
+                    <ref name="FormattedBoolean"/>
+                </element>
+            </optional>
+        </interleave>
+    </define>
+    <define name="ItunesExtraLocale">
+        <attribute name="name">
+            <ref name="LanguageType"/>
+        </attribute>
+        <interleave>
+            <optional>
+                <element name="designated_fallback">
+                    <ref name="FormattedBoolean"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="title">
+                    <text/>
+                </element>
+            </optional>
+            <optional>
+                <element name="description">
+                    <text/>
+                </element>
+            </optional>
+        </interleave>
+    </define>
+    <define name="ExtraScreenshot">
+        <optional>
+            <attribute name="display_target">
+                <ref name="ItunesExtraDisplayTargetEnum"/>
+            </attribute>
+        </optional>
+        <ref name="File"/>
+    </define>
+    <define name="ItunesExtraDisplayTargetEnum">
+        <text/>
+    </define>
+    <define name="RootnodeList">
+        <oneOrMore>
+            <element name="rootnode">
+                <ref name="Rootnode"/>
+            </element>
+        </oneOrMore>
+    </define>
+    <define name="Rootnode">
+        <interleave>
+            <element name="vendor_id">
+                <ref name="VendorIdType"/>
+            </element>
+            <element name="title">
+                <text/>
+            </element>
+            <optional>
+                <element name="short_title">
+                    <text/>
+                </element>
+            </optional>
+            <element name="territories">
+                <zeroOrMore>
+                    <element name="territory">
+                        <ref name="Territory"/>
+                    </element>
+                </zeroOrMore>
+            </element>
+            <optional>
+                <element name="background_gallery_link">
+                    <ref name="GalleryLink"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="locales">
+                    <zeroOrMore>
+                        <element name="locale">
+                            <ref name="NavnodeLocale"/>
+                        </element>
+                    </zeroOrMore>
+                </element>
+            </optional>
+            <optional>
+                <element name="colors">
+                    <ref name="ColorsType"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="transition">
+                    <choice>
+                        <value>none</value>
+                        <value>push</value>
+                        <value>wipe</value>
+                        <value>dissolve</value>
+                    </choice>
+                </element>
+            </optional>
+            <optional>
+                <element name="navnodes">
+                    <ref name="NavnodeList"/>
+                </element>
+            </optional>
+        </interleave>
+    </define>
+    <define name="GalleryLink">
+        <attribute name="vendor_id">
+            <text/>
+        </attribute>
+    </define>
+    <define name="ColorsType">
+        <optional>
+            <attribute name="background">
+                <text/>
+            </attribute>
+        </optional>
+        <optional>
+            <attribute name="theme">
+                <choice>
+                    <value>light</value>
+                    <value>dark</value>
+                </choice>
+            </attribute>
+        </optional>
+        <optional>
+            <attribute name="title">
+                <text/>
+            </attribute>
+        </optional>
+        <optional>
+            <attribute name="primary_text">
+                <text/>
+            </attribute>
+        </optional>
+    </define>
+    <define name="NavnodeLocale">
+        <attribute name="name">
+            <ref name="LanguageType"/>
+        </attribute>
+        <interleave>
+            <optional>
+                <element name="designated_fallback">
+                    <ref name="FormattedBoolean"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="title">
+                    <text/>
+                </element>
+            </optional>
+            <optional>
+                <element name="short_title">
+                    <text/>
+                </element>
+            </optional>
+            <optional>
+                <element name="description">
+                    <text/>
+                </element>
+            </optional>
+            <optional>
+                <element name="background_gallery_link">
+                    <ref name="GalleryLink"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="preview_label">
+                    <text/>
+                </element>
+            </optional>
+            <optional>
+                <element name="movie_label">
+                    <text/>
+                </element>
+            </optional>
+        </interleave>
+    </define>
+    <define name="NavnodeList">
+        <zeroOrMore>
+            <element name="navnode">
+                <ref name="Navnode"/>
+            </element>
+        </zeroOrMore>
+    </define>
+    <define name="Navnode">
+        <attribute name="type">
+            <choice>
+                <value>cast</value>
+                <value>gallery</value>
+                <value>menu</value>
+                <value>play</value>
+                <value>related</value>
+                <value>scenes</value>
+            </choice>
+        </attribute>
+        <optional>
+            <attribute name="template">
+                <choice>
+                    <value>carousel</value>
+                    <value>cast</value>
+                    <value>expand_in_parent</value>
+                    <value>grid</value>
+                    <value>list_on_left</value>
+                    <value>list_on_left_with_grid</value>
+                    <value>list_on_right</value>
+                    <value>one_up</value>
+                    <value>rows</value>
+                </choice>
+            </attribute>
+        </optional>
+        <interleave>
+            <element name="vendor_id">
+                <ref name="VendorIdType"/>
+            </element>
+            <optional>
+                <element name="title">
+                    <text/>
+                </element>
+            </optional>
+            <optional>
+                <element name="short_title">
+                    <text/>
+                </element>
+            </optional>
+            <optional>
+                <element name="description">
+                    <text/>
+                </element>
+            </optional>
+            <optional>
+                <element name="background_gallery_link">
+                    <ref name="GalleryLink"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="gallery_link">
+                    <ref name="GalleryLink"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="selection_gallery_link">
+                    <ref name="GalleryLink"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="locales">
+                    <zeroOrMore>
+                        <element name="locale">
+                            <ref name="NavnodeLocale"/>
+                        </element>
+                    </zeroOrMore>
+                </element>
+            </optional>
+            <optional>
+                <element name="colors">
+                    <ref name="ColorsType"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="transition">
+                    <text/>
+                    <!-- TODO enumerate types -->
+                </element>
+            </optional>
+            <optional>
+                <element name="show_play_all">
+                    <ref name="FormattedBoolean"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="inherit_background_image">
+                    <ref name="FormattedBoolean"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="inherit_background_audio">
+                    <ref name="FormattedBoolean"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="inherit_background_video">
+                    <ref name="FormattedBoolean"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="navnodes">
+                    <ref name="NavnodeList"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="preview_label">
+                    <text/>
+                </element>
+            </optional>
+            <optional>
+                <element name="movie_label">
+                    <text/>
+                </element>
+            </optional>
+        </interleave>
+    </define>
+    <define name="Characters">
+        <zeroOrMore>
+            <element name="character">
+                <ref name="Character"/>
+            </element>
+        </zeroOrMore>
+    </define>
+    <define name="Character">
+        <interleave>
+            <element name="character_name">
+                <ref name="String250"/>
+            </element>
+            <element name="reference_id">
+                <ref name="NonEmptyTokenString"/>
+            </element>
+            <optional>
+                <element name="character_note">
+                    <ref name="String4000"/>
+                </element>
+            </optional>
+            <optional>
+                <choice>
+                    <element name="character_image">
+                        <element name="data_file">
+                            <ref name="AssetFile"/>
+                        </element>
+                    </element>
+                    <element name="clone_character_image">
+                        <ref name="FormattedBoolean"/>
+                    </element>
+                </choice>
+            </optional>
+            <optional>
+                <element name="locales">
+                    <ref name="CharacterLocales"/>
+                </element>
+            </optional>
+        </interleave>
+    </define>
+    <define name="CharacterLocales">
+        <oneOrMore>
+            <element name="locale">
+                <interleave>
+                    <optional>
+                        <element name="designated_fallback">
+                            <ref name="FormattedBoolean"/>
+                        </element>
+                    </optional>
+                    <optional>
+                        <element name="character_name">
+                            <ref name="String250"/>
+                        </element>
+                    </optional>
+                    <optional>
+                        <element name="character_note">
+                            <ref name="String4000"/>
+                        </element>
+                    </optional>
+                </interleave>
+                <attribute name="name">
+                    <ref name="LanguageType"/>
+                </attribute>
+            </element>
+        </oneOrMore>
+    </define>
+    <define name="Description">
+        <attribute name="format">
+            <choice>
+                <value>html</value>
+                <value>plain</value>
+            </choice>
+        </attribute>
+        <text/>
+    </define>
+    <define name="SceneGroupCollection">
+        <interleave>
+            <optional>
+                <element name="timecode_format">
+                    <ref name="TimecodeFormat"/>
+                </element>
+            </optional>
+            <zeroOrMore>
+                <element name="scene_group">
+                    <ref name="SceneGroup"/>
+                </element>
+            </zeroOrMore>
+        </interleave>
+    </define>
+    <define name="SceneGroup">
+        <interleave>
+            <element name="vendor_id">
+                <ref name="VendorIdType"/>
+            </element>
+            <element name="title">
+                <ref name="NonEmptyTokenString"/>
+            </element>
+            <optional>
+                <element name="locales">
+                    <oneOrMore>
+                        <element name="locale">
+                            <ref name="SceneGroupLocale"/>
+                        </element>
+                    </oneOrMore>
+                </element>
+            </optional>
+            <element name="scene_links">
+                <ref name="SceneLinkCollection"/>
+            </element>
+        </interleave>
+    </define>
+    <define name="SceneGroupLocale">
+        <attribute name="name">
+            <ref name="LanguageType"/>
+        </attribute>
+        <interleave>
+            <optional>
+                <element name="designated_fallback">
+                    <ref name="FormattedBoolean"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="title">
+                    <text/>
+                </element>
+            </optional>
+        </interleave>
+    </define>
+    <define name="SceneLinkCollection">
+        <oneOrMore>
+            <element name="scene_link">
+                <ref name="SceneLink"/>
+            </element>
+        </oneOrMore>
+    </define>
+    <define name="SceneLink">
+        <attribute name="vendor_id">
+            <ref name="VendorIdType"/>
+        </attribute>
+        <optional>
+            <attribute name="key_scene">
+                <ref name="FormattedBoolean"/>
+            </attribute>
+        </optional>
+    </define>
+    <define name="SceneCollection">
+        <zeroOrMore>
+            <element name="scene">
+                <ref name="Scene"/>
+            </element>
+        </zeroOrMore>
+    </define>
+    <define name="Scene">
+        <interleave>
+            <element name="vendor_id">
+                <ref name="VendorIdType"/>
+            </element>
+            <element name="title">
+                <ref name="NonEmptyTokenString"/>
+            </element>
+            <element name="media_reference">
+                <ref name="MediaReference"/>
+            </element>
+            <optional>
+                <element name="description">
+                    <text/>
+                </element>
+            </optional>
+            <optional>
+                <element name="alt_description">
+                    <text/>
+                </element>
+            </optional>
+            <optional>
+                <element name="locales">
+                    <oneOrMore>
+                        <element name="locale">
+                            <ref name="SceneLocale"/>
+                        </element>
+                    </oneOrMore>
+                </element>
+            </optional>
+            <optional>
+                <element name="assets">
+                    <ref name="AssetList"/>
+                </element>
+            </optional>
+        </interleave>
+    </define>
+    <define name="SceneLocale">
+        <attribute name="name">
+            <ref name="LanguageType"/>
+        </attribute>
+        <interleave>
+            <optional>
+                <element name="designated_fallback">
+                    <ref name="FormattedBoolean"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="title">
+                    <text/>
+                </element>
+            </optional>
+            <optional>
+                <element name="description">
+                    <text/>
+                </element>
+            </optional>
+            <optional>
+                <element name="alt_description">
+                    <text/>
+                </element>
+            </optional>
+        </interleave>
+    </define>
+    <define name="MediaReference">
+        <attribute name="start">
+            <ref name="FormattedTime"/>
+        </attribute>
+        <attribute name="end">
+            <ref name="FormattedTime"/>
+        </attribute>
+    </define>
+    <define name="ProviderReviewer">
+        <attribute name="reviewer_id">
+            <text/>
+        </attribute>
+    </define>
+    <define name="ProviderReview">
+        <interleave>
+            <element name="review_date">
+                <ref name="FormattedDate"/>
+            </element>
+            <element name="reviewer">
+                <ref name="ProviderReviewer"/>
+            </element>
+            <optional>
+                <element name="review_problems">
+                    <oneOrMore>
+                        <element name="review_problem">
+                            <ref name="ReviewProblem"/>
+                        </element>
+                    </oneOrMore>
+                </element>
+            </optional>
+        </interleave>
+    </define>
+    <define name="ReviewProblemCode">
+        <attribute name="value">
+            <text/>
+        </attribute>
+    </define>
+    <define name="ReviewProblem">
+        <interleave>
+            <element name="review_problem_codes">
+                <oneOrMore>
+                    <element name="review_problem_code">
+                        <ref name="ReviewProblemCode"/>
+                    </element>
+                </oneOrMore>
+            </element>
+            <optional>
+                <element name="review_problem_note">
+                    <text/>
+                </element>
+            </optional>
+            <element name="review_components">
+                <oneOrMore>
+                    <element name="review_component">
+                        <attribute name="type">
+                            <data type="token"/>
+                        </attribute>
+                        <zeroOrMore>
+                            <element name="review_component_item">
+                                <ref name="ReviewComponentItem"/>
+                            </element>
+                        </zeroOrMore>
+                    </element>
+                </oneOrMore>
+            </element>
+        </interleave>
+    </define>
+    <define name="ReviewComponentItem">
+        <optional>
+            <attribute name="locale">
+                <ref name="LanguageType"/>
+            </attribute>
+        </optional>
+        <attribute name="type">
+            <text/>
+        </attribute>
+    </define>
+</grammar>

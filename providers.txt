@@ -1,0 +1,84 @@
+﻿
+Provider listing:
+    - Long Name -                                                            - Short Name -
+1   ABC - Disney                                                             abc
+2   All3Media International Limited                                          all3media
+3   Alliance Films (UK) Limited (f/k/a Alliance Atlantis Releasing Limited)  momentum
+4   Anderson Digital                                                         SoPeachiEntertainmentLLC
+5   Aurum Producciones S.A.                                                  aurumproducciones
+6   BBC Worldwide                                                            BBCAudio
+7   Beijing Huayi Brothers New Media Technologies Co., Ltd                   beijinghuayibrothersnewmediatechnologiescoltdfilm
+8   Belga Films                                                              belgafilms
+9   Beyond Distribution Pty Ltd                                              beyonddistribution
+10  Big Air Studios, LLC                                                     bigairstudios
+11  Bona Entertainment Co., Ltd                                              BonaEntertainmentCoLtd
+12  Brainstorm Media|1254248228                                              BrainstormMedia1254248228
+13  Buena Vista Home Entertainment, Inc.                                     buenavista
+14  CTM DIGITAL B.V.                                                         CTMDIGIALBV
+15  Canadian Broadcasting Corp (CBC)                                         cbc
+16  Content Media Corporation International                                  ContentMediaCorporationInternational
+17  DO NOT UPDATE - The EMI Group - REPLACED BY EMI MUSIC (1898)             EMI
+18  DO NOT USE - EMI Music                                                   EMIMusic
+19  Do&Co Digital B.V.                                                       docodigitalbv
+20  Dutch Filmworks / Source Investments BV                                  dutchfilmworks
+21  E1 Films Canada Inc.                                                     e1films
+22  ESPN                                                                     espn
+23  EUROPOOL GmbH (FKA Aurum Beteiligungs- und Verwaltungs-GmbH & Co. KG)    aurum
+24  Eglence Fabrikasi Tic Ve San Ltd Sti                                     EglenceFabrikasiTicVeSanLtdSti
+25  Entertainment One Films Canada Inc. (formerly Alliance)                  alliance
+26  Entertainment One US LP                                                  KochDistribution
+27  Filmauro S.r.l.                                                          filmaurosrl
+28  Fox Entertainment Group                                                  FoxTV
+29  Fusion Media Sales Limited                                               fusionmedia
+30  Hit Entertainment Limited                                                hit
+31  Hopscotch Film Distributors Pty Ltd                                      hopscotchfilms
+32  IMG /International Merchandising / 7th on Sixth                          img
+33  ITV / Granada Ventures Limited                                           itv
+34  Icon Film Distribution Pty Limited                                       iconfilmau
+35  Kinosmith Inc.                                                           KinosmithInc
+36  Lions Gate Films, Inc.                                                   lionsgate
+37  MGM                                                                      mgmfilm
+38  MOMEDIA TV                                                               MOMEDIATV
+39  Madman Entertainment Pty Ltd                                             madman
+40  Muse Distribution                                                        muse
+41  National Film Board of Canada|10064597868                                NationalFilmBoardofCanada10064597868
+42  New Video Group, Inc.                                                    newvideo
+43  OUTtv Network Inc.                                                       OUTtvNetworkInc
+44  PIAS Digital Ltd                                                         PlayItAgainSam
+45  Pacific Northwest Pictures                                               PacificNorthwestPictures
+46  Pathé Films AG                                                           pathefilmsag
+47  Phase 4 Films Inc.                                                       phase4
+48  Purple Plan Private Limited                                              PurplePlanPrivateLimited
+49  Qualification Test 3                                                     qualificationtest3
+50  Quebecor Media inc                                                       QuebecorMediainc
+51  RAI Com S.p.A. (f/k/a RAI Cinema S.p.A.)                                 raicinema
+52  RML Distribution Domestic, LLC                                           relativity
+53  Remstar FIlms                                                            RemstarFIlms
+54  Roadshow Films PTY LTD                                                   RoadshowFilms
+55  SHINE (AUST) PTY LIMITED                                                 shineau
+56  SND SA / M6                                                              m6
+57  STUDIOCANAL                                                              studiocanal
+58  Salambo Productions Inc.                                                 salambo
+59  Self Serve LLC                                                           SelfServeLLC
+60  Sofa Digital Media, LLC                                                  mobzmediasa
+61  Somos Next, LLC                                                          SomosNextLLC
+62  Sony Pictures Entertainment                                              sonypicturesentertainment
+63  Special Broadcasting Service Corporation / SBS                           sbs
+64  Starz Media, LLC / Manga                                                 starzmedia
+65  Syndicado LLC                                                            SyndicadoInc
+66  TF1 Video                                                                tf1
+67  TVA Films, a division of TVA Group, Inc.                                 tva
+68  TWENTIETH CENTURY FOX FILM CORPORATION                                   foxfilm
+69  Telecine Programacao de Filmes Ltda                                      telecinesprogramacaodefilmes
+70  Test Movie Provider                                                      testmovieprovider
+71  Test TV Provider                                                         testtvprovider
+72  The Warner Music Group                                                   Warner
+73  The Weinstein Company LLC                                                weinstein
+74  Transmission Films Pty Limited                                           TransmissionFilmsPtyLimited
+75  Under the Milky Way                                                      underthemilkyway
+76  UniversCiné                                                              universcine
+77  Universal Music International                                            UMI
+78  Vista India Digital Media Inc.                                           VistaIndiaDigitalMediaInc
+79  Viz Media LLC                                                            vizmedia
+80  Warner Bros. Entertainment Inc.                                          WarnerBrosEnt
+[2016-06-03 10:48:43 EDT] <main> DBG-X: Returning 0

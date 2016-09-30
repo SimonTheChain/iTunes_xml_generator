@@ -18,9 +18,9 @@ from unidecode import unidecode
 
 import iTunes_genres as genres
 import iTunes_ratings as ratings
-import itunes_xml_generator_globals_0630A as settings
+import itunes_xml_generator_globals as settings
 import languages_complete as languages_list
-import ui_generator_py_0630A as main_frame
+import ui_generator_py as main_frame
 
 
 def read_rng():
