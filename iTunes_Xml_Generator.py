@@ -20,7 +20,7 @@ import iTunes_genres as genres
 import iTunes_ratings as ratings
 import itunes_xml_generator_globals as settings
 import languages_complete as languages_list
-import ui_generator_py as main_frame
+import ui_generator as main_frame
 
 
 def read_rng():
@@ -2455,7 +2455,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.comboMetaLanguage.setCurrentIndex(index_meta_language)
 
         self.vendor_id.textChanged.connect(self.set_vendor)
-        self.pack_info_path_btn.clicked.connect(self.pack_info_path_dlg)
+        # self.pack_info_path_btn.clicked.connect(self.pack_info_path_dlg)
 
         self.xml_dest_btn.clicked.connect(self.set_xml_dest)
 
