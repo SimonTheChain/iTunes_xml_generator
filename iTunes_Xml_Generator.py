@@ -1858,6 +1858,9 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         index_tc_format = self.tc_format.findText("23.98fps", QtCore.Qt.MatchFixedString)
         self.tc_format.setCurrentIndex(index_tc_format)
 
+        self.chapter_locale_cb_main.clear()
+        self.chapter_locale_cb_main.addItems(list_of_languages)
+
         # trailer
         tc_lst = settings.timecodes.keys()
         tc_lst.sort()

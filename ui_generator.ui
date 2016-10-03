@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1226</width>
-    <height>1217</height>
+    <height>1129</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,7 +18,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="tab_9">
        <attribute name="title">
@@ -3141,7 +3141,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QComboBox" name="comboBox"/>
+           <widget class="QComboBox" name="chapter_locale_cb_main"/>
           </item>
           <item>
            <widget class="QPushButton" name="pushButton">
@@ -3230,7 +3230,7 @@
             </widget>
            </item>
            <item row="0" column="1">
-            <widget class="QLineEdit" name="lineEdit">
+            <widget class="QLineEdit" name="chap_01_tc_ln">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                <horstretch>0</horstretch>
@@ -3271,28 +3271,28 @@
             </widget>
            </item>
            <item row="1" column="1">
-            <widget class="QLineEdit" name="lineEdit_2">
+            <widget class="QLineEdit" name="chap_02_tc_ln">
              <property name="placeholderText">
               <string>00:00:00:00</string>
              </property>
             </widget>
            </item>
            <item row="2" column="1">
-            <widget class="QLineEdit" name="lineEdit_3">
+            <widget class="QLineEdit" name="chap_03_tc_ln">
              <property name="placeholderText">
               <string>00:00:00:00</string>
              </property>
             </widget>
            </item>
            <item row="3" column="1">
-            <widget class="QLineEdit" name="lineEdit_4">
+            <widget class="QLineEdit" name="chap_04_tc_ln">
              <property name="placeholderText">
               <string>00:00:00:00</string>
              </property>
             </widget>
            </item>
            <item row="4" column="1">
-            <widget class="QLineEdit" name="lineEdit_5">
+            <widget class="QLineEdit" name="chap_05_tc_ln">
              <property name="placeholderText">
               <string>00:00:00:00</string>
              </property>
@@ -3327,35 +3327,35 @@
             </widget>
            </item>
            <item row="0" column="3">
-            <widget class="QLineEdit" name="lineEdit_6">
+            <widget class="QLineEdit" name="chap_06_tc_ln">
              <property name="placeholderText">
               <string>00:00:00:00</string>
              </property>
             </widget>
            </item>
            <item row="1" column="3">
-            <widget class="QLineEdit" name="lineEdit_7">
+            <widget class="QLineEdit" name="chap_07_tc_ln">
              <property name="placeholderText">
               <string>00:00:00:00</string>
              </property>
             </widget>
            </item>
            <item row="2" column="3">
-            <widget class="QLineEdit" name="lineEdit_8">
+            <widget class="QLineEdit" name="chap_08_tc_ln">
              <property name="placeholderText">
               <string>00:00:00:00</string>
              </property>
             </widget>
            </item>
            <item row="3" column="3">
-            <widget class="QLineEdit" name="lineEdit_9">
+            <widget class="QLineEdit" name="chap_09_tc_ln">
              <property name="placeholderText">
               <string>00:00:00:00</string>
              </property>
             </widget>
            </item>
            <item row="4" column="3">
-            <widget class="QLineEdit" name="lineEdit_10">
+            <widget class="QLineEdit" name="chap_10_tc_ln">
              <property name="placeholderText">
               <string>00:00:00:00</string>
              </property>
@@ -3397,35 +3397,35 @@
             </widget>
            </item>
            <item row="0" column="5">
-            <widget class="QLineEdit" name="lineEdit_11">
+            <widget class="QLineEdit" name="chap_11_tc_ln">
              <property name="placeholderText">
               <string>00:00:00:00</string>
              </property>
             </widget>
            </item>
            <item row="1" column="5">
-            <widget class="QLineEdit" name="lineEdit_12">
+            <widget class="QLineEdit" name="chap_12_tc_ln">
              <property name="placeholderText">
               <string>00:00:00:00</string>
              </property>
             </widget>
            </item>
            <item row="2" column="5">
-            <widget class="QLineEdit" name="lineEdit_13">
+            <widget class="QLineEdit" name="chap_13_tc_ln">
              <property name="placeholderText">
               <string>00:00:00:00</string>
              </property>
             </widget>
            </item>
            <item row="3" column="5">
-            <widget class="QLineEdit" name="lineEdit_14">
+            <widget class="QLineEdit" name="chap_14_tc_ln">
              <property name="placeholderText">
               <string>00:00:00:00</string>
              </property>
             </widget>
            </item>
            <item row="4" column="5">
-            <widget class="QLineEdit" name="lineEdit_15">
+            <widget class="QLineEdit" name="chap_15_tc_ln">
              <property name="placeholderText">
               <string>00:00:00:00</string>
              </property>
@@ -3453,35 +3453,35 @@
             </widget>
            </item>
            <item row="0" column="7">
-            <widget class="QLineEdit" name="lineEdit_16">
+            <widget class="QLineEdit" name="chap_16_tc_ln">
              <property name="placeholderText">
               <string>00:00:00:00</string>
              </property>
             </widget>
            </item>
            <item row="1" column="7">
-            <widget class="QLineEdit" name="lineEdit_17">
+            <widget class="QLineEdit" name="chap_17_tc_ln">
              <property name="placeholderText">
               <string>00:00:00:00</string>
              </property>
             </widget>
            </item>
            <item row="2" column="7">
-            <widget class="QLineEdit" name="lineEdit_18">
+            <widget class="QLineEdit" name="chap_18_tc_ln">
              <property name="placeholderText">
               <string>00:00:00:00</string>
              </property>
             </widget>
            </item>
            <item row="3" column="7">
-            <widget class="QLineEdit" name="lineEdit_19">
+            <widget class="QLineEdit" name="chap_19_tc_ln">
              <property name="placeholderText">
               <string>00:00:00:00</string>
              </property>
             </widget>
            </item>
            <item row="4" column="7">
-            <widget class="QLineEdit" name="lineEdit_20">
+            <widget class="QLineEdit" name="chap_20_tc_ln">
              <property name="placeholderText">
               <string>00:00:00:00</string>
              </property>
@@ -6886,6 +6886,16 @@
            </widget>
           </item>
           <item>
+           <widget class="QLabel" name="poster_file_lbl">
+            <property name="text">
+             <string/>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
            <spacer name="horizontalSpacer_60">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
@@ -6899,16 +6909,6 @@
            </spacer>
           </item>
          </layout>
-        </item>
-        <item>
-         <widget class="QLabel" name="poster_file_lbl">
-          <property name="text">
-           <string/>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-          </property>
-         </widget>
         </item>
         <item>
          <spacer name="verticalSpacer_64">
@@ -17248,7 +17248,7 @@
      <x>0</x>
      <y>0</y>
      <width>1226</width>
-     <height>25</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
