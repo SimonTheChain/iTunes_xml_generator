@@ -1804,19 +1804,19 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.comboFeatureAudio.clear()
         self.comboFeatureAudio.addItems(self.list_of_languages)
         self.comboFeatureAudio.currentIndexChanged.connect(self.set_feat_audio)
-        index_feature_audio = self.comboFeatureAudio.findText("en-CA: English (Canada)", QtCore.Qt.MatchFixedString)
+        index_feature_audio = self.comboFeatureAudio.findText("en-US: English (United States)", QtCore.Qt.MatchFixedString)
         self.comboFeatureAudio.setCurrentIndex(index_feature_audio)
 
         self.comboNarrFeature.clear()
         self.comboNarrFeature.addItems(self.list_of_languages)
         self.comboNarrFeature.currentIndexChanged.connect(self.set_narr_feat)
-        index_feature_narr = self.comboNarrFeature.findText("en-CA: English (Canada)", QtCore.Qt.MatchFixedString)
+        index_feature_narr = self.comboNarrFeature.findText("en-US: English (United States)", QtCore.Qt.MatchFixedString)
         self.comboNarrFeature.setCurrentIndex(index_feature_narr)
 
         self.comboSubFeature.clear()
         self.comboSubFeature.addItems(self.list_of_languages)
         self.comboSubFeature.currentIndexChanged.connect(self.set_sub_feat)
-        index_feature_subs = self.comboSubFeature.findText("en-CA: English (Canada)", QtCore.Qt.MatchFixedString)
+        index_feature_subs = self.comboSubFeature.findText("en-US: English (United States)", QtCore.Qt.MatchFixedString)
         self.comboSubFeature.setCurrentIndex(index_feature_subs)
 
         self.feat_top_crop.textChanged.connect(self.set_feat_top_crop)
@@ -1901,19 +1901,19 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.comboTrailerAudio.clear()
         self.comboTrailerAudio.addItems(self.list_of_languages)
         self.comboTrailerAudio.currentIndexChanged.connect(self.set_trailer_audio)
-        index_trailer_audio = self.comboTrailerAudio.findText("en-CA: English (Canada)", QtCore.Qt.MatchFixedString)
+        index_trailer_audio = self.comboTrailerAudio.findText("en-US: English (United States)", QtCore.Qt.MatchFixedString)
         self.comboTrailerAudio.setCurrentIndex(index_trailer_audio)
 
         self.comboNarrTrailer.clear()
         self.comboNarrTrailer.addItems(self.list_of_languages)
         self.comboNarrTrailer.currentIndexChanged.connect(self.set_narr_trailer)
-        index_trailer_narr = self.comboNarrTrailer.findText("en-CA: English (Canada)", QtCore.Qt.MatchFixedString)
+        index_trailer_narr = self.comboNarrTrailer.findText("en-US: English (United States)", QtCore.Qt.MatchFixedString)
         self.comboNarrTrailer.setCurrentIndex(index_trailer_narr)
 
         self.comboSubTrailer.clear()
         self.comboSubTrailer.addItems(self.list_of_languages)
         self.comboSubTrailer.currentIndexChanged.connect(self.set_sub_trailer)
-        index_trailer_subs = self.comboSubTrailer.findText("en-CA: English (Canada)", QtCore.Qt.MatchFixedString)
+        index_trailer_subs = self.comboSubTrailer.findText("en-US: English (United States)", QtCore.Qt.MatchFixedString)
         self.comboSubTrailer.setCurrentIndex(index_trailer_subs)
 
         self.trailer_still_tc.textChanged.connect(self.set_trailer_still_tc)
@@ -1948,7 +1948,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.feat_asset1_locale.clear()
         self.feat_asset1_locale.addItems(self.list_of_languages)
         self.feat_asset1_locale.currentIndexChanged.connect(self.set_feat_asset1_locale)
-        index_feat_asset1_locale = self.feat_asset1_locale.findText("en-CA: English (Canada)", QtCore.Qt.MatchFixedString)
+        index_feat_asset1_locale = self.feat_asset1_locale.findText("en-US: English (United States)", QtCore.Qt.MatchFixedString)
         self.feat_asset1_locale.setCurrentIndex(index_feat_asset1_locale)
 
         self.feat_asset2_role.clear()
@@ -1958,7 +1958,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.feat_asset2_locale.clear()
         self.feat_asset2_locale.addItems(self.list_of_languages)
         self.feat_asset2_locale.currentIndexChanged.connect(self.set_feat_asset2_locale)
-        index_feat_asset2_locale = self.feat_asset2_locale.findText("en-CA: English (Canada)", QtCore.Qt.MatchFixedString)
+        index_feat_asset2_locale = self.feat_asset2_locale.findText("en-US: English (United States)", QtCore.Qt.MatchFixedString)
         self.feat_asset2_locale.setCurrentIndex(index_feat_asset2_locale)
 
         self.feat_asset3_role.clear()
@@ -1968,7 +1968,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.feat_asset3_locale.clear()
         self.feat_asset3_locale.addItems(self.list_of_languages)
         self.feat_asset3_locale.currentIndexChanged.connect(self.set_feat_asset3_locale)
-        index_feat_asset3_locale = self.feat_asset3_locale.findText("en-CA: English (Canada)", QtCore.Qt.MatchFixedString)
+        index_feat_asset3_locale = self.feat_asset3_locale.findText("en-US: English (United States)", QtCore.Qt.MatchFixedString)
         self.feat_asset3_locale.setCurrentIndex(index_feat_asset3_locale)
 
         self.feat_asset4_role.clear()
@@ -1978,7 +1978,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.feat_asset4_locale.clear()
         self.feat_asset4_locale.addItems(self.list_of_languages)
         self.feat_asset4_locale.currentIndexChanged.connect(self.set_feat_asset4_locale)
-        index_feat_asset4_locale = self.feat_asset4_locale.findText("en-CA: English (Canada)", QtCore.Qt.MatchFixedString)
+        index_feat_asset4_locale = self.feat_asset4_locale.findText("en-US: English (United States)", QtCore.Qt.MatchFixedString)
         self.feat_asset4_locale.setCurrentIndex(index_feat_asset4_locale)
 
         self.feat_asset5_role.clear()
@@ -1988,7 +1988,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.feat_asset5_locale.clear()
         self.feat_asset5_locale.addItems(self.list_of_languages)
         self.feat_asset5_locale.currentIndexChanged.connect(self.set_feat_asset5_locale)
-        index_feat_asset5_locale = self.feat_asset5_locale.findText("en-CA: English (Canada)", QtCore.Qt.MatchFixedString)
+        index_feat_asset5_locale = self.feat_asset5_locale.findText("en-US: English (United States)", QtCore.Qt.MatchFixedString)
         self.feat_asset5_locale.setCurrentIndex(index_feat_asset5_locale)
 
         self.feat_asset6_role.clear()
@@ -1998,7 +1998,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.feat_asset6_locale.clear()
         self.feat_asset6_locale.addItems(self.list_of_languages)
         self.feat_asset6_locale.currentIndexChanged.connect(self.set_feat_asset6_locale)
-        index_feat_asset6_locale = self.feat_asset6_locale.findText("en-CA: English (Canada)", QtCore.Qt.MatchFixedString)
+        index_feat_asset6_locale = self.feat_asset6_locale.findText("en-US: English (United States)", QtCore.Qt.MatchFixedString)
         self.feat_asset6_locale.setCurrentIndex(index_feat_asset6_locale)
 
         self.feat_asset7_role.clear()
@@ -2008,7 +2008,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.feat_asset7_locale.clear()
         self.feat_asset7_locale.addItems(self.list_of_languages)
         self.feat_asset7_locale.currentIndexChanged.connect(self.set_feat_asset7_locale)
-        index_feat_asset7_locale = self.feat_asset7_locale.findText("en-CA: English (Canada)", QtCore.Qt.MatchFixedString)
+        index_feat_asset7_locale = self.feat_asset7_locale.findText("en-US: English (United States)", QtCore.Qt.MatchFixedString)
         self.feat_asset7_locale.setCurrentIndex(index_feat_asset7_locale)
 
         self.feat_asset8_role.clear()
@@ -2018,7 +2018,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.feat_asset8_locale.clear()
         self.feat_asset8_locale.addItems(self.list_of_languages)
         self.feat_asset8_locale.currentIndexChanged.connect(self.set_feat_asset8_locale)
-        index_feat_asset8_locale = self.feat_asset8_locale.findText("en-CA: English (Canada)", QtCore.Qt.MatchFixedString)
+        index_feat_asset8_locale = self.feat_asset8_locale.findText("en-US: English (United States)", QtCore.Qt.MatchFixedString)
         self.feat_asset8_locale.setCurrentIndex(index_feat_asset8_locale)
 
         self.feat_asset1_add_terr.clicked.connect(self.feat_asset1_add)
@@ -2055,7 +2055,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.trailer_asset1_locale.clear()
         self.trailer_asset1_locale.addItems(self.list_of_languages)
         self.trailer_asset1_locale.currentIndexChanged.connect(self.set_trailer_asset1_locale)
-        index_trailer_asset1_locale = self.trailer_asset1_locale.findText("en-CA: English (Canada)", QtCore.Qt.MatchFixedString)
+        index_trailer_asset1_locale = self.trailer_asset1_locale.findText("en-US: English (United States)", QtCore.Qt.MatchFixedString)
         self.trailer_asset1_locale.setCurrentIndex(index_trailer_asset1_locale)
 
         self.trailer_asset2_role.clear()
@@ -2065,7 +2065,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.trailer_asset2_locale.clear()
         self.trailer_asset2_locale.addItems(self.list_of_languages)
         self.trailer_asset2_locale.currentIndexChanged.connect(self.set_trailer_asset2_locale)
-        index_trailer_asset2_locale = self.trailer_asset2_locale.findText("en-CA: English (Canada)", QtCore.Qt.MatchFixedString)
+        index_trailer_asset2_locale = self.trailer_asset2_locale.findText("en-US: English (United States)", QtCore.Qt.MatchFixedString)
         self.trailer_asset2_locale.setCurrentIndex(index_trailer_asset2_locale)
 
         self.trailer_asset3_role.clear()
@@ -2075,7 +2075,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.trailer_asset3_locale.clear()
         self.trailer_asset3_locale.addItems(self.list_of_languages)
         self.trailer_asset3_locale.currentIndexChanged.connect(self.set_trailer_asset3_locale)
-        index_trailer_asset3_locale = self.trailer_asset3_locale.findText("en-CA: English (Canada)", QtCore.Qt.MatchFixedString)
+        index_trailer_asset3_locale = self.trailer_asset3_locale.findText("en-US: English (United States)", QtCore.Qt.MatchFixedString)
         self.trailer_asset3_locale.setCurrentIndex(index_trailer_asset3_locale)
 
         self.trailer_asset4_role.clear()
@@ -2085,7 +2085,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.trailer_asset4_locale.clear()
         self.trailer_asset4_locale.addItems(self.list_of_languages)
         self.trailer_asset4_locale.currentIndexChanged.connect(self.set_trailer_asset4_locale)
-        index_trailer_asset4_locale = self.trailer_asset4_locale.findText("en-CA: English (Canada)", QtCore.Qt.MatchFixedString)
+        index_trailer_asset4_locale = self.trailer_asset4_locale.findText("en-US: English (United States)", QtCore.Qt.MatchFixedString)
         self.trailer_asset4_locale.setCurrentIndex(index_trailer_asset4_locale)
 
         self.trailer_asset5_role.clear()
@@ -2095,7 +2095,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.trailer_asset5_locale.clear()
         self.trailer_asset5_locale.addItems(self.list_of_languages)
         self.trailer_asset5_locale.currentIndexChanged.connect(self.set_trailer_asset5_locale)
-        index_trailer_asset5_locale = self.trailer_asset5_locale.findText("en-CA: English (Canada)", QtCore.Qt.MatchFixedString)
+        index_trailer_asset5_locale = self.trailer_asset5_locale.findText("en-US: English (United States)", QtCore.Qt.MatchFixedString)
         self.trailer_asset5_locale.setCurrentIndex(index_trailer_asset5_locale)
 
         self.trailer_asset6_role.clear()
@@ -2105,7 +2105,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.trailer_asset6_locale.clear()
         self.trailer_asset6_locale.addItems(self.list_of_languages)
         self.trailer_asset6_locale.currentIndexChanged.connect(self.set_trailer_asset6_locale)
-        index_trailer_asset6_locale = self.trailer_asset6_locale.findText("en-CA: English (Canada)", QtCore.Qt.MatchFixedString)
+        index_trailer_asset6_locale = self.trailer_asset6_locale.findText("en-US: English (United States)", QtCore.Qt.MatchFixedString)
         self.trailer_asset6_locale.setCurrentIndex(index_trailer_asset6_locale)
 
         self.trailer_asset7_role.clear()
@@ -2115,7 +2115,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.trailer_asset7_locale.clear()
         self.trailer_asset7_locale.addItems(self.list_of_languages)
         self.trailer_asset7_locale.currentIndexChanged.connect(self.set_trailer_asset7_locale)
-        index_trailer_asset7_locale = self.trailer_asset7_locale.findText("en-CA: English (Canada)", QtCore.Qt.MatchFixedString)
+        index_trailer_asset7_locale = self.trailer_asset7_locale.findText("en-US: English (United States)", QtCore.Qt.MatchFixedString)
         self.trailer_asset7_locale.setCurrentIndex(index_trailer_asset7_locale)
 
         self.trailer_asset8_role.clear()
@@ -2125,14 +2125,14 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.trailer_asset8_locale.clear()
         self.trailer_asset8_locale.addItems(self.list_of_languages)
         self.trailer_asset8_locale.currentIndexChanged.connect(self.set_trailer_asset8_locale)
-        index_trailer_asset8_locale = self.trailer_asset8_locale.findText("en-CA: English (Canada)", QtCore.Qt.MatchFixedString)
+        index_trailer_asset8_locale = self.trailer_asset8_locale.findText("en-US: English (United States)", QtCore.Qt.MatchFixedString)
         self.trailer_asset8_locale.setCurrentIndex(index_trailer_asset8_locale)
 
         # poster
         self.comboPoster.clear()
         self.comboPoster.addItems(self.list_of_languages)
         self.comboPoster.currentIndexChanged.connect(self.set_poster_locale)
-        index_poster_locale = self.comboPoster.findText("en-CA: English (Canada)", QtCore.Qt.MatchFixedString)
+        index_poster_locale = self.comboPoster.findText("en-US: English (United States)", QtCore.Qt.MatchFixedString)
         self.comboPoster.setCurrentIndex(index_poster_locale)
 
         self.poster_file_btn.clicked.connect(self.poster_file_dlg)
@@ -2191,7 +2191,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.product1_terr.clear()
         self.product1_terr.addItems(self.country_values)
         self.product1_terr.currentIndexChanged.connect(self.set_product1_terr)
-        index_product1_terr = self.product1_terr.findText("CA", QtCore.Qt.MatchFixedString)
+        index_product1_terr = self.product1_terr.findText("US", QtCore.Qt.MatchFixedString)
         self.product1_terr.setCurrentIndex(index_product1_terr)
 
         self.product1_sale_clear.clear()
@@ -2220,7 +2220,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.product2_terr.clear()
         self.product2_terr.addItems(self.country_values)
         self.product2_terr.currentIndexChanged.connect(self.set_product2_terr)
-        index_product2_terr = self.product2_terr.findText("CA", QtCore.Qt.MatchFixedString)
+        index_product2_terr = self.product2_terr.findText("US", QtCore.Qt.MatchFixedString)
         self.product2_terr.setCurrentIndex(index_product2_terr)
 
         self.product2_sale_clear.clear()
@@ -2249,7 +2249,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.product3_terr.clear()
         self.product3_terr.addItems(self.country_values)
         self.product3_terr.currentIndexChanged.connect(self.set_product3_terr)
-        index_product3_terr = self.product3_terr.findText("CA", QtCore.Qt.MatchFixedString)
+        index_product3_terr = self.product3_terr.findText("US", QtCore.Qt.MatchFixedString)
         self.product3_terr.setCurrentIndex(index_product3_terr)
 
         self.product3_sale_clear.clear()
@@ -2278,7 +2278,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.product4_terr.clear()
         self.product4_terr.addItems(self.country_values)
         self.product4_terr.currentIndexChanged.connect(self.set_product4_terr)
-        index_product4_terr = self.product4_terr.findText("CA", QtCore.Qt.MatchFixedString)
+        index_product4_terr = self.product4_terr.findText("US", QtCore.Qt.MatchFixedString)
         self.product4_terr.setCurrentIndex(index_product4_terr)
 
         self.product4_sale_clear.clear()
@@ -2309,7 +2309,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.localized_locale_1.clear()
         self.localized_locale_1.addItems(self.list_of_languages)
         self.localized_locale_1.currentIndexChanged.connect(self.set_localized_locale_1)
-        index_localized_locale_1 = self.localized_locale_1.findText("en-CA: English (Canada)",
+        index_localized_locale_1 = self.localized_locale_1.findText("en-US: English (United States)",
                                                                     QtCore.Qt.MatchFixedString)
         self.localized_locale_1.setCurrentIndex(index_localized_locale_1)
         self.localized_title_1.textChanged.connect(self.set_localized_title_1)
@@ -2319,7 +2319,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.localized_locale_2.clear()
         self.localized_locale_2.addItems(self.list_of_languages)
         self.localized_locale_2.currentIndexChanged.connect(self.set_localized_locale_2)
-        index_localized_locale_2 = self.localized_locale_2.findText("en-CA: English (Canada)",
+        index_localized_locale_2 = self.localized_locale_2.findText("en-US: English (United States)",
                                                                   QtCore.Qt.MatchFixedString)
         self.localized_locale_2.setCurrentIndex(index_localized_locale_2)
         self.localized_title_2.textChanged.connect(self.set_localized_title_2)
@@ -2329,7 +2329,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.localized_locale_3.clear()
         self.localized_locale_3.addItems(self.list_of_languages)
         self.localized_locale_3.currentIndexChanged.connect(self.set_localized_locale_3)
-        index_localized_locale_3 = self.localized_locale_3.findText("en-CA: English (Canada)",
+        index_localized_locale_3 = self.localized_locale_3.findText("en-US: English (United States)",
                                                                   QtCore.Qt.MatchFixedString)
         self.localized_locale_3.setCurrentIndex(index_localized_locale_3)
         self.localized_title_3.textChanged.connect(self.set_localized_title_3)
@@ -2339,7 +2339,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.localized_locale_4.clear()
         self.localized_locale_4.addItems(self.list_of_languages)
         self.localized_locale_4.currentIndexChanged.connect(self.set_localized_locale_4)
-        index_localized_locale_4 = self.localized_locale_4.findText("en-CA: English (Canada)",
+        index_localized_locale_4 = self.localized_locale_4.findText("en-US: English (United States)",
                                                                   QtCore.Qt.MatchFixedString)
         self.localized_locale_4.setCurrentIndex(index_localized_locale_4)
         self.localized_title_4.textChanged.connect(self.set_localized_title_4)
@@ -2357,19 +2357,19 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.loc_comboTrailerAudio.clear()
         self.loc_comboTrailerAudio.addItems(self.list_of_languages)
         self.loc_comboTrailerAudio.currentIndexChanged.connect(self.set_loc_trailer_audio)
-        index_loc_comboTrailerAudio = self.loc_comboTrailerAudio.findText("en-CA: English (Canada)", QtCore.Qt.MatchFixedString)
+        index_loc_comboTrailerAudio = self.loc_comboTrailerAudio.findText("en-US: English (United States)", QtCore.Qt.MatchFixedString)
         self.loc_comboTrailerAudio.setCurrentIndex(index_loc_comboTrailerAudio)
 
         self.loc_comboNarrTrailer.clear()
         self.loc_comboNarrTrailer.addItems(self.list_of_languages)
         self.loc_comboNarrTrailer.currentIndexChanged.connect(self.set_narr_loc_trailer)
-        index_loc_comboNarrTrailer = self.loc_comboNarrTrailer.findText("en-CA: English (Canada)", QtCore.Qt.MatchFixedString)
+        index_loc_comboNarrTrailer = self.loc_comboNarrTrailer.findText("en-US: English (United States)", QtCore.Qt.MatchFixedString)
         self.loc_comboNarrTrailer.setCurrentIndex(index_loc_comboNarrTrailer)
 
         self.loc_comboSubTrailer.clear()
         self.loc_comboSubTrailer.addItems(self.list_of_languages)
         self.loc_comboSubTrailer.currentIndexChanged.connect(self.set_sub_loc_trailer)
-        index_loc_comboSubTrailer = self.loc_comboSubTrailer.findText("en-CA: English (Canada)", QtCore.Qt.MatchFixedString)
+        index_loc_comboSubTrailer = self.loc_comboSubTrailer.findText("en-US: English (United States)", QtCore.Qt.MatchFixedString)
         self.loc_comboSubTrailer.setCurrentIndex(index_loc_comboSubTrailer)
 
         self.loc_trailer_still_tc.textChanged.connect(self.set_loc_trailer_still_tc)
@@ -2407,7 +2407,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.loc_trailer_asset1_locale.clear()
         self.loc_trailer_asset1_locale.addItems(self.list_of_languages)
         self.loc_trailer_asset1_locale.currentIndexChanged.connect(self.set_loc_trailer_asset1_locale)
-        index_loc_trailer_asset1_locale = self.loc_trailer_asset1_locale.findText("en-CA: English (Canada)",
+        index_loc_trailer_asset1_locale = self.loc_trailer_asset1_locale.findText("en-US: English (United States)",
                                                                           QtCore.Qt.MatchFixedString)
         self.loc_trailer_asset1_locale.setCurrentIndex(index_loc_trailer_asset1_locale)
 
@@ -2418,7 +2418,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.loc_trailer_asset2_locale.clear()
         self.loc_trailer_asset2_locale.addItems(self.list_of_languages)
         self.loc_trailer_asset2_locale.currentIndexChanged.connect(self.set_loc_trailer_asset2_locale)
-        index_loc_trailer_asset2_locale = self.loc_trailer_asset2_locale.findText("en-CA: English (Canada)",
+        index_loc_trailer_asset2_locale = self.loc_trailer_asset2_locale.findText("en-US: English (United States)",
                                                                           QtCore.Qt.MatchFixedString)
         self.loc_trailer_asset2_locale.setCurrentIndex(index_loc_trailer_asset2_locale)
 
@@ -2429,7 +2429,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.loc_trailer_asset3_locale.clear()
         self.loc_trailer_asset3_locale.addItems(self.list_of_languages)
         self.loc_trailer_asset3_locale.currentIndexChanged.connect(self.set_loc_trailer_asset3_locale)
-        index_loc_trailer_asset3_locale = self.loc_trailer_asset3_locale.findText("en-CA: English (Canada)",
+        index_loc_trailer_asset3_locale = self.loc_trailer_asset3_locale.findText("en-US: English (United States)",
                                                                           QtCore.Qt.MatchFixedString)
         self.loc_trailer_asset3_locale.setCurrentIndex(index_loc_trailer_asset3_locale)
 
@@ -2440,7 +2440,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.loc_trailer_asset4_locale.clear()
         self.loc_trailer_asset4_locale.addItems(self.list_of_languages)
         self.loc_trailer_asset4_locale.currentIndexChanged.connect(self.set_loc_trailer_asset4_locale)
-        index_loc_trailer_asset4_locale = self.loc_trailer_asset4_locale.findText("en-CA: English (Canada)",
+        index_loc_trailer_asset4_locale = self.loc_trailer_asset4_locale.findText("en-US: English (United States)",
                                                                           QtCore.Qt.MatchFixedString)
         self.loc_trailer_asset4_locale.setCurrentIndex(index_loc_trailer_asset4_locale)
 
@@ -2451,7 +2451,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.loc_trailer_asset5_locale.clear()
         self.loc_trailer_asset5_locale.addItems(self.list_of_languages)
         self.loc_trailer_asset5_locale.currentIndexChanged.connect(self.set_loc_trailer_asset5_locale)
-        index_loc_trailer_asset5_locale = self.loc_trailer_asset5_locale.findText("en-CA: English (Canada)",
+        index_loc_trailer_asset5_locale = self.loc_trailer_asset5_locale.findText("en-US: English (United States)",
                                                                           QtCore.Qt.MatchFixedString)
         self.loc_trailer_asset5_locale.setCurrentIndex(index_loc_trailer_asset5_locale)
 
@@ -2462,7 +2462,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.loc_trailer_asset6_locale.clear()
         self.loc_trailer_asset6_locale.addItems(self.list_of_languages)
         self.loc_trailer_asset6_locale.currentIndexChanged.connect(self.set_loc_trailer_asset6_locale)
-        index_loc_trailer_asset6_locale = self.loc_trailer_asset6_locale.findText("en-CA: English (Canada)",
+        index_loc_trailer_asset6_locale = self.loc_trailer_asset6_locale.findText("en-US: English (United States)",
                                                                           QtCore.Qt.MatchFixedString)
         self.loc_trailer_asset6_locale.setCurrentIndex(index_loc_trailer_asset6_locale)
 
@@ -2473,7 +2473,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.loc_trailer_asset7_locale.clear()
         self.loc_trailer_asset7_locale.addItems(self.list_of_languages)
         self.loc_trailer_asset7_locale.currentIndexChanged.connect(self.set_loc_trailer_asset7_locale)
-        index_loc_trailer_asset7_locale = self.loc_trailer_asset7_locale.findText("en-CA: English (Canada)",
+        index_loc_trailer_asset7_locale = self.loc_trailer_asset7_locale.findText("en-US: English (United States)",
                                                                           QtCore.Qt.MatchFixedString)
         self.loc_trailer_asset7_locale.setCurrentIndex(index_loc_trailer_asset7_locale)
 
@@ -2484,7 +2484,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.loc_trailer_asset8_locale.clear()
         self.loc_trailer_asset8_locale.addItems(self.list_of_languages)
         self.loc_trailer_asset8_locale.currentIndexChanged.connect(self.set_loc_trailer_asset8_locale)
-        index_loc_trailer_asset8_locale = self.loc_trailer_asset8_locale.findText("en-CA: English (Canada)",
+        index_loc_trailer_asset8_locale = self.loc_trailer_asset8_locale.findText("en-US: English (United States)",
                                                                           QtCore.Qt.MatchFixedString)
         self.loc_trailer_asset8_locale.setCurrentIndex(index_loc_trailer_asset8_locale)
 
@@ -2498,7 +2498,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.comboMetaLanguage.clear()
         self.comboMetaLanguage.addItems(self.list_of_languages)
         self.comboMetaLanguage.currentIndexChanged.connect(self.set_meta_locale)
-        index_meta_language = self.comboMetaLanguage.findText("en-CA: English (Canada)", QtCore.Qt.MatchFixedString)
+        index_meta_language = self.comboMetaLanguage.findText("en-US: English (United States)", QtCore.Qt.MatchFixedString)
         self.comboMetaLanguage.setCurrentIndex(index_meta_language)
 
         self.vendor_id.textChanged.connect(self.set_vendor)
@@ -4794,8 +4794,9 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         box.addItems(self.country_values)
         box.setObjectName("territory%d" % self.loc_trailer_count)
         box.currentIndexChanged.connect(self.set_loc_trailer_terr)
-        index_loc_trailer_terr = box.findText("CA", QtCore.Qt.MatchFixedString)
-        box.setCurrentIndex(index_loc_trailer_terr)
+        # index_loc_trailer_terr = box.findText("US", QtCore.Qt.MatchFixedString)
+        box.setCurrentIndex(1)
+        box.setCurrentIndex(0)
 
         self.loc_trailer_terr_lyt.addWidget(box, 0, self.loc_trailer_count)
 
@@ -5735,13 +5736,13 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
             self.tc_format.setCurrentIndex(index_tc_format)
 
             # trailer
-            index_trailer_audio = self.comboTrailerAudio.findText("en-CA: English (Canada)", QtCore.Qt.MatchFixedString)
+            index_trailer_audio = self.comboTrailerAudio.findText("en-US: English (United States)", QtCore.Qt.MatchFixedString)
             self.comboTrailerAudio.setCurrentIndex(index_trailer_audio)
 
-            index_trailer_narr = self.comboNarrTrailer.findText("en-CA: English (Canada)", QtCore.Qt.MatchFixedString)
+            index_trailer_narr = self.comboNarrTrailer.findText("en-US: English (United States)", QtCore.Qt.MatchFixedString)
             self.comboNarrTrailer.setCurrentIndex(index_trailer_narr)
 
-            index_trailer_subs = self.comboSubTrailer.findText("en-CA: English (Canada)", QtCore.Qt.MatchFixedString)
+            index_trailer_subs = self.comboSubTrailer.findText("en-US: English (United States)", QtCore.Qt.MatchFixedString)
             self.comboSubTrailer.setCurrentIndex(index_trailer_subs)
 
             self.trailer_top_crop.setText("")
@@ -5758,56 +5759,56 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
             self.feat_asset1_role.clear()
             self.feat_asset1_role.addItems(settings.data_roles)
 
-            index_feat_asset1_locale = self.feat_asset1_locale.findText("en-CA: English (Canada)",
+            index_feat_asset1_locale = self.feat_asset1_locale.findText("en-US: English (United States)",
                                                                         QtCore.Qt.MatchFixedString)
             self.feat_asset1_locale.setCurrentIndex(index_feat_asset1_locale)
 
             self.feat_asset2_role.clear()
             self.feat_asset2_role.addItems(settings.data_roles)
 
-            index_feat_asset2_locale = self.feat_asset2_locale.findText("en-CA: English (Canada)",
+            index_feat_asset2_locale = self.feat_asset2_locale.findText("en-US: English (United States)",
                                                                         QtCore.Qt.MatchFixedString)
             self.feat_asset2_locale.setCurrentIndex(index_feat_asset2_locale)
 
             self.feat_asset3_role.clear()
             self.feat_asset3_role.addItems(settings.data_roles)
 
-            index_feat_asset3_locale = self.feat_asset3_locale.findText("en-CA: English (Canada)",
+            index_feat_asset3_locale = self.feat_asset3_locale.findText("en-US: English (United States)",
                                                                         QtCore.Qt.MatchFixedString)
             self.feat_asset3_locale.setCurrentIndex(index_feat_asset3_locale)
 
             self.feat_asset4_role.clear()
             self.feat_asset4_role.addItems(settings.data_roles)
 
-            index_feat_asset4_locale = self.feat_asset4_locale.findText("en-CA: English (Canada)",
+            index_feat_asset4_locale = self.feat_asset4_locale.findText("en-US: English (United States)",
                                                                         QtCore.Qt.MatchFixedString)
             self.feat_asset4_locale.setCurrentIndex(index_feat_asset4_locale)
 
             self.feat_asset5_role.clear()
             self.feat_asset5_role.addItems(settings.data_roles)
 
-            index_feat_asset5_locale = self.feat_asset5_locale.findText("en-CA: English (Canada)",
+            index_feat_asset5_locale = self.feat_asset5_locale.findText("en-US: English (United States)",
                                                                         QtCore.Qt.MatchFixedString)
             self.feat_asset5_locale.setCurrentIndex(index_feat_asset5_locale)
 
             self.feat_asset6_role.clear()
             self.feat_asset6_role.addItems(settings.data_roles)
 
-            index_feat_asset6_locale = self.feat_asset6_locale.findText("en-CA: English (Canada)",
+            index_feat_asset6_locale = self.feat_asset6_locale.findText("en-US: English (United States)",
                                                                         QtCore.Qt.MatchFixedString)
             self.feat_asset6_locale.setCurrentIndex(index_feat_asset6_locale)
 
             self.feat_asset7_role.clear()
             self.feat_asset7_role.addItems(settings.data_roles)
 
-            index_feat_asset7_locale = self.feat_asset7_locale.findText("en-CA: English (Canada)",
+            index_feat_asset7_locale = self.feat_asset7_locale.findText("en-US: English (United States)",
                                                                         QtCore.Qt.MatchFixedString)
             self.feat_asset7_locale.setCurrentIndex(index_feat_asset7_locale)
 
             self.feat_asset8_role.clear()
             self.feat_asset8_role.addItems(settings.data_roles)
 
-            index_feat_asset8_locale = self.feat_asset8_locale.findText("en-CA: English (Canada)",
+            index_feat_asset8_locale = self.feat_asset8_locale.findText("en-US: English (United States)",
                                                                         QtCore.Qt.MatchFixedString)
             self.feat_asset8_locale.setCurrentIndex(index_feat_asset8_locale)
 
@@ -5815,61 +5816,61 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
             self.trailer_asset1_role.clear()
             self.trailer_asset1_role.addItems(settings.data_roles)
 
-            index_trailer_asset1_locale = self.trailer_asset1_locale.findText("en-CA: English (Canada)",
+            index_trailer_asset1_locale = self.trailer_asset1_locale.findText("en-US: English (United States)",
                                                                               QtCore.Qt.MatchFixedString)
             self.trailer_asset1_locale.setCurrentIndex(index_trailer_asset1_locale)
 
             self.trailer_asset2_role.clear()
             self.trailer_asset2_role.addItems(settings.data_roles)
 
-            index_trailer_asset2_locale = self.trailer_asset2_locale.findText("en-CA: English (Canada)",
+            index_trailer_asset2_locale = self.trailer_asset2_locale.findText("en-US: English (United States)",
                                                                               QtCore.Qt.MatchFixedString)
             self.trailer_asset2_locale.setCurrentIndex(index_trailer_asset2_locale)
 
             self.trailer_asset3_role.clear()
             self.trailer_asset3_role.addItems(settings.data_roles)
 
-            index_trailer_asset3_locale = self.trailer_asset3_locale.findText("en-CA: English (Canada)",
+            index_trailer_asset3_locale = self.trailer_asset3_locale.findText("en-US: English (United States)",
                                                                               QtCore.Qt.MatchFixedString)
             self.trailer_asset3_locale.setCurrentIndex(index_trailer_asset3_locale)
 
             self.trailer_asset4_role.clear()
             self.trailer_asset4_role.addItems(settings.data_roles)
 
-            index_trailer_asset4_locale = self.trailer_asset4_locale.findText("en-CA: English (Canada)",
+            index_trailer_asset4_locale = self.trailer_asset4_locale.findText("en-US: English (United States)",
                                                                               QtCore.Qt.MatchFixedString)
             self.trailer_asset4_locale.setCurrentIndex(index_trailer_asset4_locale)
 
             self.trailer_asset5_role.clear()
             self.trailer_asset5_role.addItems(settings.data_roles)
 
-            index_trailer_asset5_locale = self.trailer_asset5_locale.findText("en-CA: English (Canada)",
+            index_trailer_asset5_locale = self.trailer_asset5_locale.findText("en-US: English (United States)",
                                                                               QtCore.Qt.MatchFixedString)
             self.trailer_asset5_locale.setCurrentIndex(index_trailer_asset5_locale)
 
             self.trailer_asset6_role.clear()
             self.trailer_asset6_role.addItems(settings.data_roles)
 
-            index_trailer_asset6_locale = self.trailer_asset6_locale.findText("en-CA: English (Canada)",
+            index_trailer_asset6_locale = self.trailer_asset6_locale.findText("en-US: English (United States)",
                                                                               QtCore.Qt.MatchFixedString)
             self.trailer_asset6_locale.setCurrentIndex(index_trailer_asset6_locale)
 
             self.trailer_asset7_role.clear()
             self.trailer_asset7_role.addItems(settings.data_roles)
 
-            index_trailer_asset7_locale = self.trailer_asset7_locale.findText("en-CA: English (Canada)",
+            index_trailer_asset7_locale = self.trailer_asset7_locale.findText("en-US: English (United States)",
                                                                               QtCore.Qt.MatchFixedString)
             self.trailer_asset7_locale.setCurrentIndex(index_trailer_asset7_locale)
 
             self.trailer_asset8_role.clear()
             self.trailer_asset8_role.addItems(settings.data_roles)
 
-            index_trailer_asset8_locale = self.trailer_asset8_locale.findText("en-CA: English (Canada)",
+            index_trailer_asset8_locale = self.trailer_asset8_locale.findText("en-US: English (United States)",
                                                                               QtCore.Qt.MatchFixedString)
             self.trailer_asset8_locale.setCurrentIndex(index_trailer_asset8_locale)
 
             # poster
-            index_poster_locale = self.comboPoster.findText("en-CA: English (Canada)", QtCore.Qt.MatchFixedString)
+            index_poster_locale = self.comboPoster.findText("en-US: English (United States)", QtCore.Qt.MatchFixedString)
             self.comboPoster.setCurrentIndex(index_poster_locale)
 
             # product
@@ -6017,28 +6018,28 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
 
             # localization
             self.localized_check_1.setChecked(False)
-            index_localized_locale_1 = self.localized_locale_1.findText("en-CA: English (Canada)",
+            index_localized_locale_1 = self.localized_locale_1.findText("en-US: English (United States)",
                                                                         QtCore.Qt.MatchFixedString)
             self.localized_locale_1.setCurrentIndex(index_localized_locale_1)
             self.localized_title_1.setText("")
             self.localized_synopsis_1.setPlainText("")
 
             self.localized_check_2.setChecked(False)
-            index_localized_locale_2 = self.localized_locale_2.findText("en-CA: English (Canada)",
+            index_localized_locale_2 = self.localized_locale_2.findText("en-US: English (United States)",
                                                                         QtCore.Qt.MatchFixedString)
             self.localized_locale_2.setCurrentIndex(index_localized_locale_2)
             self.localized_title_2.setText("")
             self.localized_synopsis_2.setPlainText("")
 
             self.localized_check_3.setChecked(False)
-            index_localized_locale_3 = self.localized_locale_3.findText("en-CA: English (Canada)",
+            index_localized_locale_3 = self.localized_locale_3.findText("en-US: English (United States)",
                                                                         QtCore.Qt.MatchFixedString)
             self.localized_locale_3.setCurrentIndex(index_localized_locale_3)
             self.localized_title_3.setText("")
             self.localized_synopsis_3.setPlainText("")
 
             self.localized_check_4.setChecked(False)
-            index_localized_locale_4 = self.localized_locale_4.findText("en-CA: English (Canada)",
+            index_localized_locale_4 = self.localized_locale_4.findText("en-US: English (United States)",
                                                                         QtCore.Qt.MatchFixedString)
             self.localized_locale_4.setCurrentIndex(index_localized_locale_4)
             self.localized_title_4.setText("")
@@ -6049,7 +6050,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
                                                          QtCore.Qt.MatchFixedString)
             self.comboProvider.setCurrentIndex(index_provider)
 
-            index_meta_language = self.comboMetaLanguage.findText("en-CA: English (Canada)", QtCore.Qt.MatchFixedString)
+            index_meta_language = self.comboMetaLanguage.findText("en-US: English (United States)", QtCore.Qt.MatchFixedString)
             self.comboMetaLanguage.setCurrentIndex(index_meta_language)
 
             self.vendor_id.setText("")

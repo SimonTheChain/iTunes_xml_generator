@@ -356,10 +356,10 @@
         </item>
         <item>
          <layout class="QGridLayout" name="gridLayout_2">
-          <item row="1" column="3">
-           <widget class="QComboBox" name="build_scenario">
+          <item row="7" column="0">
+           <widget class="QCheckBox" name="build_trailer_assets">
             <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
@@ -369,10 +369,37 @@
               <pointsize>10</pointsize>
              </font>
             </property>
+            <property name="layoutDirection">
+             <enum>Qt::RightToLeft</enum>
+            </property>
+            <property name="text">
+             <string>Trailer assets</string>
+            </property>
            </widget>
           </item>
-          <item row="11" column="3">
-           <spacer name="horizontalSpacer_114">
+          <item row="5" column="0">
+           <widget class="QCheckBox" name="build_chapters">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="layoutDirection">
+             <enum>Qt::RightToLeft</enum>
+            </property>
+            <property name="text">
+             <string>Chapters</string>
+            </property>
+           </widget>
+          </item>
+          <item row="10" column="3">
+           <spacer name="horizontalSpacer_103">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
             </property>
@@ -384,8 +411,72 @@
             </property>
            </spacer>
           </item>
-          <item row="13" column="3">
-           <spacer name="horizontalSpacer_20">
+          <item row="4" column="3">
+           <spacer name="horizontalSpacer_102">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_161">
+            <property name="text">
+             <string>Build scenario:</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="10" column="0">
+           <widget class="QCheckBox" name="build_poster">
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="layoutDirection">
+             <enum>Qt::RightToLeft</enum>
+            </property>
+            <property name="text">
+             <string>Poster Art</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="3">
+           <spacer name="horizontalSpacer_16">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="12" column="3">
+           <spacer name="horizontalSpacer_18">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="14" column="3">
+           <spacer name="horizontalSpacer_59">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
             </property>
@@ -423,21 +514,8 @@
             </property>
            </spacer>
           </item>
-          <item row="5" column="3">
-           <spacer name="horizontalSpacer_16">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item row="10" column="3">
-           <spacer name="horizontalSpacer_18">
+          <item row="15" column="3">
+           <spacer name="horizontalSpacer_20">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
             </property>
@@ -462,31 +540,23 @@
             </property>
            </spacer>
           </item>
-          <item row="12" column="3">
-           <spacer name="horizontalSpacer_59">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
+          <item row="1" column="3">
+           <widget class="QComboBox" name="build_scenario">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
             </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item row="1" column="0">
-           <widget class="QLabel" name="label_161">
-            <property name="text">
-             <string>Build scenario:</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+             </font>
             </property>
            </widget>
           </item>
-          <item row="4" column="3">
-           <spacer name="horizontalSpacer_102">
+          <item row="13" column="3">
+           <spacer name="horizontalSpacer_114">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
             </property>
@@ -499,7 +569,7 @@
            </spacer>
           </item>
           <item row="8" column="3">
-           <spacer name="horizontalSpacer_103">
+           <spacer name="horizontalSpacer_149">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
             </property>
@@ -511,8 +581,8 @@
             </property>
            </spacer>
           </item>
-          <item row="5" column="0">
-           <widget class="QCheckBox" name="build_chapters">
+          <item row="15" column="0">
+           <widget class="QCheckBox" name="build_cast_crew">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -528,12 +598,12 @@
              <enum>Qt::RightToLeft</enum>
             </property>
             <property name="text">
-             <string>Chapters</string>
+             <string>Cast and crew</string>
             </property>
            </widget>
           </item>
-          <item row="7" column="0">
-           <widget class="QCheckBox" name="build_trailer_assets">
+          <item row="14" column="0">
+           <widget class="QCheckBox" name="build_genres_ratings">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -549,12 +619,18 @@
              <enum>Qt::RightToLeft</enum>
             </property>
             <property name="text">
-             <string>Trailer assets</string>
+             <string>Genres and ratings</string>
             </property>
            </widget>
           </item>
-          <item row="8" column="0">
-           <widget class="QCheckBox" name="build_poster">
+          <item row="3" column="0">
+           <widget class="QCheckBox" name="build_feat">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="font">
              <font>
               <pointsize>10</pointsize>
@@ -564,7 +640,7 @@
              <enum>Qt::RightToLeft</enum>
             </property>
             <property name="text">
-             <string>Poster Art</string>
+             <string>Feature</string>
             </property>
            </widget>
           </item>
@@ -604,70 +680,7 @@
             </property>
            </widget>
           </item>
-          <item row="3" column="0">
-           <widget class="QCheckBox" name="build_feat">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>10</pointsize>
-             </font>
-            </property>
-            <property name="layoutDirection">
-             <enum>Qt::RightToLeft</enum>
-            </property>
-            <property name="text">
-             <string>Feature</string>
-            </property>
-           </widget>
-          </item>
           <item row="13" column="0">
-           <widget class="QCheckBox" name="build_cast_crew">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>10</pointsize>
-             </font>
-            </property>
-            <property name="layoutDirection">
-             <enum>Qt::RightToLeft</enum>
-            </property>
-            <property name="text">
-             <string>Cast and crew</string>
-            </property>
-           </widget>
-          </item>
-          <item row="12" column="0">
-           <widget class="QCheckBox" name="build_genres_ratings">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>10</pointsize>
-             </font>
-            </property>
-            <property name="layoutDirection">
-             <enum>Qt::RightToLeft</enum>
-            </property>
-            <property name="text">
-             <string>Genres and ratings</string>
-            </property>
-           </widget>
-          </item>
-          <item row="11" column="0">
            <widget class="QCheckBox" name="build_meta">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
@@ -688,7 +701,7 @@
             </property>
            </widget>
           </item>
-          <item row="10" column="0">
+          <item row="12" column="0">
            <widget class="QCheckBox" name="build_product">
             <property name="font">
              <font>
@@ -703,20 +716,7 @@
             </property>
            </widget>
           </item>
-          <item row="14" column="3">
-           <spacer name="horizontalSpacer_149">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item row="14" column="0">
+          <item row="8" column="0">
            <widget class="QCheckBox" name="build_loc_trailer">
             <property name="font">
              <font>
@@ -731,7 +731,7 @@
             </property>
            </widget>
           </item>
-          <item row="15" column="0">
+          <item row="9" column="0">
            <widget class="QCheckBox" name="build_loc_trailer_assets">
             <property name="font">
              <font>
@@ -746,7 +746,7 @@
             </property>
            </widget>
           </item>
-          <item row="15" column="3">
+          <item row="9" column="3">
            <spacer name="horizontalSpacer_150">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
