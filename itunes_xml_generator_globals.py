@@ -208,6 +208,9 @@ feat_crop_right = ""
 # chapters
 tc_format = "23.98fps"
 pack_info_path = ""
+chapters_tc = OrderedDict()
+thumbs_tc = OrderedDict()
+chapter_locales = OrderedDict()
 chapters_done = True
 
 # trailer
@@ -471,8 +474,6 @@ product = False
 # lists and dictionaries
 countries = {}
 providers_lst = []
-chapters_tc = []
-chapter_thumbs = []
 cleared_choices = [
     "true",
     "false"

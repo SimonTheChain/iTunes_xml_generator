@@ -658,25 +658,16 @@ class CreateXml(QtCore.QThread):
 
                     create_chapter_title(settings.language_meta)
 
-                    if settings.localized_check_1:
-                        create_chapter_title(settings.localized_locale_1)
-
-                    if settings.localized_check_2:
-                        create_chapter_title(settings.localized_locale_2)
-
-                    if settings.localized_check_3:
-                        create_chapter_title(settings.localized_locale_3)
-
-                    if settings.localized_check_4:
-                        create_chapter_title(settings.localized_locale_4)
+                    for value in settings.chapter_locales.values():
+                        create_chapter_title(value.split(":", 1)[0])
 
                     xml_chap_thumb = etree.SubElement(xml_chapter, "artwork_time")
                     xml_chap_thumb.text = thumbnail
 
                 chapter_number = 0
-                for i in range(len(settings.chapters_tc)):
+                for i in range(len(settings.chapters_tc.keys())):
                     chapter_number += 1
-                    chapter_template(settings.chapters_tc[i], chapter_number, settings.chapter_thumbs[i])
+                    chapter_template(settings.chapters_tc.values()[i], chapter_number, settings.thumbs_tc.values()[i])
 
                 # accessibility info
                 xml_access_info = etree.SubElement(xml_video, "accessibility_info")
@@ -967,25 +958,16 @@ class CreateXml(QtCore.QThread):
 
                 create_chapter_title(settings.language_meta)
 
-                if settings.localized_check_1:
-                    create_chapter_title(settings.localized_locale_1)
-
-                if settings.localized_check_2:
-                    create_chapter_title(settings.localized_locale_2)
-
-                if settings.localized_check_3:
-                    create_chapter_title(settings.localized_locale_3)
-
-                if settings.localized_check_4:
-                    create_chapter_title(settings.localized_locale_4)
+                for value in settings.chapter_locales.values():
+                    create_chapter_title(value.split(":", 1)[0])
 
                 xml_chap_thumb = etree.SubElement(xml_chapter, "artwork_time")
                 xml_chap_thumb.text = thumbnail
 
             chapter_number = 0
-            for i in range(len(settings.chapters_tc)):
+            for i in range(len(settings.chapters_tc.keys())):
                 chapter_number += 1
-                chapter_template(settings.chapters_tc[i], chapter_number, settings.chapter_thumbs[i])
+                chapter_template(settings.chapters_tc.values()[i], chapter_number, settings.thumbs_tc.values()[i])
 
         settings.chapters_done = True
         self.emit(QtCore.SIGNAL("chapters_done"))
@@ -1565,7 +1547,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         create_providers()
         create_countries()
         list_of_countries = create_list("country_lst", settings.countries)
-        list_of_languages = create_list("language_lst", languages_list.languages)
+        self.list_of_languages = create_list("language_lst", languages_list.languages)
 
         self.loc_trailer_count = 0
         self.feat_asset1_count = 0
@@ -1576,6 +1558,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.feat_asset6_count = 0
         self.feat_asset7_count = 0
         self.feat_asset8_count = 0
+        self.chapter_locale_count = 0
         self.country_values = settings.countries.values()
         self.country_values.sort()
 
@@ -1589,7 +1572,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.comboCountry.setCurrentIndex(index_country)
 
         self.comboOriginalLanguage.clear()
-        self.comboOriginalLanguage.addItems(list_of_languages)
+        self.comboOriginalLanguage.addItems(self.list_of_languages)
         self.comboOriginalLanguage.currentIndexChanged.connect(self.set_spoken)
         index_original_locale = self.comboOriginalLanguage.findText("en-US: English (United States)", QtCore.Qt.MatchFixedString)
         self.comboOriginalLanguage.setCurrentIndex(index_original_locale)
@@ -1819,19 +1802,19 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
 
         # feature
         self.comboFeatureAudio.clear()
-        self.comboFeatureAudio.addItems(list_of_languages)
+        self.comboFeatureAudio.addItems(self.list_of_languages)
         self.comboFeatureAudio.currentIndexChanged.connect(self.set_feat_audio)
         index_feature_audio = self.comboFeatureAudio.findText("en-CA: English (Canada)", QtCore.Qt.MatchFixedString)
         self.comboFeatureAudio.setCurrentIndex(index_feature_audio)
 
         self.comboNarrFeature.clear()
-        self.comboNarrFeature.addItems(list_of_languages)
+        self.comboNarrFeature.addItems(self.list_of_languages)
         self.comboNarrFeature.currentIndexChanged.connect(self.set_narr_feat)
         index_feature_narr = self.comboNarrFeature.findText("en-CA: English (Canada)", QtCore.Qt.MatchFixedString)
         self.comboNarrFeature.setCurrentIndex(index_feature_narr)
 
         self.comboSubFeature.clear()
-        self.comboSubFeature.addItems(list_of_languages)
+        self.comboSubFeature.addItems(self.list_of_languages)
         self.comboSubFeature.currentIndexChanged.connect(self.set_sub_feat)
         index_feature_subs = self.comboSubFeature.findText("en-CA: English (Canada)", QtCore.Qt.MatchFixedString)
         self.comboSubFeature.setCurrentIndex(index_feature_subs)
@@ -1859,7 +1842,52 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.tc_format.setCurrentIndex(index_tc_format)
 
         self.chapter_locale_cb_main.clear()
-        self.chapter_locale_cb_main.addItems(list_of_languages)
+        self.chapter_locale_cb_main.addItems(self.list_of_languages)
+
+        self.chapter_locale_add_btn.clicked.connect(self.chap_locale_add)
+        self.chapter_locale_del_btn.clicked.connect(self.chap_locale_del)
+
+        self.chap_01_tc_ln.textChanged.connect(self.set_chap_01_tc)
+        self.chap_02_tc_ln.textChanged.connect(self.set_chap_02_tc)
+        self.chap_03_tc_ln.textChanged.connect(self.set_chap_03_tc)
+        self.chap_04_tc_ln.textChanged.connect(self.set_chap_04_tc)
+        self.chap_05_tc_ln.textChanged.connect(self.set_chap_05_tc)
+        self.chap_06_tc_ln.textChanged.connect(self.set_chap_06_tc)
+        self.chap_07_tc_ln.textChanged.connect(self.set_chap_07_tc)
+        self.chap_08_tc_ln.textChanged.connect(self.set_chap_08_tc)
+        self.chap_09_tc_ln.textChanged.connect(self.set_chap_09_tc)
+        self.chap_10_tc_ln.textChanged.connect(self.set_chap_10_tc)
+        self.chap_11_tc_ln.textChanged.connect(self.set_chap_11_tc)
+        self.chap_12_tc_ln.textChanged.connect(self.set_chap_12_tc)
+        self.chap_13_tc_ln.textChanged.connect(self.set_chap_13_tc)
+        self.chap_14_tc_ln.textChanged.connect(self.set_chap_14_tc)
+        self.chap_15_tc_ln.textChanged.connect(self.set_chap_15_tc)
+        self.chap_16_tc_ln.textChanged.connect(self.set_chap_16_tc)
+        self.chap_17_tc_ln.textChanged.connect(self.set_chap_17_tc)
+        self.chap_18_tc_ln.textChanged.connect(self.set_chap_18_tc)
+        self.chap_19_tc_ln.textChanged.connect(self.set_chap_19_tc)
+        self.chap_20_tc_ln.textChanged.connect(self.set_chap_20_tc)
+
+        self.chap_01_thumb_tc_ln.textChanged.connect(self.set_chap_01_thumb_tc)
+        self.chap_02_thumb_tc_ln.textChanged.connect(self.set_chap_02_thumb_tc)
+        self.chap_03_thumb_tc_ln.textChanged.connect(self.set_chap_03_thumb_tc)
+        self.chap_04_thumb_tc_ln.textChanged.connect(self.set_chap_04_thumb_tc)
+        self.chap_05_thumb_tc_ln.textChanged.connect(self.set_chap_05_thumb_tc)
+        self.chap_06_thumb_tc_ln.textChanged.connect(self.set_chap_06_thumb_tc)
+        self.chap_07_thumb_tc_ln.textChanged.connect(self.set_chap_07_thumb_tc)
+        self.chap_08_thumb_tc_ln.textChanged.connect(self.set_chap_08_thumb_tc)
+        self.chap_09_thumb_tc_ln.textChanged.connect(self.set_chap_09_thumb_tc)
+        self.chap_10_thumb_tc_ln.textChanged.connect(self.set_chap_10_thumb_tc)
+        self.chap_11_thumb_tc_ln.textChanged.connect(self.set_chap_11_thumb_tc)
+        self.chap_12_thumb_tc_ln.textChanged.connect(self.set_chap_12_thumb_tc)
+        self.chap_13_thumb_tc_ln.textChanged.connect(self.set_chap_13_thumb_tc)
+        self.chap_14_thumb_tc_ln.textChanged.connect(self.set_chap_14_thumb_tc)
+        self.chap_15_thumb_tc_ln.textChanged.connect(self.set_chap_15_thumb_tc)
+        self.chap_16_thumb_tc_ln.textChanged.connect(self.set_chap_16_thumb_tc)
+        self.chap_17_thumb_tc_ln.textChanged.connect(self.set_chap_17_thumb_tc)
+        self.chap_18_thumb_tc_ln.textChanged.connect(self.set_chap_18_thumb_tc)
+        self.chap_19_thumb_tc_ln.textChanged.connect(self.set_chap_19_thumb_tc)
+        self.chap_20_thumb_tc_ln.textChanged.connect(self.set_chap_20_thumb_tc)
 
         # trailer
         tc_lst = settings.timecodes.keys()
@@ -1871,19 +1899,19 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.tc_format_ww_trailer.setCurrentIndex(index_tc_format_ww)
 
         self.comboTrailerAudio.clear()
-        self.comboTrailerAudio.addItems(list_of_languages)
+        self.comboTrailerAudio.addItems(self.list_of_languages)
         self.comboTrailerAudio.currentIndexChanged.connect(self.set_trailer_audio)
         index_trailer_audio = self.comboTrailerAudio.findText("en-CA: English (Canada)", QtCore.Qt.MatchFixedString)
         self.comboTrailerAudio.setCurrentIndex(index_trailer_audio)
 
         self.comboNarrTrailer.clear()
-        self.comboNarrTrailer.addItems(list_of_languages)
+        self.comboNarrTrailer.addItems(self.list_of_languages)
         self.comboNarrTrailer.currentIndexChanged.connect(self.set_narr_trailer)
         index_trailer_narr = self.comboNarrTrailer.findText("en-CA: English (Canada)", QtCore.Qt.MatchFixedString)
         self.comboNarrTrailer.setCurrentIndex(index_trailer_narr)
 
         self.comboSubTrailer.clear()
-        self.comboSubTrailer.addItems(list_of_languages)
+        self.comboSubTrailer.addItems(self.list_of_languages)
         self.comboSubTrailer.currentIndexChanged.connect(self.set_sub_trailer)
         index_trailer_subs = self.comboSubTrailer.findText("en-CA: English (Canada)", QtCore.Qt.MatchFixedString)
         self.comboSubTrailer.setCurrentIndex(index_trailer_subs)
@@ -1918,7 +1946,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.feat_asset1_role.currentIndexChanged.connect(self.set_feat_asset1_role)
 
         self.feat_asset1_locale.clear()
-        self.feat_asset1_locale.addItems(list_of_languages)
+        self.feat_asset1_locale.addItems(self.list_of_languages)
         self.feat_asset1_locale.currentIndexChanged.connect(self.set_feat_asset1_locale)
         index_feat_asset1_locale = self.feat_asset1_locale.findText("en-CA: English (Canada)", QtCore.Qt.MatchFixedString)
         self.feat_asset1_locale.setCurrentIndex(index_feat_asset1_locale)
@@ -1928,7 +1956,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.feat_asset2_role.currentIndexChanged.connect(self.set_feat_asset2_role)
 
         self.feat_asset2_locale.clear()
-        self.feat_asset2_locale.addItems(list_of_languages)
+        self.feat_asset2_locale.addItems(self.list_of_languages)
         self.feat_asset2_locale.currentIndexChanged.connect(self.set_feat_asset2_locale)
         index_feat_asset2_locale = self.feat_asset2_locale.findText("en-CA: English (Canada)", QtCore.Qt.MatchFixedString)
         self.feat_asset2_locale.setCurrentIndex(index_feat_asset2_locale)
@@ -1938,7 +1966,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.feat_asset3_role.currentIndexChanged.connect(self.set_feat_asset3_role)
 
         self.feat_asset3_locale.clear()
-        self.feat_asset3_locale.addItems(list_of_languages)
+        self.feat_asset3_locale.addItems(self.list_of_languages)
         self.feat_asset3_locale.currentIndexChanged.connect(self.set_feat_asset3_locale)
         index_feat_asset3_locale = self.feat_asset3_locale.findText("en-CA: English (Canada)", QtCore.Qt.MatchFixedString)
         self.feat_asset3_locale.setCurrentIndex(index_feat_asset3_locale)
@@ -1948,7 +1976,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.feat_asset4_role.currentIndexChanged.connect(self.set_feat_asset4_role)
 
         self.feat_asset4_locale.clear()
-        self.feat_asset4_locale.addItems(list_of_languages)
+        self.feat_asset4_locale.addItems(self.list_of_languages)
         self.feat_asset4_locale.currentIndexChanged.connect(self.set_feat_asset4_locale)
         index_feat_asset4_locale = self.feat_asset4_locale.findText("en-CA: English (Canada)", QtCore.Qt.MatchFixedString)
         self.feat_asset4_locale.setCurrentIndex(index_feat_asset4_locale)
@@ -1958,7 +1986,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.feat_asset5_role.currentIndexChanged.connect(self.set_feat_asset5_role)
 
         self.feat_asset5_locale.clear()
-        self.feat_asset5_locale.addItems(list_of_languages)
+        self.feat_asset5_locale.addItems(self.list_of_languages)
         self.feat_asset5_locale.currentIndexChanged.connect(self.set_feat_asset5_locale)
         index_feat_asset5_locale = self.feat_asset5_locale.findText("en-CA: English (Canada)", QtCore.Qt.MatchFixedString)
         self.feat_asset5_locale.setCurrentIndex(index_feat_asset5_locale)
@@ -1968,7 +1996,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.feat_asset6_role.currentIndexChanged.connect(self.set_feat_asset6_role)
 
         self.feat_asset6_locale.clear()
-        self.feat_asset6_locale.addItems(list_of_languages)
+        self.feat_asset6_locale.addItems(self.list_of_languages)
         self.feat_asset6_locale.currentIndexChanged.connect(self.set_feat_asset6_locale)
         index_feat_asset6_locale = self.feat_asset6_locale.findText("en-CA: English (Canada)", QtCore.Qt.MatchFixedString)
         self.feat_asset6_locale.setCurrentIndex(index_feat_asset6_locale)
@@ -1978,7 +2006,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.feat_asset7_role.currentIndexChanged.connect(self.set_feat_asset7_role)
 
         self.feat_asset7_locale.clear()
-        self.feat_asset7_locale.addItems(list_of_languages)
+        self.feat_asset7_locale.addItems(self.list_of_languages)
         self.feat_asset7_locale.currentIndexChanged.connect(self.set_feat_asset7_locale)
         index_feat_asset7_locale = self.feat_asset7_locale.findText("en-CA: English (Canada)", QtCore.Qt.MatchFixedString)
         self.feat_asset7_locale.setCurrentIndex(index_feat_asset7_locale)
@@ -1988,7 +2016,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.feat_asset8_role.currentIndexChanged.connect(self.set_feat_asset8_role)
 
         self.feat_asset8_locale.clear()
-        self.feat_asset8_locale.addItems(list_of_languages)
+        self.feat_asset8_locale.addItems(self.list_of_languages)
         self.feat_asset8_locale.currentIndexChanged.connect(self.set_feat_asset8_locale)
         index_feat_asset8_locale = self.feat_asset8_locale.findText("en-CA: English (Canada)", QtCore.Qt.MatchFixedString)
         self.feat_asset8_locale.setCurrentIndex(index_feat_asset8_locale)
@@ -2025,7 +2053,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.trailer_asset1_role.currentIndexChanged.connect(self.set_trailer_asset1_role)
 
         self.trailer_asset1_locale.clear()
-        self.trailer_asset1_locale.addItems(list_of_languages)
+        self.trailer_asset1_locale.addItems(self.list_of_languages)
         self.trailer_asset1_locale.currentIndexChanged.connect(self.set_trailer_asset1_locale)
         index_trailer_asset1_locale = self.trailer_asset1_locale.findText("en-CA: English (Canada)", QtCore.Qt.MatchFixedString)
         self.trailer_asset1_locale.setCurrentIndex(index_trailer_asset1_locale)
@@ -2035,7 +2063,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.trailer_asset2_role.currentIndexChanged.connect(self.set_trailer_asset2_role)
 
         self.trailer_asset2_locale.clear()
-        self.trailer_asset2_locale.addItems(list_of_languages)
+        self.trailer_asset2_locale.addItems(self.list_of_languages)
         self.trailer_asset2_locale.currentIndexChanged.connect(self.set_trailer_asset2_locale)
         index_trailer_asset2_locale = self.trailer_asset2_locale.findText("en-CA: English (Canada)", QtCore.Qt.MatchFixedString)
         self.trailer_asset2_locale.setCurrentIndex(index_trailer_asset2_locale)
@@ -2045,7 +2073,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.trailer_asset3_role.currentIndexChanged.connect(self.set_trailer_asset3_role)
 
         self.trailer_asset3_locale.clear()
-        self.trailer_asset3_locale.addItems(list_of_languages)
+        self.trailer_asset3_locale.addItems(self.list_of_languages)
         self.trailer_asset3_locale.currentIndexChanged.connect(self.set_trailer_asset3_locale)
         index_trailer_asset3_locale = self.trailer_asset3_locale.findText("en-CA: English (Canada)", QtCore.Qt.MatchFixedString)
         self.trailer_asset3_locale.setCurrentIndex(index_trailer_asset3_locale)
@@ -2055,7 +2083,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.trailer_asset4_role.currentIndexChanged.connect(self.set_trailer_asset4_role)
 
         self.trailer_asset4_locale.clear()
-        self.trailer_asset4_locale.addItems(list_of_languages)
+        self.trailer_asset4_locale.addItems(self.list_of_languages)
         self.trailer_asset4_locale.currentIndexChanged.connect(self.set_trailer_asset4_locale)
         index_trailer_asset4_locale = self.trailer_asset4_locale.findText("en-CA: English (Canada)", QtCore.Qt.MatchFixedString)
         self.trailer_asset4_locale.setCurrentIndex(index_trailer_asset4_locale)
@@ -2065,7 +2093,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.trailer_asset5_role.currentIndexChanged.connect(self.set_trailer_asset5_role)
 
         self.trailer_asset5_locale.clear()
-        self.trailer_asset5_locale.addItems(list_of_languages)
+        self.trailer_asset5_locale.addItems(self.list_of_languages)
         self.trailer_asset5_locale.currentIndexChanged.connect(self.set_trailer_asset5_locale)
         index_trailer_asset5_locale = self.trailer_asset5_locale.findText("en-CA: English (Canada)", QtCore.Qt.MatchFixedString)
         self.trailer_asset5_locale.setCurrentIndex(index_trailer_asset5_locale)
@@ -2075,7 +2103,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.trailer_asset6_role.currentIndexChanged.connect(self.set_trailer_asset6_role)
 
         self.trailer_asset6_locale.clear()
-        self.trailer_asset6_locale.addItems(list_of_languages)
+        self.trailer_asset6_locale.addItems(self.list_of_languages)
         self.trailer_asset6_locale.currentIndexChanged.connect(self.set_trailer_asset6_locale)
         index_trailer_asset6_locale = self.trailer_asset6_locale.findText("en-CA: English (Canada)", QtCore.Qt.MatchFixedString)
         self.trailer_asset6_locale.setCurrentIndex(index_trailer_asset6_locale)
@@ -2085,7 +2113,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.trailer_asset7_role.currentIndexChanged.connect(self.set_trailer_asset7_role)
 
         self.trailer_asset7_locale.clear()
-        self.trailer_asset7_locale.addItems(list_of_languages)
+        self.trailer_asset7_locale.addItems(self.list_of_languages)
         self.trailer_asset7_locale.currentIndexChanged.connect(self.set_trailer_asset7_locale)
         index_trailer_asset7_locale = self.trailer_asset7_locale.findText("en-CA: English (Canada)", QtCore.Qt.MatchFixedString)
         self.trailer_asset7_locale.setCurrentIndex(index_trailer_asset7_locale)
@@ -2095,14 +2123,14 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.trailer_asset8_role.currentIndexChanged.connect(self.set_trailer_asset8_role)
 
         self.trailer_asset8_locale.clear()
-        self.trailer_asset8_locale.addItems(list_of_languages)
+        self.trailer_asset8_locale.addItems(self.list_of_languages)
         self.trailer_asset8_locale.currentIndexChanged.connect(self.set_trailer_asset8_locale)
         index_trailer_asset8_locale = self.trailer_asset8_locale.findText("en-CA: English (Canada)", QtCore.Qt.MatchFixedString)
         self.trailer_asset8_locale.setCurrentIndex(index_trailer_asset8_locale)
 
         # poster
         self.comboPoster.clear()
-        self.comboPoster.addItems(list_of_languages)
+        self.comboPoster.addItems(self.list_of_languages)
         self.comboPoster.currentIndexChanged.connect(self.set_poster_locale)
         index_poster_locale = self.comboPoster.findText("en-CA: English (Canada)", QtCore.Qt.MatchFixedString)
         self.comboPoster.setCurrentIndex(index_poster_locale)
@@ -2279,7 +2307,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         # localization
         self.localized_check_1.stateChanged.connect(self.set_localized_check_1)
         self.localized_locale_1.clear()
-        self.localized_locale_1.addItems(list_of_languages)
+        self.localized_locale_1.addItems(self.list_of_languages)
         self.localized_locale_1.currentIndexChanged.connect(self.set_localized_locale_1)
         index_localized_locale_1 = self.localized_locale_1.findText("en-CA: English (Canada)",
                                                                     QtCore.Qt.MatchFixedString)
@@ -2289,7 +2317,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
 
         self.localized_check_2.stateChanged.connect(self.set_localized_check_2)
         self.localized_locale_2.clear()
-        self.localized_locale_2.addItems(list_of_languages)
+        self.localized_locale_2.addItems(self.list_of_languages)
         self.localized_locale_2.currentIndexChanged.connect(self.set_localized_locale_2)
         index_localized_locale_2 = self.localized_locale_2.findText("en-CA: English (Canada)",
                                                                   QtCore.Qt.MatchFixedString)
@@ -2299,7 +2327,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
 
         self.localized_check_3.stateChanged.connect(self.set_localized_check_3)
         self.localized_locale_3.clear()
-        self.localized_locale_3.addItems(list_of_languages)
+        self.localized_locale_3.addItems(self.list_of_languages)
         self.localized_locale_3.currentIndexChanged.connect(self.set_localized_locale_3)
         index_localized_locale_3 = self.localized_locale_3.findText("en-CA: English (Canada)",
                                                                   QtCore.Qt.MatchFixedString)
@@ -2309,7 +2337,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
 
         self.localized_check_4.stateChanged.connect(self.set_localized_check_4)
         self.localized_locale_4.clear()
-        self.localized_locale_4.addItems(list_of_languages)
+        self.localized_locale_4.addItems(self.list_of_languages)
         self.localized_locale_4.currentIndexChanged.connect(self.set_localized_locale_4)
         index_localized_locale_4 = self.localized_locale_4.findText("en-CA: English (Canada)",
                                                                   QtCore.Qt.MatchFixedString)
@@ -2327,19 +2355,19 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.tc_format_loc_trailer.setCurrentIndex(index_tc_format_loc)
 
         self.loc_comboTrailerAudio.clear()
-        self.loc_comboTrailerAudio.addItems(list_of_languages)
+        self.loc_comboTrailerAudio.addItems(self.list_of_languages)
         self.loc_comboTrailerAudio.currentIndexChanged.connect(self.set_loc_trailer_audio)
         index_loc_comboTrailerAudio = self.loc_comboTrailerAudio.findText("en-CA: English (Canada)", QtCore.Qt.MatchFixedString)
         self.loc_comboTrailerAudio.setCurrentIndex(index_loc_comboTrailerAudio)
 
         self.loc_comboNarrTrailer.clear()
-        self.loc_comboNarrTrailer.addItems(list_of_languages)
+        self.loc_comboNarrTrailer.addItems(self.list_of_languages)
         self.loc_comboNarrTrailer.currentIndexChanged.connect(self.set_narr_loc_trailer)
         index_loc_comboNarrTrailer = self.loc_comboNarrTrailer.findText("en-CA: English (Canada)", QtCore.Qt.MatchFixedString)
         self.loc_comboNarrTrailer.setCurrentIndex(index_loc_comboNarrTrailer)
 
         self.loc_comboSubTrailer.clear()
-        self.loc_comboSubTrailer.addItems(list_of_languages)
+        self.loc_comboSubTrailer.addItems(self.list_of_languages)
         self.loc_comboSubTrailer.currentIndexChanged.connect(self.set_sub_loc_trailer)
         index_loc_comboSubTrailer = self.loc_comboSubTrailer.findText("en-CA: English (Canada)", QtCore.Qt.MatchFixedString)
         self.loc_comboSubTrailer.setCurrentIndex(index_loc_comboSubTrailer)
@@ -2377,7 +2405,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.loc_trailer_asset1_role.currentIndexChanged.connect(self.set_loc_trailer_asset1_role)
 
         self.loc_trailer_asset1_locale.clear()
-        self.loc_trailer_asset1_locale.addItems(list_of_languages)
+        self.loc_trailer_asset1_locale.addItems(self.list_of_languages)
         self.loc_trailer_asset1_locale.currentIndexChanged.connect(self.set_loc_trailer_asset1_locale)
         index_loc_trailer_asset1_locale = self.loc_trailer_asset1_locale.findText("en-CA: English (Canada)",
                                                                           QtCore.Qt.MatchFixedString)
@@ -2388,7 +2416,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.loc_trailer_asset2_role.currentIndexChanged.connect(self.set_loc_trailer_asset2_role)
 
         self.loc_trailer_asset2_locale.clear()
-        self.loc_trailer_asset2_locale.addItems(list_of_languages)
+        self.loc_trailer_asset2_locale.addItems(self.list_of_languages)
         self.loc_trailer_asset2_locale.currentIndexChanged.connect(self.set_loc_trailer_asset2_locale)
         index_loc_trailer_asset2_locale = self.loc_trailer_asset2_locale.findText("en-CA: English (Canada)",
                                                                           QtCore.Qt.MatchFixedString)
@@ -2399,7 +2427,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.loc_trailer_asset3_role.currentIndexChanged.connect(self.set_loc_trailer_asset3_role)
 
         self.loc_trailer_asset3_locale.clear()
-        self.loc_trailer_asset3_locale.addItems(list_of_languages)
+        self.loc_trailer_asset3_locale.addItems(self.list_of_languages)
         self.loc_trailer_asset3_locale.currentIndexChanged.connect(self.set_loc_trailer_asset3_locale)
         index_loc_trailer_asset3_locale = self.loc_trailer_asset3_locale.findText("en-CA: English (Canada)",
                                                                           QtCore.Qt.MatchFixedString)
@@ -2410,7 +2438,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.loc_trailer_asset4_role.currentIndexChanged.connect(self.set_loc_trailer_asset4_role)
 
         self.loc_trailer_asset4_locale.clear()
-        self.loc_trailer_asset4_locale.addItems(list_of_languages)
+        self.loc_trailer_asset4_locale.addItems(self.list_of_languages)
         self.loc_trailer_asset4_locale.currentIndexChanged.connect(self.set_loc_trailer_asset4_locale)
         index_loc_trailer_asset4_locale = self.loc_trailer_asset4_locale.findText("en-CA: English (Canada)",
                                                                           QtCore.Qt.MatchFixedString)
@@ -2421,7 +2449,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.loc_trailer_asset5_role.currentIndexChanged.connect(self.set_loc_trailer_asset5_role)
 
         self.loc_trailer_asset5_locale.clear()
-        self.loc_trailer_asset5_locale.addItems(list_of_languages)
+        self.loc_trailer_asset5_locale.addItems(self.list_of_languages)
         self.loc_trailer_asset5_locale.currentIndexChanged.connect(self.set_loc_trailer_asset5_locale)
         index_loc_trailer_asset5_locale = self.loc_trailer_asset5_locale.findText("en-CA: English (Canada)",
                                                                           QtCore.Qt.MatchFixedString)
@@ -2432,7 +2460,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.loc_trailer_asset6_role.currentIndexChanged.connect(self.set_loc_trailer_asset6_role)
 
         self.loc_trailer_asset6_locale.clear()
-        self.loc_trailer_asset6_locale.addItems(list_of_languages)
+        self.loc_trailer_asset6_locale.addItems(self.list_of_languages)
         self.loc_trailer_asset6_locale.currentIndexChanged.connect(self.set_loc_trailer_asset6_locale)
         index_loc_trailer_asset6_locale = self.loc_trailer_asset6_locale.findText("en-CA: English (Canada)",
                                                                           QtCore.Qt.MatchFixedString)
@@ -2443,7 +2471,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.loc_trailer_asset7_role.currentIndexChanged.connect(self.set_loc_trailer_asset7_role)
 
         self.loc_trailer_asset7_locale.clear()
-        self.loc_trailer_asset7_locale.addItems(list_of_languages)
+        self.loc_trailer_asset7_locale.addItems(self.list_of_languages)
         self.loc_trailer_asset7_locale.currentIndexChanged.connect(self.set_loc_trailer_asset7_locale)
         index_loc_trailer_asset7_locale = self.loc_trailer_asset7_locale.findText("en-CA: English (Canada)",
                                                                           QtCore.Qt.MatchFixedString)
@@ -2454,7 +2482,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.loc_trailer_asset8_role.currentIndexChanged.connect(self.set_loc_trailer_asset8_role)
 
         self.loc_trailer_asset8_locale.clear()
-        self.loc_trailer_asset8_locale.addItems(list_of_languages)
+        self.loc_trailer_asset8_locale.addItems(self.list_of_languages)
         self.loc_trailer_asset8_locale.currentIndexChanged.connect(self.set_loc_trailer_asset8_locale)
         index_loc_trailer_asset8_locale = self.loc_trailer_asset8_locale.findText("en-CA: English (Canada)",
                                                                           QtCore.Qt.MatchFixedString)
@@ -2468,7 +2496,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.comboProvider.setCurrentIndex(index_provider)
 
         self.comboMetaLanguage.clear()
-        self.comboMetaLanguage.addItems(list_of_languages)
+        self.comboMetaLanguage.addItems(self.list_of_languages)
         self.comboMetaLanguage.currentIndexChanged.connect(self.set_meta_locale)
         index_meta_language = self.comboMetaLanguage.findText("en-CA: English (Canada)", QtCore.Qt.MatchFixedString)
         self.comboMetaLanguage.setCurrentIndex(index_meta_language)
@@ -3101,6 +3129,156 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
     # chapters
     def set_timecode_format(self):
         settings.tc_format = str(self.tc_format.currentText())
+
+    def chap_locale_add(self):
+        box = QtGui.QComboBox(self)
+        box.addItems(self.list_of_languages)
+        box.setObjectName("chapter_locale%d" % self.chapter_locale_count)
+        box.currentIndexChanged.connect(self.set_chapter_locales)
+        index_chapter_locale = box.findText("en-US", QtCore.Qt.MatchFixedString)
+        box.setCurrentIndex(index_chapter_locale)
+
+        self.chapter_title_lyt.addWidget(box, 0, self.chapter_locale_count)
+
+        self.chapter_locale_count = len(settings.chapter_locales.keys())
+
+    def chap_locale_del(self):
+        if self.chapter_title_lyt.count() > 0:
+            to_delete = self.chapter_title_lyt.takeAt(self.chapter_title_lyt.count() - 1)
+
+            widget = to_delete.widget()
+            if widget:
+                widget.deleteLater()
+
+        if len(settings.chapter_locales.keys()) > 0:
+            settings.chapter_locales.pop(settings.chapter_locales.keys()[-1])
+
+        self.chapter_locale_count = len(settings.chapter_locales.keys())
+
+    def set_chapter_locales(self):
+        sender = self.sender()
+
+        settings.chapter_locales.update({str(sender.objectName()): str(sender.currentText())})
+
+    def set_chap_01_tc(self):
+        settings.chapters_tc["01"] = str(self.chap_01_tc_ln.text())
+
+    def set_chap_02_tc(self):
+        settings.chapters_tc["02"] = str(self.chap_02_tc_ln.text())
+
+    def set_chap_03_tc(self):
+        settings.chapters_tc["03"] = str(self.chap_03_tc_ln.text())
+
+    def set_chap_04_tc(self):
+        settings.chapters_tc["04"] = str(self.chap_04_tc_ln.text())
+
+    def set_chap_05_tc(self):
+        settings.chapters_tc["05"] = str(self.chap_05_tc_ln.text())
+
+    def set_chap_06_tc(self):
+        settings.chapters_tc["06"] = str(self.chap_06_tc_ln.text())
+
+    def set_chap_07_tc(self):
+        settings.chapters_tc["07"] = str(self.chap_07_tc_ln.text())
+
+    def set_chap_08_tc(self):
+        settings.chapters_tc["08"] = str(self.chap_08_tc_ln.text())
+
+    def set_chap_09_tc(self):
+        settings.chapters_tc["09"] = str(self.chap_09_tc_ln.text())
+
+    def set_chap_10_tc(self):
+        settings.chapters_tc["10"] = str(self.chap_10_tc_ln.text())
+
+    def set_chap_11_tc(self):
+        settings.chapters_tc["11"] = str(self.chap_11_tc_ln.text())
+
+    def set_chap_12_tc(self):
+        settings.chapters_tc["12"] = str(self.chap_12_tc_ln.text())
+
+    def set_chap_13_tc(self):
+        settings.chapters_tc["13"] = str(self.chap_13_tc_ln.text())
+
+    def set_chap_14_tc(self):
+        settings.chapters_tc["14"] = str(self.chap_14_tc_ln.text())
+
+    def set_chap_15_tc(self):
+        settings.chapters_tc["15"] = str(self.chap_15_tc_ln.text())
+
+    def set_chap_16_tc(self):
+        settings.chapters_tc["16"] = str(self.chap_16_tc_ln.text())
+
+    def set_chap_17_tc(self):
+        settings.chapters_tc["17"] = str(self.chap_17_tc_ln.text())
+
+    def set_chap_18_tc(self):
+        settings.chapters_tc["18"] = str(self.chap_18_tc_ln.text())
+
+    def set_chap_19_tc(self):
+        settings.chapters_tc["19"] = str(self.chap_19_tc_ln.text())
+
+    def set_chap_20_tc(self):
+        settings.chapters_tc["20"] = str(self.chap_20_tc_ln.text())
+
+    def set_chap_01_thumb_tc(self):
+        settings.thumbs_tc["01"] = str(self.chap_01_thumb_tc_ln.text())
+
+    def set_chap_02_thumb_tc(self):
+        settings.thumbs_tc["02"] = str(self.chap_02_thumb_tc_ln.text())
+
+    def set_chap_03_thumb_tc(self):
+        settings.thumbs_tc["03"] = str(self.chap_03_thumb_tc_ln.text())
+
+    def set_chap_04_thumb_tc(self):
+        settings.thumbs_tc["04"] = str(self.chap_04_thumb_tc_ln.text())
+
+    def set_chap_05_thumb_tc(self):
+        settings.thumbs_tc["05"] = str(self.chap_05_thumb_tc_ln.text())
+
+    def set_chap_06_thumb_tc(self):
+        settings.thumbs_tc["06"] = str(self.chap_06_thumb_tc_ln.text())
+
+    def set_chap_07_thumb_tc(self):
+        settings.thumbs_tc["07"] = str(self.chap_07_thumb_tc_ln.text())
+
+    def set_chap_08_thumb_tc(self):
+        settings.thumbs_tc["08"] = str(self.chap_08_thumb_tc_ln.text())
+
+    def set_chap_09_thumb_tc(self):
+        settings.thumbs_tc["09"] = str(self.chap_09_thumb_tc_ln.text())
+
+    def set_chap_10_thumb_tc(self):
+        settings.thumbs_tc["10"] = str(self.chap_10_thumb_tc_ln.text())
+
+    def set_chap_11_thumb_tc(self):
+        settings.thumbs_tc["11"] = str(self.chap_11_thumb_tc_ln.text())
+
+    def set_chap_12_thumb_tc(self):
+        settings.thumbs_tc["12"] = str(self.chap_12_thumb_tc_ln.text())
+
+    def set_chap_13_thumb_tc(self):
+        settings.thumbs_tc["13"] = str(self.chap_13_thumb_tc_ln.text())
+
+    def set_chap_14_thumb_tc(self):
+        settings.thumbs_tc["14"] = str(self.chap_14_thumb_tc_ln.text())
+
+    def set_chap_15_thumb_tc(self):
+        settings.thumbs_tc["15"] = str(self.chap_15_thumb_tc_ln.text())
+
+    def set_chap_16_thumb_tc(self):
+        settings.thumbs_tc["16"] = str(self.chap_16_thumb_tc_ln.text())
+
+    def set_chap_17_thumb_tc(self):
+        settings.thumbs_tc["17"] = str(self.chap_17_thumb_tc_ln.text())
+
+    def set_chap_18_thumb_tc(self):
+        settings.thumbs_tc["18"] = str(self.chap_18_thumb_tc_ln.text())
+
+    def set_chap_19_thumb_tc(self):
+        settings.thumbs_tc["19"] = str(self.chap_19_thumb_tc_ln.text())
+
+    def set_chap_20_thumb_tc(self):
+        settings.thumbs_tc["20"] = str(self.chap_20_thumb_tc_ln.text())
 
     # trailer
     def trailer_file_dlg(self):
@@ -4834,6 +5012,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.comboFeatureAudio.setCurrentIndex(global_index)
         self.comboNarrFeature.setCurrentIndex(global_index)
         self.comboSubFeature.setCurrentIndex(global_index)
+        self.chapter_locale_cb_main.setCurrentIndex(global_index)
         self.comboTrailerAudio.setCurrentIndex(global_index)
         self.comboNarrTrailer.setCurrentIndex(global_index)
         self.comboSubTrailer.setCurrentIndex(global_index)
@@ -5013,7 +5192,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
 
                 settings.chapters_tc.sort()
                 settings.chapter_thumbs.sort()
-                self.pack_info_lcd.display(len(settings.chapters_tc))
+                # self.pack_info_lcd.display(len(settings.chapters_tc))
                 self.chapter_thumbs_lcd.display(len(settings.chapter_thumbs))
 
             except IOError:
