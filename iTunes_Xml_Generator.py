@@ -990,7 +990,7 @@ class CreateXml(QtCore.QThread):
                 xml_trailer_thumb = etree.SubElement(
                     xml_asset_trailer,
                     "preview_image_time",
-                    attrib={"format": settings.timecodes.get(settings.tc_format)})
+                    attrib={"format": settings.timecodes.get(settings.trailer_tc)})
                 xml_trailer_thumb.text = settings.trailer_still
 
             xml_trailer_territories = etree.SubElement(xml_asset_trailer, "territories")
@@ -1134,7 +1134,7 @@ class CreateXml(QtCore.QThread):
                 xml_loc_trailer_thumb = etree.SubElement(
                     xml_asset_loc_trailer,
                     "preview_image_time",
-                    attrib={"format": settings.timecodes.get(settings.tc_format)})
+                    attrib={"format": settings.timecodes.get(settings.loc_trailer_tc)})
                 xml_loc_trailer_thumb.text = settings.loc_trailer_still
 
             xml_loc_trailer_territories = etree.SubElement(xml_asset_loc_trailer, "territories")
@@ -1894,7 +1894,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         tc_lst.sort()
         self.tc_format_ww_trailer.clear()
         self.tc_format_ww_trailer.addItems(tc_lst)
-        self.tc_format_ww_trailer.currentIndexChanged.connect(self.set_timecode_format)
+        self.tc_format_ww_trailer.currentIndexChanged.connect(self.set_trailer_tc_format)
         index_tc_format_ww = self.tc_format_ww_trailer.findText("23.98fps", QtCore.Qt.MatchFixedString)
         self.tc_format_ww_trailer.setCurrentIndex(index_tc_format_ww)
 
@@ -2350,7 +2350,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         tc_lst.sort()
         self.tc_format_loc_trailer.clear()
         self.tc_format_loc_trailer.addItems(tc_lst)
-        self.tc_format_loc_trailer.currentIndexChanged.connect(self.set_timecode_format)
+        self.tc_format_loc_trailer.currentIndexChanged.connect(self.set_loc_trailer_tc_format)
         index_tc_format_loc = self.tc_format_loc_trailer.findText("23.98fps", QtCore.Qt.MatchFixedString)
         self.tc_format_loc_trailer.setCurrentIndex(index_tc_format_loc)
 
@@ -3130,6 +3130,12 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
     def set_timecode_format(self):
         settings.tc_format = str(self.tc_format.currentText())
 
+        index_tc_format_ww = self.tc_format_ww_trailer.findText(settings.tc_format, QtCore.Qt.MatchFixedString)
+        self.tc_format_ww_trailer.setCurrentIndex(index_tc_format_ww)
+
+        index_tc_format_loc = self.tc_format_loc_trailer.findText(settings.tc_format, QtCore.Qt.MatchFixedString)
+        self.tc_format_loc_trailer.setCurrentIndex(index_tc_format_loc)
+
     def chap_locale_add(self):
         box = QtGui.QComboBox(self)
         box.addItems(self.list_of_languages)
@@ -3335,6 +3341,9 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
 
     def set_trailer_still_tc(self):
         settings.trailer_still = " ".join(unicode(self.trailer_still_tc.text()).split())
+
+    def set_trailer_tc_format(self):
+        settings.trailer_tc = str(self.tc_format_ww_trailer.currentText())
 
     def set_trailer_audio(self):
         settings.trailer_audio = str(self.comboTrailerAudio.currentText()).split(":", 1)[0]
@@ -4746,6 +4755,9 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
 
     def set_loc_trailer_still_tc(self):
         settings.loc_trailer_still = " ".join(unicode(self.loc_trailer_still_tc.text()).split())
+
+    def set_loc_trailer_tc_format(self):
+        settings.loc_trailer_tc = str(self.tc_format_loc_trailer.currentText())
 
     def set_loc_trailer_audio(self):
         settings.loc_trailer_audio = str(self.loc_comboTrailerAudio.currentText()).split(":", 1)[0]
