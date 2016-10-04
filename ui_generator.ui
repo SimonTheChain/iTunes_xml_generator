@@ -281,27 +281,22 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="xml_dest_lbl">
-            <property name="text">
-             <string/>
+           <widget class="QLineEdit" name="xml_dest_lbl">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
             </property>
-            <property name="alignment">
-             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="readOnly">
+             <bool>true</bool>
             </property>
            </widget>
-          </item>
-          <item>
-           <spacer name="horizontalSpacer_15">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
           </item>
          </layout>
         </item>
@@ -813,27 +808,11 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="feature_file_lbl">
-            <property name="text">
-             <string/>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+           <widget class="QLineEdit" name="feature_file_lbl">
+            <property name="readOnly">
+             <bool>true</bool>
             </property>
            </widget>
-          </item>
-          <item>
-           <spacer name="horizontalSpacer_57">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
           </item>
          </layout>
         </item>
@@ -1566,9 +1545,9 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="feat_asset1_lbl">
-            <property name="text">
-             <string/>
+           <widget class="QLineEdit" name="feat_asset1_lbl">
+            <property name="readOnly">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -1762,9 +1741,9 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="feat_asset2_lbl">
-            <property name="text">
-             <string/>
+           <widget class="QLineEdit" name="feat_asset2_lbl">
+            <property name="readOnly">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -1958,9 +1937,9 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="feat_asset3_lbl">
-            <property name="text">
-             <string/>
+           <widget class="QLineEdit" name="feat_asset3_lbl">
+            <property name="readOnly">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -2154,9 +2133,9 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="feat_asset4_lbl">
-            <property name="text">
-             <string/>
+           <widget class="QLineEdit" name="feat_asset4_lbl">
+            <property name="readOnly">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -2350,9 +2329,9 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="feat_asset5_lbl">
-            <property name="text">
-             <string/>
+           <widget class="QLineEdit" name="feat_asset5_lbl">
+            <property name="readOnly">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -2546,9 +2525,9 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="feat_asset6_lbl">
-            <property name="text">
-             <string/>
+           <widget class="QLineEdit" name="feat_asset6_lbl">
+            <property name="readOnly">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -2742,9 +2721,9 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="feat_asset7_lbl">
-            <property name="text">
-             <string/>
+           <widget class="QLineEdit" name="feat_asset7_lbl">
+            <property name="readOnly">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -2938,9 +2917,9 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="feat_asset8_lbl">
-            <property name="text">
-             <string/>
+           <widget class="QLineEdit" name="feat_asset8_lbl">
+            <property name="readOnly">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -4111,29 +4090,13 @@
            </widget>
           </item>
           <item>
-           <spacer name="horizontalSpacer_58">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
+           <widget class="QLineEdit" name="trailer_file_lbl">
+            <property name="readOnly">
+             <bool>true</bool>
             </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
+           </widget>
           </item>
          </layout>
-        </item>
-        <item>
-         <widget class="QLabel" name="trailer_file_lbl">
-          <property name="text">
-           <string/>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-          </property>
-         </widget>
         </item>
         <item>
          <spacer name="verticalSpacer_31">
@@ -4952,9 +4915,9 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="trailer_asset1_lbl">
-            <property name="text">
-             <string/>
+           <widget class="QLineEdit" name="trailer_asset1_lbl">
+            <property name="readOnly">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -5101,9 +5064,9 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="trailer_asset2_lbl">
-            <property name="text">
-             <string/>
+           <widget class="QLineEdit" name="trailer_asset2_lbl">
+            <property name="readOnly">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -5250,9 +5213,9 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="trailer_asset3_lbl">
-            <property name="text">
-             <string/>
+           <widget class="QLineEdit" name="trailer_asset3_lbl">
+            <property name="readOnly">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -5399,9 +5362,9 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="trailer_asset4_lbl">
-            <property name="text">
-             <string/>
+           <widget class="QLineEdit" name="trailer_asset4_lbl">
+            <property name="readOnly">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -5548,9 +5511,9 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="trailer_asset5_lbl">
-            <property name="text">
-             <string/>
+           <widget class="QLineEdit" name="trailer_asset5_lbl">
+            <property name="readOnly">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -5697,9 +5660,9 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="trailer_asset6_lbl">
-            <property name="text">
-             <string/>
+           <widget class="QLineEdit" name="trailer_asset6_lbl">
+            <property name="readOnly">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -5846,9 +5809,9 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="trailer_asset7_lbl">
-            <property name="text">
-             <string/>
+           <widget class="QLineEdit" name="trailer_asset7_lbl">
+            <property name="readOnly">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -5995,9 +5958,9 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="trailer_asset8_lbl">
-            <property name="text">
-             <string/>
+           <widget class="QLineEdit" name="trailer_asset8_lbl">
+            <property name="readOnly">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -6147,27 +6110,11 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="loc_trailer_file_lbl">
-            <property name="text">
-             <string/>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+           <widget class="QLineEdit" name="loc_trailer_file_lbl">
+            <property name="readOnly">
+             <bool>true</bool>
             </property>
            </widget>
-          </item>
-          <item>
-           <spacer name="horizontalSpacer_139">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
           </item>
          </layout>
         </item>
@@ -7093,9 +7040,9 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="loc_trailer_asset1_lbl">
-            <property name="text">
-             <string/>
+           <widget class="QLineEdit" name="loc_trailer_asset1_lbl">
+            <property name="readOnly">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -7242,9 +7189,9 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="loc_trailer_asset2_lbl">
-            <property name="text">
-             <string/>
+           <widget class="QLineEdit" name="loc_trailer_asset2_lbl">
+            <property name="readOnly">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -7391,9 +7338,9 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="loc_trailer_asset3_lbl">
-            <property name="text">
-             <string/>
+           <widget class="QLineEdit" name="loc_trailer_asset3_lbl">
+            <property name="readOnly">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -7540,9 +7487,9 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="loc_trailer_asset4_lbl">
-            <property name="text">
-             <string/>
+           <widget class="QLineEdit" name="loc_trailer_asset4_lbl">
+            <property name="readOnly">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -7689,9 +7636,9 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="loc_trailer_asset5_lbl">
-            <property name="text">
-             <string/>
+           <widget class="QLineEdit" name="loc_trailer_asset5_lbl">
+            <property name="readOnly">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -7838,9 +7785,9 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="loc_trailer_asset6_lbl">
-            <property name="text">
-             <string/>
+           <widget class="QLineEdit" name="loc_trailer_asset6_lbl">
+            <property name="readOnly">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -7987,9 +7934,9 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="loc_trailer_asset7_lbl">
-            <property name="text">
-             <string/>
+           <widget class="QLineEdit" name="loc_trailer_asset7_lbl">
+            <property name="readOnly">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -8136,9 +8083,9 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="loc_trailer_asset8_lbl">
-            <property name="text">
-             <string/>
+           <widget class="QLineEdit" name="loc_trailer_asset8_lbl">
+            <property name="readOnly">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -8336,27 +8283,11 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="poster_file_lbl">
-            <property name="text">
-             <string/>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+           <widget class="QLineEdit" name="poster_file_lbl">
+            <property name="readOnly">
+             <bool>true</bool>
             </property>
            </widget>
-          </item>
-          <item>
-           <spacer name="horizontalSpacer_60">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
           </item>
          </layout>
         </item>
@@ -10911,7 +10842,7 @@
              </font>
             </property>
             <property name="placeholderText">
-             <string>2016-01-01</string>
+             <string>1972-01-13</string>
             </property>
            </widget>
           </item>
