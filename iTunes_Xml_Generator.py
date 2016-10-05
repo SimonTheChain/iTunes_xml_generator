@@ -5693,23 +5693,23 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
             self.crew7_composer.setChecked(False)
             self.crew7_codirector.setChecked(False)
 
-            self.crew8_director.stateChanged.connect(self.set_crew8_director)
-            self.crew8_producer.stateChanged.connect(self.set_crew8_producer)
-            self.crew8_screenwriter.stateChanged.connect(self.set_crew8_screenwriter)
-            self.crew8_composer.stateChanged.connect(self.set_crew8_composer)
-            self.crew8_codirector.stateChanged.connect(self.set_crew8_codirector)
+            self.crew8_director.setChecked(False)
+            self.crew8_producer.setChecked(False)
+            self.crew8_screenwriter.setChecked(False)
+            self.crew8_composer.setChecked(False)
+            self.crew8_codirector.setChecked(False)
 
-            self.crew9_director.stateChanged.connect(self.set_crew9_director)
-            self.crew9_producer.stateChanged.connect(self.set_crew9_producer)
-            self.crew9_screenwriter.stateChanged.connect(self.set_crew9_screenwriter)
-            self.crew9_composer.stateChanged.connect(self.set_crew9_composer)
-            self.crew9_codirector.stateChanged.connect(self.set_crew9_codirector)
+            self.crew9_director.setChecked(False)
+            self.crew9_producer.setChecked(False)
+            self.crew9_screenwriter.setChecked(False)
+            self.crew9_composer.setChecked(False)
+            self.crew9_codirector.setChecked(False)
 
-            self.crew10_director.stateChanged.connect(self.set_crew10_director)
-            self.crew10_producer.stateChanged.connect(self.set_crew10_producer)
-            self.crew10_screenwriter.stateChanged.connect(self.set_crew10_screenwriter)
-            self.crew10_composer.stateChanged.connect(self.set_crew10_composer)
-            self.crew10_codirector.stateChanged.connect(self.set_crew10_codirector)
+            self.crew10_director.setChecked(False)
+            self.crew10_producer.setChecked(False)
+            self.crew10_screenwriter.setChecked(False)
+            self.crew10_composer.setChecked(False)
+            self.crew10_codirector.setChecked(False)
 
             # feature
             index_feature_audio = self.comboFeatureAudio.findText("", QtCore.Qt.MatchFixedString)
@@ -5735,6 +5735,51 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
             index_tc_format = self.tc_format.findText("23.98fps", QtCore.Qt.MatchFixedString)
             self.tc_format.setCurrentIndex(index_tc_format)
 
+            index_chapter_locale = self.chapter_locale_cb_main.findText("en-US: English (United States)", QtCore.Qt.MatchFixedString)
+            self.chapter_locale_cb_main.setCurrentIndex(index_chapter_locale)
+
+            self.chap_01_tc_ln.setText("")
+            self.chap_02_tc_ln.setText("")
+            self.chap_03_tc_ln.setText("")
+            self.chap_04_tc_ln.setText("")
+            self.chap_05_tc_ln.setText("")
+            self.chap_06_tc_ln.setText("")
+            self.chap_07_tc_ln.setText("")
+            self.chap_08_tc_ln.setText("")
+            self.chap_09_tc_ln.setText("")
+            self.chap_10_tc_ln.setText("")
+            self.chap_11_tc_ln.setText("")
+            self.chap_12_tc_ln.setText("")
+            self.chap_13_tc_ln.setText("")
+            self.chap_14_tc_ln.setText("")
+            self.chap_15_tc_ln.setText("")
+            self.chap_16_tc_ln.setText("")
+            self.chap_17_tc_ln.setText("")
+            self.chap_18_tc_ln.setText("")
+            self.chap_19_tc_ln.setText("")
+            self.chap_20_tc_ln.setText("")
+
+            self.chap_01_thumb_tc_ln.setText("")
+            self.chap_02_thumb_tc_ln.setText("")
+            self.chap_03_thumb_tc_ln.setText("")
+            self.chap_04_thumb_tc_ln.setText("")
+            self.chap_05_thumb_tc_ln.setText("")
+            self.chap_06_thumb_tc_ln.setText("")
+            self.chap_07_thumb_tc_ln.setText("")
+            self.chap_08_thumb_tc_ln.setText("")
+            self.chap_09_thumb_tc_ln.setText("")
+            self.chap_10_thumb_tc_ln.setText("")
+            self.chap_11_thumb_tc_ln.setText("")
+            self.chap_12_thumb_tc_ln.setText("")
+            self.chap_13_thumb_tc_ln.setText("")
+            self.chap_14_thumb_tc_ln.setText("")
+            self.chap_15_thumb_tc_ln.setText("")
+            self.chap_16_thumb_tc_ln.setText("")
+            self.chap_17_thumb_tc_ln.setText("")
+            self.chap_18_thumb_tc_ln.setText("")
+            self.chap_19_thumb_tc_ln.setText("")
+            self.chap_20_thumb_tc_ln.setText("")
+
             # trailer
             index_trailer_audio = self.comboTrailerAudio.findText("en-US: English (United States)", QtCore.Qt.MatchFixedString)
             self.comboTrailerAudio.setCurrentIndex(index_trailer_audio)
@@ -5745,6 +5790,10 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
             index_trailer_subs = self.comboSubTrailer.findText("en-US: English (United States)", QtCore.Qt.MatchFixedString)
             self.comboSubTrailer.setCurrentIndex(index_trailer_subs)
 
+            index_tc_format_ww_trailer = self.tc_format_ww_trailer.findText("23.98fps", QtCore.Qt.MatchFixedString)
+            self.tc_format_ww_trailer.setCurrentIndex(index_tc_format_ww_trailer)
+
+            self.trailer_still_tc.setText("")
             self.trailer_top_crop.setText("")
             self.trailer_bottom_crop.setText("")
             self.trailer_left_crop.setText("")
@@ -5924,7 +5973,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
             self.product3_vod_type_check.setChecked(True)
             self.product4_vod_type_check.setChecked(True)
 
-            index_product1_terr = self.product1_terr.findText("CA", QtCore.Qt.MatchFixedString)
+            index_product1_terr = self.product1_terr.findText("US", QtCore.Qt.MatchFixedString)
             self.product1_terr.setCurrentIndex(index_product1_terr)
 
             self.product1_sale_clear.clear()
@@ -5947,7 +5996,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
             self.product1_vod_end.setText("")
             self.product1_physical.setText("")
 
-            index_product2_terr = self.product2_terr.findText("CA", QtCore.Qt.MatchFixedString)
+            index_product2_terr = self.product2_terr.findText("US", QtCore.Qt.MatchFixedString)
             self.product2_terr.setCurrentIndex(index_product2_terr)
 
             self.product2_sale_clear.clear()
@@ -5970,7 +6019,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
             self.product2_vod_end.setText("")
             self.product2_physical.setText("")
 
-            index_product3_terr = self.product3_terr.findText("CA", QtCore.Qt.MatchFixedString)
+            index_product3_terr = self.product3_terr.findText("US", QtCore.Qt.MatchFixedString)
             self.product3_terr.setCurrentIndex(index_product3_terr)
 
             self.product3_sale_clear.clear()
@@ -5993,7 +6042,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
             self.product3_vod_end.setText("")
             self.product3_physical.setText("")
 
-            index_product4_terr = self.product4_terr.findText("CA", QtCore.Qt.MatchFixedString)
+            index_product4_terr = self.product4_terr.findText("US", QtCore.Qt.MatchFixedString)
             self.product4_terr.setCurrentIndex(index_product4_terr)
 
             self.product4_sale_clear.clear()
@@ -6044,6 +6093,33 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
             self.localized_locale_4.setCurrentIndex(index_localized_locale_4)
             self.localized_title_4.setText("")
             self.localized_synopsis_4.setPlainText("")
+
+            # localized trailer
+            index_loc_trailer_audio = self.comboTrailerAudio.findText("en-US: English (United States)",
+                                                                  QtCore.Qt.MatchFixedString)
+            self.comboTrailerAudio.setCurrentIndex(index_loc_trailer_audio)
+
+            index_loc_trailer_narr = self.comboNarrTrailer.findText("en-US: English (United States)",
+                                                                QtCore.Qt.MatchFixedString)
+            self.comboNarrTrailer.setCurrentIndex(index_loc_trailer_narr)
+
+            index_loc_trailer_subs = self.comboSubTrailer.findText("en-US: English (United States)",
+                                                               QtCore.Qt.MatchFixedString)
+            self.comboSubTrailer.setCurrentIndex(index_loc_trailer_subs)
+
+            index_tc_format_loc_trailer = self.tc_format_ww_trailer.findText("23.98fps", QtCore.Qt.MatchFixedString)
+            self.tc_format_ww_trailer.setCurrentIndex(index_tc_format_loc_trailer)
+
+            self.trailer_still_tc.setText("")
+            self.trailer_top_crop.setText("")
+            self.trailer_bottom_crop.setText("")
+            self.trailer_left_crop.setText("")
+            self.trailer_right_crop.setText("")
+
+            self.trailer_md5_lbl.setText("")
+
+            self.trailer_narr.setChecked(False)
+            self.trailer_subs.setChecked(False)
 
             # process
             index_provider = self.comboProvider.findText("Entertainment One US LP: KochDistribution",
