@@ -2390,6 +2390,8 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.add_territory_btn.clicked.connect(self.add_territory)
         self.del_territory_btn.clicked.connect(self.del_territory)
 
+        self.add_territory()
+
         # localized trailer assets
         self.loc_trailer_asset1_btn.clicked.connect(self.loc_trailer_asset1_dlg)
         self.loc_trailer_asset2_btn.clicked.connect(self.loc_trailer_asset2_dlg)
@@ -4803,14 +4805,14 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.loc_trailer_count = len(settings.loc_trailer_territories.keys())
 
     def del_territory(self):
-        if self.loc_trailer_terr_lyt.count() > 0:
+        if self.loc_trailer_terr_lyt.count() > 1:
             to_delete = self.loc_trailer_terr_lyt.takeAt(self.loc_trailer_terr_lyt.count() - 1)
 
             widget = to_delete.widget()
             if widget:
                 widget.deleteLater()
 
-        if len(settings.loc_trailer_territories.keys()) > 0:
+        if len(settings.loc_trailer_territories.keys()) > 1:
             settings.loc_trailer_territories.pop(settings.loc_trailer_territories.keys()[-1])
 
         self.loc_trailer_count = len(settings.loc_trailer_territories.keys())
@@ -5780,6 +5782,9 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
             self.chap_19_thumb_tc_ln.setText("")
             self.chap_20_thumb_tc_ln.setText("")
 
+            while self.chapter_title_lyt.count() > 0:
+                self.chap_locale_del()
+
             # trailer
             index_trailer_audio = self.comboTrailerAudio.findText("en-US: English (United States)", QtCore.Qt.MatchFixedString)
             self.comboTrailerAudio.setCurrentIndex(index_trailer_audio)
@@ -5860,6 +5865,30 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
             index_feat_asset8_locale = self.feat_asset8_locale.findText("en-US: English (United States)",
                                                                         QtCore.Qt.MatchFixedString)
             self.feat_asset8_locale.setCurrentIndex(index_feat_asset8_locale)
+
+            while self.feat_asset1_lyt.count() > 0:
+                self.feat_asset1_del()
+
+            while self.feat_asset2_lyt.count() > 0:
+                self.feat_asset2_del()
+
+            while self.feat_asset3_lyt.count() > 0:
+                self.feat_asset3_del()
+
+            while self.feat_asset4_lyt.count() > 0:
+                self.feat_asset4_del()
+
+            while self.feat_asset5_lyt.count() > 0:
+                self.feat_asset5_del()
+
+            while self.feat_asset6_lyt.count() > 0:
+                self.feat_asset6_del()
+
+            while self.feat_asset7_lyt.count() > 0:
+                self.feat_asset7_del()
+
+            while self.feat_asset8_lyt.count() > 0:
+                self.feat_asset8_del()
 
             # trailer assets
             self.trailer_asset1_role.clear()
@@ -6095,31 +6124,91 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
             self.localized_synopsis_4.setPlainText("")
 
             # localized trailer
-            index_loc_trailer_audio = self.comboTrailerAudio.findText("en-US: English (United States)",
+            index_loc_trailer_audio = self.loc_comboTrailerAudio.findText("en-US: English (United States)",
                                                                   QtCore.Qt.MatchFixedString)
-            self.comboTrailerAudio.setCurrentIndex(index_loc_trailer_audio)
+            self.loc_comboTrailerAudio.setCurrentIndex(index_loc_trailer_audio)
 
-            index_loc_trailer_narr = self.comboNarrTrailer.findText("en-US: English (United States)",
+            index_loc_trailer_narr = self.loc_comboNarrTrailer.findText("en-US: English (United States)",
                                                                 QtCore.Qt.MatchFixedString)
-            self.comboNarrTrailer.setCurrentIndex(index_loc_trailer_narr)
+            self.loc_comboNarrTrailer.setCurrentIndex(index_loc_trailer_narr)
 
-            index_loc_trailer_subs = self.comboSubTrailer.findText("en-US: English (United States)",
+            index_loc_trailer_subs = self.loc_comboSubTrailer.findText("en-US: English (United States)",
                                                                QtCore.Qt.MatchFixedString)
-            self.comboSubTrailer.setCurrentIndex(index_loc_trailer_subs)
+            self.loc_comboSubTrailer.setCurrentIndex(index_loc_trailer_subs)
 
-            index_tc_format_loc_trailer = self.tc_format_ww_trailer.findText("23.98fps", QtCore.Qt.MatchFixedString)
-            self.tc_format_ww_trailer.setCurrentIndex(index_tc_format_loc_trailer)
+            index_tc_format_loc_trailer = self.tc_format_loc_trailer.findText("23.98fps", QtCore.Qt.MatchFixedString)
+            self.tc_format_loc_trailer.setCurrentIndex(index_tc_format_loc_trailer)
 
-            self.trailer_still_tc.setText("")
-            self.trailer_top_crop.setText("")
-            self.trailer_bottom_crop.setText("")
-            self.trailer_left_crop.setText("")
-            self.trailer_right_crop.setText("")
+            self.loc_trailer_still_tc.setText("")
+            self.loc_trailer_top_crop.setText("")
+            self.loc_trailer_bottom_crop.setText("")
+            self.loc_trailer_left_crop.setText("")
+            self.loc_trailer_right_crop.setText("")
 
-            self.trailer_md5_lbl.setText("")
+            self.loc_trailer_md5_lbl.setText("")
 
-            self.trailer_narr.setChecked(False)
-            self.trailer_subs.setChecked(False)
+            self.loc_trailer_narr.setChecked(False)
+            self.loc_trailer_subs.setChecked(False)
+
+            # trailer assets
+            self.loc_trailer_asset1_role.clear()
+            self.loc_trailer_asset1_role.addItems(settings.data_roles)
+
+            index_loc_trailer_asset1_locale = self.loc_trailer_asset1_locale.findText("en-US: English (United States)",
+                                                                              QtCore.Qt.MatchFixedString)
+            self.loc_trailer_asset1_locale.setCurrentIndex(index_loc_trailer_asset1_locale)
+
+            self.loc_trailer_asset2_role.clear()
+            self.loc_trailer_asset2_role.addItems(settings.data_roles)
+
+            index_loc_trailer_asset2_locale = self.loc_trailer_asset2_locale.findText("en-US: English (United States)",
+                                                                              QtCore.Qt.MatchFixedString)
+            self.loc_trailer_asset2_locale.setCurrentIndex(index_loc_trailer_asset2_locale)
+
+            self.loc_trailer_asset3_role.clear()
+            self.loc_trailer_asset3_role.addItems(settings.data_roles)
+
+            index_loc_trailer_asset3_locale = self.loc_trailer_asset3_locale.findText("en-US: English (United States)",
+                                                                              QtCore.Qt.MatchFixedString)
+            self.loc_trailer_asset3_locale.setCurrentIndex(index_loc_trailer_asset3_locale)
+
+            self.loc_trailer_asset4_role.clear()
+            self.loc_trailer_asset4_role.addItems(settings.data_roles)
+
+            index_loc_trailer_asset4_locale = self.loc_trailer_asset4_locale.findText("en-US: English (United States)",
+                                                                              QtCore.Qt.MatchFixedString)
+            self.loc_trailer_asset4_locale.setCurrentIndex(index_loc_trailer_asset4_locale)
+
+            self.loc_trailer_asset5_role.clear()
+            self.loc_trailer_asset5_role.addItems(settings.data_roles)
+
+            index_loc_trailer_asset5_locale = self.loc_trailer_asset5_locale.findText("en-US: English (United States)",
+                                                                              QtCore.Qt.MatchFixedString)
+            self.loc_trailer_asset5_locale.setCurrentIndex(index_loc_trailer_asset5_locale)
+
+            self.loc_trailer_asset6_role.clear()
+            self.loc_trailer_asset6_role.addItems(settings.data_roles)
+
+            index_loc_trailer_asset6_locale = self.loc_trailer_asset6_locale.findText("en-US: English (United States)",
+                                                                              QtCore.Qt.MatchFixedString)
+            self.loc_trailer_asset6_locale.setCurrentIndex(index_loc_trailer_asset6_locale)
+
+            self.loc_trailer_asset7_role.clear()
+            self.loc_trailer_asset7_role.addItems(settings.data_roles)
+
+            index_loc_trailer_asset7_locale = self.loc_trailer_asset7_locale.findText("en-US: English (United States)",
+                                                                              QtCore.Qt.MatchFixedString)
+            self.loc_trailer_asset7_locale.setCurrentIndex(index_loc_trailer_asset7_locale)
+
+            self.loc_trailer_asset8_role.clear()
+            self.loc_trailer_asset8_role.addItems(settings.data_roles)
+
+            index_loc_trailer_asset8_locale = self.loc_trailer_asset8_locale.findText("en-US: English (United States)",
+                                                                              QtCore.Qt.MatchFixedString)
+            self.loc_trailer_asset8_locale.setCurrentIndex(index_loc_trailer_asset8_locale)
+
+            while self.loc_trailer_terr_lyt.count() > 1:
+                self.del_territory()
 
             # process
             index_provider = self.comboProvider.findText("Entertainment One US LP: KochDistribution",
@@ -6133,6 +6222,19 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
 
             self.build_scenario.clear()
             self.build_scenario.addItems(settings.scenarios)
+
+            self.build_meta.setCheckState(QtCore.Qt.Unchecked)
+            self.build_genres_ratings.setCheckState(QtCore.Qt.Unchecked)
+            self.build_cast_crew.setCheckState(QtCore.Qt.Unchecked)
+            self.build_feat.setCheckState(QtCore.Qt.Unchecked)
+            self.build_feat_assets.setCheckState(QtCore.Qt.Unchecked)
+            self.build_chapters.setCheckState(QtCore.Qt.Unchecked)
+            self.build_trailer.setCheckState(QtCore.Qt.Unchecked)
+            self.build_trailer_assets.setCheckState(QtCore.Qt.Unchecked)
+            self.build_poster.setCheckState(QtCore.Qt.Unchecked)
+            self.build_product.setCheckState(QtCore.Qt.Unchecked)
+            self.build_loc_trailer.setCheckState(QtCore.Qt.Unchecked)
+            self.build_loc_trailer_assets.setCheckState(QtCore.Qt.Unchecked)
 
 
 def main():
