@@ -656,8 +656,6 @@ class CreateXml(QtCore.QThread):
                         else:
                             xml_chapter_title.text = u"Chapter %s" % count
 
-                    create_chapter_title(settings.language_meta)
-
                     for value in settings.chapter_locales.values():
                         create_chapter_title(value.split(":", 1)[0])
 
@@ -955,8 +953,6 @@ class CreateXml(QtCore.QThread):
                         xml_chapter_title.text = u"Isahluko %s" % count
                     else:
                         xml_chapter_title.text = u"Chapter %s" % count
-
-                create_chapter_title(settings.language_meta)
 
                 for value in settings.chapter_locales.values():
                     create_chapter_title(value.split(":", 1)[0])
@@ -1843,6 +1839,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
 
         self.chapter_locale_cb_main.clear()
         self.chapter_locale_cb_main.addItems(self.list_of_languages)
+        self.chapter_locale_cb_main.currentIndexChanged.connect(self.set_chapter_locales)
 
         self.chapter_locale_add_btn.clicked.connect(self.chap_locale_add)
         self.chapter_locale_del_btn.clicked.connect(self.chap_locale_del)
@@ -5047,6 +5044,17 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.trailer_asset6_locale.setCurrentIndex(global_index)
         self.trailer_asset7_locale.setCurrentIndex(global_index)
         self.trailer_asset8_locale.setCurrentIndex(global_index)
+        self.loc_comboTrailerAudio.setCurrentIndex(global_index)
+        self.loc_comboNarrTrailer.setCurrentIndex(global_index)
+        self.loc_comboSubTrailer.setCurrentIndex(global_index)
+        self.loc_trailer_asset1_locale.setCurrentIndex(global_index)
+        self.loc_trailer_asset2_locale.setCurrentIndex(global_index)
+        self.loc_trailer_asset3_locale.setCurrentIndex(global_index)
+        self.loc_trailer_asset4_locale.setCurrentIndex(global_index)
+        self.loc_trailer_asset5_locale.setCurrentIndex(global_index)
+        self.loc_trailer_asset6_locale.setCurrentIndex(global_index)
+        self.loc_trailer_asset7_locale.setCurrentIndex(global_index)
+        self.loc_trailer_asset8_locale.setCurrentIndex(global_index)
         self.comboPoster.setCurrentIndex(global_index)
 
         settings.language_meta = str(global_locale).split(":", 1)[0]
@@ -5714,13 +5722,13 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
             self.crew10_codirector.setChecked(False)
 
             # feature
-            index_feature_audio = self.comboFeatureAudio.findText("", QtCore.Qt.MatchFixedString)
+            index_feature_audio = self.comboFeatureAudio.findText("en-US: English (United States)", QtCore.Qt.MatchFixedString)
             self.comboFeatureAudio.setCurrentIndex(index_feature_audio)
 
-            index_feature_narr = self.comboNarrFeature.findText("", QtCore.Qt.MatchFixedString)
+            index_feature_narr = self.comboNarrFeature.findText("en-US: English (United States)", QtCore.Qt.MatchFixedString)
             self.comboNarrFeature.setCurrentIndex(index_feature_narr)
 
-            index_feature_subs = self.comboSubFeature.findText("", QtCore.Qt.MatchFixedString)
+            index_feature_subs = self.comboSubFeature.findText("en-US: English (United States)", QtCore.Qt.MatchFixedString)
             self.comboSubFeature.setCurrentIndex(index_feature_subs)
 
             self.feat_top_crop.setText("")
