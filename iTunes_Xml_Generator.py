@@ -3140,7 +3140,7 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         box.addItems(self.list_of_languages)
         box.setObjectName("chapter_locale%d" % self.chapter_locale_count)
         box.currentIndexChanged.connect(self.set_chapter_locales)
-        index_chapter_locale = box.findText("en-US", QtCore.Qt.MatchFixedString)
+        index_chapter_locale = box.findText("en-US: English (United States)", QtCore.Qt.MatchFixedString)
         box.setCurrentIndex(index_chapter_locale)
 
         self.chapter_title_lyt.addWidget(box, 0, self.chapter_locale_count)
@@ -5793,6 +5793,9 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
             while self.chapter_title_lyt.count() > 0:
                 self.chap_locale_del()
 
+            settings.chapters_tc.clear()
+            settings.thumbs_tc.clear()
+
             # trailer
             index_trailer_audio = self.comboTrailerAudio.findText("en-US: English (United States)", QtCore.Qt.MatchFixedString)
             self.comboTrailerAudio.setCurrentIndex(index_trailer_audio)
@@ -6243,6 +6246,70 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
             self.build_product.setCheckState(QtCore.Qt.Unchecked)
             self.build_loc_trailer.setCheckState(QtCore.Qt.Unchecked)
             self.build_loc_trailer_assets.setCheckState(QtCore.Qt.Unchecked)
+
+            # files
+            settings.feature_file_path = ""
+            settings.feature_file = ""
+            settings.trailer_file_path = ""
+            settings.trailer_file = ""
+            settings.feat_asset1_path = ""
+            settings.feat_asset2_path = ""
+            settings.feat_asset3_path = ""
+            settings.feat_asset4_path = ""
+            settings.feat_asset5_path = ""
+            settings.feat_asset6_path = ""
+            settings.feat_asset7_path = ""
+            settings.feat_asset8_path = ""
+            settings.trailer_asset1_path = ""
+            settings.trailer_asset2_path = ""
+            settings.trailer_asset3_path = ""
+            settings.trailer_asset4_path = ""
+            settings.trailer_asset5_path = ""
+            settings.trailer_asset6_path = ""
+            settings.trailer_asset7_path = ""
+            settings.trailer_asset8_path = ""
+            settings.poster_file_path = ""
+            settings.loc_trailer_file_path = ""
+            settings.loc_trailer_file = ""
+            settings.loc_trailer_asset1_path = ""
+            settings.loc_trailer_asset2_path = ""
+            settings.loc_trailer_asset3_path = ""
+            settings.loc_trailer_asset4_path = ""
+            settings.loc_trailer_asset5_path = ""
+            settings.loc_trailer_asset6_path = ""
+            settings.loc_trailer_asset7_path = ""
+            settings.loc_trailer_asset8_path = ""
+            settings.destination = ""
+
+            self.xml_dest_lbl.setText("")
+            self.feature_file_lbl.setText("")
+            self.feat_asset1_lbl.setText("")
+            self.feat_asset2_lbl.setText("")
+            self.feat_asset3_lbl.setText("")
+            self.feat_asset4_lbl.setText("")
+            self.feat_asset5_lbl.setText("")
+            self.feat_asset6_lbl.setText("")
+            self.feat_asset7_lbl.setText("")
+            self.feat_asset8_lbl.setText("")
+            self.trailer_file_lbl.setText("")
+            self.trailer_asset1_lbl.setText("")
+            self.trailer_asset2_lbl.setText("")
+            self.trailer_asset3_lbl.setText("")
+            self.trailer_asset4_lbl.setText("")
+            self.trailer_asset5_lbl.setText("")
+            self.trailer_asset6_lbl.setText("")
+            self.trailer_asset7_lbl.setText("")
+            self.trailer_asset8_lbl.setText("")
+            self.loc_trailer_file_lbl.setText("")
+            self.loc_trailer_asset1_lbl.setText("")
+            self.loc_trailer_asset2_lbl.setText("")
+            self.loc_trailer_asset3_lbl.setText("")
+            self.loc_trailer_asset4_lbl.setText("")
+            self.loc_trailer_asset5_lbl.setText("")
+            self.loc_trailer_asset6_lbl.setText("")
+            self.loc_trailer_asset7_lbl.setText("")
+            self.loc_trailer_asset8_lbl.setText("")
+            self.poster_file_lbl.setText("")
 
 
 def main():
