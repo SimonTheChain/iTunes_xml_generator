@@ -21,6 +21,7 @@ import iTunes_ratings as ratings
 import itunes_xml_generator_globals as settings
 import languages_complete as languages_list
 import ui_generator as main_frame
+import ixg_about as about_dlg
 
 
 def read_rng():
@@ -668,30 +669,34 @@ class CreateXml(QtCore.QThread):
                     chapter_template(settings.chapters_tc.values()[i], chapter_number, settings.thumbs_tc.values()[i])
 
                 # accessibility info
-                xml_access_info = etree.SubElement(xml_video, "accessibility_info")
+                if (settings.product1_terr == "US" and settings.product1_check) \
+                    or (settings.product2_terr == "US" and settings.product2_check) \
+                    or (settings.product3_terr == "US" and settings.product3_check) \
+                    or (settings.product4_terr == "US" and settings.product4_check):
+                    xml_access_info = etree.SubElement(xml_video, "accessibility_info")
 
-                if settings.feat_asset1_role == "captions" \
-                        or settings.feat_asset2_role == "captions" \
-                        or settings.feat_asset3_role == "captions" \
-                        or settings.feat_asset3_role == "captions" \
-                        or settings.feat_asset4_role == "captions" \
-                        or settings.feat_asset5_role == "captions" \
-                        or settings.feat_asset6_role == "captions" \
-                        or settings.feat_asset7_role == "captions" \
-                        or settings.feat_asset8_role == "captions":
-                    xml_access = etree.SubElement(
-                        xml_access_info,
-                        "accessibility",
-                        attrib={"role": "captions", "available": "true"})
+                    if settings.feat_asset1_role == "captions" \
+                            or settings.feat_asset2_role == "captions" \
+                            or settings.feat_asset3_role == "captions" \
+                            or settings.feat_asset3_role == "captions" \
+                            or settings.feat_asset4_role == "captions" \
+                            or settings.feat_asset5_role == "captions" \
+                            or settings.feat_asset6_role == "captions" \
+                            or settings.feat_asset7_role == "captions" \
+                            or settings.feat_asset8_role == "captions":
+                        xml_access = etree.SubElement(
+                            xml_access_info,
+                            "accessibility",
+                            attrib={"role": "captions", "available": "true"})
 
-                else:
-                    xml_access = etree.SubElement(
-                        xml_access_info,
-                        "accessibility",
-                        attrib={
-                            "role": "captions",
-                            "available": "false",
-                            "reason_code": "NO_CC_SDH_FOREIGN_LANGUAGE_ENGLISH_SUBS"})
+                    else:
+                        xml_access = etree.SubElement(
+                            xml_access_info,
+                            "accessibility",
+                            attrib={
+                                "role": "captions",
+                                "available": "false",
+                                "reason_code": "NO_CC_SDH_FOREIGN_LANGUAGE_ENGLISH_SUBS"})
 
                 settings.chapters_done = True
                 self.emit(QtCore.SIGNAL("chapters_done"))
@@ -1310,7 +1315,7 @@ class CreateXml(QtCore.QThread):
 
         if not settings.meta and (settings.feature or settings.feature_assets):
             # accessibility info
-            xml_access_info = etree.SubElement(xml_assets, "accessibility_info")
+            xml_access_info = etree.SubElement(xml_video, "accessibility_info")
 
             if settings.feat_asset1_role == "captions" \
                     or settings.feat_asset2_role == "captions" \
@@ -1529,6 +1534,13 @@ class CreateXml(QtCore.QThread):
             settings.results = "Validation successful."
 
 
+class AboutDlg(QtGui.QDialog, about_dlg.Ui_About):
+    def __init__(self, parent=None):
+        super(AboutDlg, self).__init__(parent)
+
+        self.setupUi(self)
+
+
 class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
     def __init__(self, parent=None):
         super(XmlGeneratorApp, self).__init__(parent)
@@ -1559,6 +1571,10 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.country_values.sort()
 
         self.setupUi(self)
+
+        # menubar
+        self.actionAbout.triggered.connect(self.about_dlg)
+        self.actionQuit_4.triggered.connect(self.quit_fcn)
 
         # metadata
         self.comboCountry.clear()
@@ -2515,6 +2531,15 @@ class XmlGeneratorApp(QtGui.QMainWindow, main_frame.Ui_XmlGenUI):
         self.reset_btn.clicked.connect(self.reset_app)
 
         self.show()
+
+    # menubar
+    @staticmethod
+    def about_dlg():
+        about = AboutDlg()
+        about.exec_()
+
+    def quit_fcn(self):
+        self.close()
 
     # metadata
     def set_country(self):
